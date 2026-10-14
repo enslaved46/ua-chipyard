@@ -1,0 +1,152 @@
+* My notes 
+
+- my notes :/home/crosswind46/education/01_college_work/graduate/classes/ece_562/project_chipyard/ua-chipyard/notes.org
+* Links
+* Discord
+ - https://discord.com/channels/1549861774210244770/1549861775292366930
+- Git https://github.com/enslaved46/ua-chipyard/blob/main/docs/running-programs.md
+- Piazza
+  - notes https ://piazza.com/arizona/fall2026/ece462562/resources
+  - annoucement : https://piazza.com/class/mt3v0sly71665i/post/5
+- RISC-V
+  - Tutorial : https://piazza.com/class_profile/get_resource/mt3v0sly71665i/muf02ljh3hbyj
+  
+  
+
+
+* Start Docker
+- docker compose run --rm chipyard
+
+* Load Chipyard Env
+- cd /workspace/chipyard
+- source env.sh
+
+* Test ENV
+- /workspace/test-install.sh
+
+* Baseline Porcesor
+ - CourseRocketConfig
+
+** Build baselien processor
+1. cd /workspace/chipyard/sims/verilator
+2. make CONFIG=CourseRocketConfig
+3. simulator-chipyard.harness-CourseRocketConfig is the output product
+
+** Run RISC V program
+1. ./simulator-chipyard.harness-CourseRocketConfig \
+  $RISCV/riscv64-unknown-elf/share/riscv-tests/isa/rv64ui-p-simple
+2. program location
+   - ./workspace/chipyard/toolchains/riscv-tools/riscv-tests/build/isa/rv64ui-p-simple
+   - ./workspace/chipyard/.conda-env/riscv-tools/riscv64-unknown-elf/share/riscv-tests/isa/rv64ui-p-simple
+
+
+  
+* Chipyard path
+- /workspace/chipyard
+
+* Student persistent working directory is
+- /workspace/student-work
+  Files placed in /workspace/student-work are stored in the student-work/ directory of the repository on your computer and will remain available after the container exits.
+  Important: Do not use the Docker container itself as permanent storage. Store work that you want to keep in /workspace/student-work or another directory specifically identified by an assignment.
+
+
+* File Paths
+|--------------------------------------------+-----------------------------------------------------|
+| Location                                   | Purpose                                             |
+|--------------------------------------------+-----------------------------------------------------|
+| /workspace/chipyard                        | Chipyard installation                               |
+| /workspace/chipyard/generators/rocket-chip | Rocket Chip generator and implementation            |
+| /workspace/chipyard/generators/chipyard    | Chipyard-specific generator code and configurations |
+| /workspace/chipyard/sims/verilator         | Verilator simulation environment                    |
+| /workspace/student-work                    | Persistent student files                            |
+|--------------------------------------------+-----------------------------------------------------|
+
+* Performance counters at run time: 
+    Collect counters 
+
+
+* Collection of program under(running-programs.md)
+- path /workspace/chipyard/tests
+- Build test program
+  + cd /workspace/chipyard/tests
+  + mkdir -p build
+  + cd build
+  + cmake ..
+  + make
+  + this generages hello.riscv
+- Run
+  - path /workspace/chipyard/sims/verilator
+  - cmd : ./simulator-chipyard.harness-CourseRocketConfig ../../tests/build/hello.riscv
+
+- Custom Test
+  - Create program
+    + path cd /workspace/chipyard/tests
+    + touch ecex62.c 
+    + write program execx62.c
+      
+  - Add the program to cmakelist
+    - add_executable(...)
+      - add_executable(ecex62 ecex62.c)
+      - add_dump_target(...)
+	- add_dump_target(...)
+  - Rebuild test
+    - cd /workspace/chipyard/tests/build
+    - cmake ..
+    - make
+      - should create .riscv
+	- /workspace/chipyard/tests/ecex62.riscv
+  - Run program
+    - cd /workspace/chipyard/sims/verilator
+    - ./simulator-chipyard.harness-CourseRocketConfig ../../tests/build/ecex62.riscv
+    - output
+      - [UART] UART0 is here (stdin/stdout).
+      - Welcome to ECE462/562
+      - The result of addition is: 3
+	
+    
+    
+courserocketConfi
+line 14 \metrics.h
+ collects counts
+ metrics.h performance counters
+
+ applicaiton is in /workspace
+
+ What is the reason you ran branch predicotr once then re-ran it again ?
+
+
+ if C/C++ is user applicaiton, and HDL files are auto generated  ? what is scala prupose ?
+ BTB.scala branc prediction
+
+
+ What is the use of scala ?
+ 
+
+
+An important opportunity for your ECE 562 project
+
+* Your benchmark already reports several architectural performance counters:
+
+- cycles: total processor cycles
+-instret: instructions retired
+- branch: branch instructions
+- load: load instructions
+- mul: multiplication instructions
+- bp_dir_mis: branch direction mispredictions
+- bp_tgt_mis: branch target mispredictions
+- md_stall: multiply/divide stalls
+- ic_miss: instruction cache misses
+- dc_miss: data cache misse
+
+
+- Virtual Memory
+  - Limitation
+    - Memory management unit
+      - Progam uses virtual memory
+      - Blocks 64 B i common Pages about 4Kb
+      - This fault handler is missing Page
+      - Frame size is smae as Page sizes
+      - Page Offset doesn't during addr translation
+      - Frame can be group of Block,
+      - Page table in Physical RAM, to get translation and data
+      - 
