@@ -85,14 +85,14 @@
  * There is no div counter because downscale is the only stage that divides and
  * its count is known statically: one per output pixel, 868 of them. */
 static const uint64_t hpm_events[HPM_N] = {
-    HPM_EVENT(0, 6),   /* branch instructions   - denominator            */
-    HPM_EVENT(0, 1),   /* load instructions     - denominator            */
-    HPM_EVENT(0, 9),   /* multiply instructions - denominator            */
-    HPM_EVENT(1, 5),   /* branch misprediction              -> BHT       */
-    HPM_EVENT(1, 6),   /* control-flow target misprediction -> BTB / RAS */
-    HPM_EVENT(1, 9),   /* mul/div interlock - cycles stalled on MulDiv   */
-    HPM_EVENT(2, 0),   /* I$ miss - control, stays in the low single digits */
-    HPM_EVENT(2, 1)    /* D$ miss                                        */
+    HPM_EVENT(0, 6),   /* branch instructions   - denominator               0 index */ 
+    HPM_EVENT(0, 1),   /* load instructions     - denominator               1*/
+    HPM_EVENT(0, 9),   /* multiply instructions - denominator               2*/
+    HPM_EVENT(1, 5),   /* branch misprediction              -> BHT          hpm_events[3]  (set 1, 13-8)  (1ULL <<(5+8)) + 1 = (1ULL << 13) | 1 = 0x2001 */
+    HPM_EVENT(1, 6),   /* control-flow target misprediction -> BTB / RAS    4*/
+    HPM_EVENT(1, 9),   /* mul/div interlock - cycles stalled on MulDiv      5*/
+    HPM_EVENT(2, 0),   /* I$ miss - control, stays in the low single digits 6*/
+    HPM_EVENT(2, 1)    /* D$ miss                                           7*/
 };
 
 /* These become the column headings of the metrics table printed by
