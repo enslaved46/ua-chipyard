@@ -69,6 +69,21 @@ complex_t cVectAdd(complex_t z1[], complex_t z2[], int size){ // (a+bi) (c+di)
   return cVecAddResult;
 }
 
+
+/* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i */
+complex_t cMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
+
+  int16_t z1Real = getReal(z1);
+  int16_t z2Real = getReal(z2);
+  int16_t z1Imag = getImag(z1);
+  int16_t z2Imag = getImag(z2);
+
+  int16_t realResult = (z1Real*z2Real) - (z1Imag*z2Imag);
+  int16_t imgResult  = (z1Real*z2Imag) + (z1Imag*z2Real);
+  complex_t cMulResult = makeComplex(realResult, imgResult);
+  return cMulResult;
+}
+
 void printComplexForm(complex_t z){
   int16_t real = getReal(z);
   int16_t img  = getImag(z);
