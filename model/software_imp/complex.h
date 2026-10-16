@@ -45,28 +45,12 @@ complex_t cAdd(complex_t z1, complex_t z2){
 }
 
 // perform verctor add
-complex_t cVectAdd(complex_t z1[], complex_t z2[], int size){ // (a+bi) (c+di)
-  complex_t cVecAddResult = {0};
-  int16_t z1Real=0;
-  int16_t z2Real=0;
-  int16_t z1Imag=0;
-  int16_t z2Imag=0;
-
-  int16_t realResult =0;
-  int16_t imgResult  =0;
+void cVectAdd(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di)
 
   for (int i = 0; i < size; i++){
-    z1Real = getReal(z1[i]);
-    z2Real = getReal(z2[i]);
-    z1Imag = getImag(z1[i]);
-    z2Imag = getImag(z2[i]);
-
-    realResult = (z1Real  + z2Real + realResult)  & 0xFFFF;
-    imgResult   = (z1Imag + z2Imag + imgResult) & 0xFFFF;
-    printf(" realResult[%d] : %d  \t  imgResult[%d] : %d\n", i, realResult, i, imgResult);
+    result[i] = cAdd(z1[i], z2[i]);
+    // printf(" realResult[%d] : %d  \t  imgResult[%d] : %d\n", i, realResult, i, imgResult);
   }
-  cVecAddResult = makeComplex(realResult, imgResult);
-  return cVecAddResult;
 }
 
 
@@ -84,6 +68,12 @@ complex_t cMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
   return cMulResult;
 }
 
+void cVectMul(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di)
+  for (int i = 0; i < size; i++){
+    result[i] = cMul(z1[i], z2[2]);
+  }
+}
+
 void printComplexForm(complex_t z){
   int16_t real = getReal(z);
   int16_t img  = getImag(z);
@@ -92,6 +82,12 @@ void printComplexForm(complex_t z){
   else if (real < 0 && img >= 0) {printf("2nd qrd -> Complex number : %d + %dj\n", real, img);} //-ve +ve
   else if (real < 0 && img < 0) {printf("3rd qrd -> Complex number : %d%dj\n", real, img);} // -ve -ve
   else {printf("4th qrd  -> Complex number : %d%dj\n", real, img);} // +ve -ve
+}
+
+void printComplexVector(complex_t z[], int size){
+    for (int i = 0; i < size; i++){
+      printComplexForm(z[i]);
+    }
 }
 
 #endif

@@ -32,6 +32,12 @@
 #define TEST_CADD 1
 #define TEST_CMUL 1
 
+typedef struct{
+  int16_t real;
+  int16_t complex;
+}complex_t;
+  
+
 int32_t packComplex(int16_t realN, int16_t imgN){
   int32_t packedComplex = (int32_t)(realN << 16) | (int32_t) (imgN  & 0xFFFF);
   // printf("Packed complex is : 0x%8x\n", packedComplex);
