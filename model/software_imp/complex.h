@@ -70,7 +70,7 @@ complex_t cMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
 
 void cVectMul(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di)
   for (int i = 0; i < size; i++){
-    result[i] = cMul(z1[i], z2[2]);
+    result[i] = cMul(z1[i], z2[i]);
   }
 }
 
@@ -78,14 +78,15 @@ void printComplexForm(complex_t z){
   int16_t real = getReal(z);
   int16_t img  = getImag(z);
 
-  if (real >= 0 && img >= 0){printf("1   qrd  -> Complex number : %d + %dj\n", real, img);}   // +ve +ve
-  else if (real < 0 && img >= 0) {printf("2nd qrd -> Complex number : %d + %dj\n", real, img);} //-ve +ve
-  else if (real < 0 && img < 0) {printf("3rd qrd -> Complex number : %d%dj\n", real, img);} // -ve -ve
-  else {printf("4th qrd  -> Complex number : %d%dj\n", real, img);} // +ve -ve
+  if (real >= 0 && img >= 0){printf("\t Falls in 1   qrd  -> Complex number : %d + %dj\n", real, img);}   // +ve +ve
+  else if (real < 0 && img >= 0) {printf("\t Falls in 2nd qrd -> Complex number : %d + %dj\n", real, img);} //-ve +ve
+  else if (real < 0 && img < 0) {printf("\t Falls in 3rd qrd -> Complex number : %d%dj\n", real, img);} // -ve -ve
+  else {printf("\t Falls in 4th qrd  -> Complex number : %d%dj\n", real, img);} // +ve -ve
 }
 
 void printComplexVector(complex_t z[], int size){
     for (int i = 0; i < size; i++){
+      printf("z[%d]", i );
       printComplexForm(z[i]);
     }
 }
