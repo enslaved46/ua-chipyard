@@ -1,5 +1,9 @@
 #include <stdio.h>
-// #include <riscv-pk/encoding.h>
+
+#if defined(__riscv)
+#include <riscv-pk/encoding.h>
+#endif
+   
 #include <stdint.h>
 #include "complex.h"
 #define TEST_MAKE_COMPLEX 0
