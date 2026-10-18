@@ -126,6 +126,33 @@ elseif(TEST_SELECT STREQUAL "vector_mul")
     add_dump_target(cmplx_v_mul)
 
 #################################
+# COMPLEX VECTOR BENCHMARK (Kody): software vs accelerator, one timed pass
+# usage: cmake -S ./ -B ./build/vec_add_sw_N50 -DTEST_SELECT=vec_bench -DVEC_OP=add -DVEC_MODE=sw -DVEC_N=50
+#   VEC_OP = add | mul     VEC_MODE = sw | hw (hw uses ACMUL/AADD, ComplexAccelConfig only)
+#################################
+elseif(TEST_SELECT STREQUAL "vec_bench")
+    if(NOT DEFINED VEC_N)
+        set(VEC_N 50)
+    endif()
+    if(NOT DEFINED VEC_OP)
+        set(VEC_OP add)
+    endif()
+    if(NOT DEFINED VEC_MODE)
+        set(VEC_MODE sw)
+    endif()
+    set(VEC_TARGET vec_${VEC_OP}_${VEC_MODE}_N${VEC_N})
+    message(STATUS "Configuring target: ${VEC_TARGET}")
+    add_executable(${VEC_TARGET} accelerator/vec/vec_bench.c)
+    target_compile_definitions(${VEC_TARGET} PRIVATE VEC_N=${VEC_N})
+    if(VEC_OP STREQUAL "mul")
+        target_compile_definitions(${VEC_TARGET} PRIVATE OP_MUL)
+    endif()
+    if(VEC_MODE STREQUAL "hw")
+        target_compile_definitions(${VEC_TARGET} PRIVATE USE_ROCC)
+    endif()
+    add_dump_target(${VEC_TARGET})
+
+#################################
 # for FIR and other Test Type add here    
 #################################
 

@@ -1,0 +1,9 @@
+=== complex_bench: SOFTWARE BASELINE, N=1000 ===
+empty loop : cycles 19493  instret 8007
+complex add: cycles 27619  instret 17007
+complex mul: cycles 164539  instret 25007
+net add/op : cycles 8126  instret 9000  (x1000 = per-op * 1000)
+net mul/op : cycles 145046  instret 17000  (x1000 = per-op * 1000)
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish

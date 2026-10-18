@@ -1,0 +1,6 @@
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+vmul_hw         10036       4010          0          0          0          0          0          0          0          0
+RESULT op=vmul mode=hw N=500 mismatches=0 checksum=0x3cccd72a
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexAccelConfig/gen-collateral/TestDriver.v:158: Verilog $finish

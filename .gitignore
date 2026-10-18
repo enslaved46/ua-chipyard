@@ -5,3 +5,6 @@
 model/
 student-work/build/
 student-work/CMakeFiles/
+student-work/simulator-chipyard.*
+student-work/build/
+student-work/accelerator/vec/build/
