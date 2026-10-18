@@ -18,25 +18,25 @@
 # CMakee Build Commands and istructions 
 
 ## Vector Add
-`cmake -S ./ -B ./build/ -DTEST_SELECT=vector_add`
-`cmake --build ./build/ --target-all`
+- `cmake -S ./ -B ./build/ -DTEST_SELECT=vector_add`
+- `cmake --build ./build/ --target-all`
 
 
 ## Vector MUL
-`cmake -S ./ -B ./build/ -DTEST_SELECT=vector_add`
-`cmake --build ./build/ --target-all`
+- `cmake -S ./ -B ./build/ -DTEST_SELECT=vector_add`
+- `cmake --build ./build/ --target-all`
 
 
 ## Simple complex arithemetic and funciton check
 ### this function needs update, i've not used complex type
-`cmake -S ./ -B ./build/ -DTEST_SELECT=complex_arith`
-`cmake --build ./build/ --target all`
+- `cmake -S ./ -B ./build/ -DTEST_SELECT=complex_arith`
+- `cmake --build ./build/ --target all`
 
 ## Clean traget
-`cmake --build ./build/ --target clean`
+- `cmake --build ./build/ --target clean`
  
 ## executable is producedin ./build_riscv dir
 
 ## to run executable, example for add
-/workspace/chipyard/sims/verilator/simulator-chipyard.harness-BaselineConfig  /workspace/student-work/build/cmplx_v_add.riscv 
+- `/workspace/chipyard/sims/verilator/simulator-chipyard.harness-BaselineConfig  /workspace/student-work/build/cmplx_v_add.riscv`
 
