@@ -4,3 +4,4 @@
 *.asv
 model/
 student-work/build/
+student-work/CMakeFiles/
