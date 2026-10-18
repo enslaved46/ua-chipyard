@@ -128,7 +128,7 @@ An important opportunity for your ECE 562 project
 * Your benchmark already reports several architectural performance counters:
 
 - cycles: total processor cycles
--instret: instructions retired
+- instret: instructions retired
 - branch: branch instructions
 - load: load instructions
 - mul: multiplication instructions

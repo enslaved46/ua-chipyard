@@ -1,1 +1,6 @@
+*.out
 *~
+*#
+*.asv
+model/
+student-work/build/
