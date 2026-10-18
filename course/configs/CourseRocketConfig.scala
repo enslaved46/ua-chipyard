@@ -11,6 +11,7 @@ import freechips.rocketchip.rocket._
 import freechips.rocketchip.tile._
 
 class CourseRocketConfig extends Config(
+  new chipyard.config.WithNPerfCounters(8) ++
   new chipyard.RocketConfig
 )
 
@@ -86,3 +87,17 @@ class BaselineConfig extends Config(
   new chipyard.config.WithBroadcastManager ++
   new WithBaselineCore(1) ++
   new chipyard.config.AbstractConfig)
+
+/** BaselineConfig with 16 KiB 4-way set-associative L1 I$ and D$
+  * (64 sets x 4 ways x 64 B), up from 4 KiB direct-mapped.
+  * Only nWays changes; everything else matches BaselineConfig. */
+class LargeL1Config extends Config(
+  new Config((site, here, up) => {
+    case TilesLocated(InSubsystem) => up(TilesLocated(InSubsystem), site) map {
+      case tp: RocketTileAttachParams => tp.copy(tileParams = tp.tileParams.copy(
+        icache = tp.tileParams.icache.map(_.copy(nWays = 4)),   // 4 KiB -> 16 KiB
+        dcache = tp.tileParams.dcache.map(_.copy(nWays = 4))))  // 4 KiB -> 16 KiB
+    }
+  }) ++
+  new BaselineConfig)
+

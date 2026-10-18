@@ -6,6 +6,8 @@ This guide provides simple hands-on tutorials for Chipyard once it's installed. 
 
 [Running Programs](/docs/running-programs.md)
 
+[Reading Data from a File](/docs/reading-files.md)
+
 [Building and Running the Course Benchmark](/docs/benchmarks.md)
 
 [Custom Configurations](/docs/custom-configurations.md)
