@@ -33,7 +33,7 @@ static inline int16_t getImag(complex_t z){
 
 // we will have probelm with overflow, don't worry about overflow
 // z = z1 + z2 = (a+c) + (b+d)i;
-complex_t cAdd(complex_t z1, complex_t z2){
+static inline complex_t cAdd(complex_t z1, complex_t z2){
   int16_t z1Real = getReal(z1);
   int16_t z2Real = getReal(z2);
   int16_t z1Imag = getImag(z1);
@@ -55,7 +55,7 @@ void cVectAdd(complex_t z1[], complex_t z2[], complex_t result[], int size){ // 
 
 
 /* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i */
-complex_t cMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
+static inline complex_t cMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
 
   int16_t z1Real = getReal(z1);
   int16_t z2Real = getReal(z2);

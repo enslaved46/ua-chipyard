@@ -1,0 +1,59 @@
+
+########################################################################
+Running Test for  Vector Multiplication of complex Numbers              
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+complex_vector_add       7732       1214         51        100        200         50          4        147          3          0
+z[0]	 Falls in 2nd qrd -> Complex number : -4 + 7j
+z[1]	 Falls in 2nd qrd -> Complex number : -16 + 28j
+z[2]	 Falls in 2nd qrd -> Complex number : -36 + 63j
+z[3]	 Falls in 2nd qrd -> Complex number : -64 + 112j
+z[4]	 Falls in 2nd qrd -> Complex number : -100 + 175j
+z[5]	 Falls in 2nd qrd -> Complex number : -144 + 252j
+z[6]	 Falls in 2nd qrd -> Complex number : -196 + 343j
+z[7]	 Falls in 2nd qrd -> Complex number : -256 + 448j
+z[8]	 Falls in 2nd qrd -> Complex number : -324 + 567j
+z[9]	 Falls in 2nd qrd -> Complex number : -400 + 700j
+z[10]	 Falls in 2nd qrd -> Complex number : -484 + 847j
+z[11]	 Falls in 2nd qrd -> Complex number : -576 + 1008j
+z[12]	 Falls in 2nd qrd -> Complex number : -676 + 1183j
+z[13]	 Falls in 2nd qrd -> Complex number : -784 + 1372j
+z[14]	 Falls in 2nd qrd -> Complex number : -900 + 1575j
+z[15]	 Falls in 2nd qrd -> Complex number : -1024 + 1792j
+z[16]	 Falls in 2nd qrd -> Complex number : -1156 + 2023j
+z[17]	 Falls in 2nd qrd -> Complex number : -1296 + 2268j
+z[18]	 Falls in 2nd qrd -> Complex number : -1444 + 2527j
+z[19]	 Falls in 2nd qrd -> Complex number : -1600 + 2800j
+z[20]	 Falls in 2nd qrd -> Complex number : -1764 + 3087j
+z[21]	 Falls in 2nd qrd -> Complex number : -1936 + 3388j
+z[22]	 Falls in 2nd qrd -> Complex number : -2116 + 3703j
+z[23]	 Falls in 2nd qrd -> Complex number : -2304 + 4032j
+z[24]	 Falls in 2nd qrd -> Complex number : -2500 + 4375j
+z[25]	 Falls in 2nd qrd -> Complex number : -2704 + 4732j
+z[26]	 Falls in 2nd qrd -> Complex number : -2916 + 5103j
+z[27]	 Falls in 2nd qrd -> Complex number : -3136 + 5488j
+z[28]	 Falls in 2nd qrd -> Complex number : -3364 + 5887j
+z[29]	 Falls in 2nd qrd -> Complex number : -3600 + 6300j
+z[30]	 Falls in 2nd qrd -> Complex number : -3844 + 6727j
+z[31]	 Falls in 2nd qrd -> Complex number : -4096 + 7168j
+z[32]	 Falls in 2nd qrd -> Complex number : -4356 + 7623j
+z[33]	 Falls in 2nd qrd -> Complex number : -4624 + 8092j
+z[34]	 Falls in 2nd qrd -> Complex number : -4900 + 8575j
+z[35]	 Falls in 2nd qrd -> Complex number : -5184 + 9072j
+z[36]	 Falls in 2nd qrd -> Complex number : -5476 + 9583j
+z[37]	 Falls in 2nd qrd -> Complex number : -5776 + 10108j
+z[38]	 Falls in 2nd qrd -> Complex number : -6084 + 10647j
+z[39]	 Falls in 2nd qrd -> Complex number : -6400 + 11200j
+z[40]	 Falls in 2nd qrd -> Complex number : -6724 + 11767j
+z[41]	 Falls in 2nd qrd -> Complex number : -7056 + 12348j
+z[42]	 Falls in 2nd qrd -> Complex number : -7396 + 12943j
+z[43]	 Falls in 2nd qrd -> Complex number : -7744 + 13552j
+z[44]	 Falls in 2nd qrd -> Complex number : -8100 + 14175j
+z[45]	 Falls in 2nd qrd -> Complex number : -8464 + 14812j
+z[46]	 Falls in 2nd qrd -> Complex number : -8836 + 15463j
+z[47]	 Falls in 2nd qrd -> Complex number : -9216 + 16128j
+z[48]	 Falls in 2nd qrd -> Complex number : -9604 + 16807j
+z[49]	 Falls in 2nd qrd -> Complex number : -10000 + 17500j
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish

@@ -1,0 +1,59 @@
+1 	2 	3 	4 	5 	6 	7 	8 	9 	10 	11 	12 	13 	14 	15 	16 	17 	18 	19 	20 	21 	22 	23 	24 	25 	26 	27 	28 	29 	30 	31 	32 	33 	34 	35 	36 	37 	38 	39 	40 	41 	42 	43 	44 	45 	46 	47 	48 	49 	50 	
+########################################################################
+Running Test for first N Vector of Positive numbers                     
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+complex_vector_add       1045        814          0          0          0          0          0          0          0          0
+z[0]	 Falls in 1   qrd  -> Complex number : 3 + 5j
+z[1]	 Falls in 1   qrd  -> Complex number : 6 + 10j
+z[2]	 Falls in 1   qrd  -> Complex number : 9 + 15j
+z[3]	 Falls in 1   qrd  -> Complex number : 12 + 20j
+z[4]	 Falls in 1   qrd  -> Complex number : 15 + 25j
+z[5]	 Falls in 1   qrd  -> Complex number : 18 + 30j
+z[6]	 Falls in 1   qrd  -> Complex number : 21 + 35j
+z[7]	 Falls in 1   qrd  -> Complex number : 24 + 40j
+z[8]	 Falls in 1   qrd  -> Complex number : 27 + 45j
+z[9]	 Falls in 1   qrd  -> Complex number : 30 + 50j
+z[10]	 Falls in 1   qrd  -> Complex number : 33 + 55j
+z[11]	 Falls in 1   qrd  -> Complex number : 36 + 60j
+z[12]	 Falls in 1   qrd  -> Complex number : 39 + 65j
+z[13]	 Falls in 1   qrd  -> Complex number : 42 + 70j
+z[14]	 Falls in 1   qrd  -> Complex number : 45 + 75j
+z[15]	 Falls in 1   qrd  -> Complex number : 48 + 80j
+z[16]	 Falls in 1   qrd  -> Complex number : 51 + 85j
+z[17]	 Falls in 1   qrd  -> Complex number : 54 + 90j
+z[18]	 Falls in 1   qrd  -> Complex number : 57 + 95j
+z[19]	 Falls in 1   qrd  -> Complex number : 60 + 100j
+z[20]	 Falls in 1   qrd  -> Complex number : 63 + 105j
+z[21]	 Falls in 1   qrd  -> Complex number : 66 + 110j
+z[22]	 Falls in 1   qrd  -> Complex number : 69 + 115j
+z[23]	 Falls in 1   qrd  -> Complex number : 72 + 120j
+z[24]	 Falls in 1   qrd  -> Complex number : 75 + 125j
+z[25]	 Falls in 1   qrd  -> Complex number : 78 + 130j
+z[26]	 Falls in 1   qrd  -> Complex number : 81 + 135j
+z[27]	 Falls in 1   qrd  -> Complex number : 84 + 140j
+z[28]	 Falls in 1   qrd  -> Complex number : 87 + 145j
+z[29]	 Falls in 1   qrd  -> Complex number : 90 + 150j
+z[30]	 Falls in 1   qrd  -> Complex number : 93 + 155j
+z[31]	 Falls in 1   qrd  -> Complex number : 96 + 160j
+z[32]	 Falls in 1   qrd  -> Complex number : 99 + 165j
+z[33]	 Falls in 1   qrd  -> Complex number : 102 + 170j
+z[34]	 Falls in 1   qrd  -> Complex number : 105 + 175j
+z[35]	 Falls in 1   qrd  -> Complex number : 108 + 180j
+z[36]	 Falls in 1   qrd  -> Complex number : 111 + 185j
+z[37]	 Falls in 1   qrd  -> Complex number : 114 + 190j
+z[38]	 Falls in 1   qrd  -> Complex number : 117 + 195j
+z[39]	 Falls in 1   qrd  -> Complex number : 120 + 200j
+z[40]	 Falls in 1   qrd  -> Complex number : 123 + 205j
+z[41]	 Falls in 1   qrd  -> Complex number : 126 + 210j
+z[42]	 Falls in 1   qrd  -> Complex number : 129 + 215j
+z[43]	 Falls in 1   qrd  -> Complex number : 132 + 220j
+z[44]	 Falls in 1   qrd  -> Complex number : 135 + 225j
+z[45]	 Falls in 1   qrd  -> Complex number : 138 + 230j
+z[46]	 Falls in 1   qrd  -> Complex number : 141 + 235j
+z[47]	 Falls in 1   qrd  -> Complex number : 144 + 240j
+z[48]	 Falls in 1   qrd  -> Complex number : 147 + 245j
+z[49]	 Falls in 1   qrd  -> Complex number : 150 + 250j
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish

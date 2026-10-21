@@ -1,0 +1,509 @@
+
+########################################################################
+Running Test for  Vector Multiplication of complex Numbers              
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+complex_vector_add      78064      12025        501       1000       2000        570          4       1500          4         52
+z[0]	 Falls in 2nd qrd -> Complex number : -4 + 7j
+z[1]	 Falls in 2nd qrd -> Complex number : -16 + 28j
+z[2]	 Falls in 2nd qrd -> Complex number : -36 + 63j
+z[3]	 Falls in 2nd qrd -> Complex number : -64 + 112j
+z[4]	 Falls in 2nd qrd -> Complex number : -100 + 175j
+z[5]	 Falls in 2nd qrd -> Complex number : -144 + 252j
+z[6]	 Falls in 2nd qrd -> Complex number : -196 + 343j
+z[7]	 Falls in 2nd qrd -> Complex number : -256 + 448j
+z[8]	 Falls in 2nd qrd -> Complex number : -324 + 567j
+z[9]	 Falls in 2nd qrd -> Complex number : -400 + 700j
+z[10]	 Falls in 2nd qrd -> Complex number : -484 + 847j
+z[11]	 Falls in 2nd qrd -> Complex number : -576 + 1008j
+z[12]	 Falls in 2nd qrd -> Complex number : -676 + 1183j
+z[13]	 Falls in 2nd qrd -> Complex number : -784 + 1372j
+z[14]	 Falls in 2nd qrd -> Complex number : -900 + 1575j
+z[15]	 Falls in 2nd qrd -> Complex number : -1024 + 1792j
+z[16]	 Falls in 2nd qrd -> Complex number : -1156 + 2023j
+z[17]	 Falls in 2nd qrd -> Complex number : -1296 + 2268j
+z[18]	 Falls in 2nd qrd -> Complex number : -1444 + 2527j
+z[19]	 Falls in 2nd qrd -> Complex number : -1600 + 2800j
+z[20]	 Falls in 2nd qrd -> Complex number : -1764 + 3087j
+z[21]	 Falls in 2nd qrd -> Complex number : -1936 + 3388j
+z[22]	 Falls in 2nd qrd -> Complex number : -2116 + 3703j
+z[23]	 Falls in 2nd qrd -> Complex number : -2304 + 4032j
+z[24]	 Falls in 2nd qrd -> Complex number : -2500 + 4375j
+z[25]	 Falls in 2nd qrd -> Complex number : -2704 + 4732j
+z[26]	 Falls in 2nd qrd -> Complex number : -2916 + 5103j
+z[27]	 Falls in 2nd qrd -> Complex number : -3136 + 5488j
+z[28]	 Falls in 2nd qrd -> Complex number : -3364 + 5887j
+z[29]	 Falls in 2nd qrd -> Complex number : -3600 + 6300j
+z[30]	 Falls in 2nd qrd -> Complex number : -3844 + 6727j
+z[31]	 Falls in 2nd qrd -> Complex number : -4096 + 7168j
+z[32]	 Falls in 2nd qrd -> Complex number : -4356 + 7623j
+z[33]	 Falls in 2nd qrd -> Complex number : -4624 + 8092j
+z[34]	 Falls in 2nd qrd -> Complex number : -4900 + 8575j
+z[35]	 Falls in 2nd qrd -> Complex number : -5184 + 9072j
+z[36]	 Falls in 2nd qrd -> Complex number : -5476 + 9583j
+z[37]	 Falls in 2nd qrd -> Complex number : -5776 + 10108j
+z[38]	 Falls in 2nd qrd -> Complex number : -6084 + 10647j
+z[39]	 Falls in 2nd qrd -> Complex number : -6400 + 11200j
+z[40]	 Falls in 2nd qrd -> Complex number : -6724 + 11767j
+z[41]	 Falls in 2nd qrd -> Complex number : -7056 + 12348j
+z[42]	 Falls in 2nd qrd -> Complex number : -7396 + 12943j
+z[43]	 Falls in 2nd qrd -> Complex number : -7744 + 13552j
+z[44]	 Falls in 2nd qrd -> Complex number : -8100 + 14175j
+z[45]	 Falls in 2nd qrd -> Complex number : -8464 + 14812j
+z[46]	 Falls in 2nd qrd -> Complex number : -8836 + 15463j
+z[47]	 Falls in 2nd qrd -> Complex number : -9216 + 16128j
+z[48]	 Falls in 2nd qrd -> Complex number : -9604 + 16807j
+z[49]	 Falls in 2nd qrd -> Complex number : -10000 + 17500j
+z[50]	 Falls in 2nd qrd -> Complex number : -10404 + 18207j
+z[51]	 Falls in 2nd qrd -> Complex number : -10816 + 18928j
+z[52]	 Falls in 2nd qrd -> Complex number : -11236 + 19663j
+z[53]	 Falls in 2nd qrd -> Complex number : -11664 + 20412j
+z[54]	 Falls in 2nd qrd -> Complex number : -12100 + 21175j
+z[55]	 Falls in 2nd qrd -> Complex number : -12544 + 21952j
+z[56]	 Falls in 2nd qrd -> Complex number : -12996 + 22743j
+z[57]	 Falls in 2nd qrd -> Complex number : -13456 + 23548j
+z[58]	 Falls in 2nd qrd -> Complex number : -13924 + 24367j
+z[59]	 Falls in 2nd qrd -> Complex number : -14400 + 25200j
+z[60]	 Falls in 2nd qrd -> Complex number : -14884 + 26047j
+z[61]	 Falls in 2nd qrd -> Complex number : -15376 + 26908j
+z[62]	 Falls in 2nd qrd -> Complex number : -15876 + 27783j
+z[63]	 Falls in 2nd qrd -> Complex number : -16384 + 28672j
+z[64]	 Falls in 2nd qrd -> Complex number : -16900 + 29575j
+z[65]	 Falls in 2nd qrd -> Complex number : -17424 + 30492j
+z[66]	 Falls in 2nd qrd -> Complex number : -17956 + 31423j
+z[67]	 Falls in 2nd qrd -> Complex number : -18496 + 32368j
+z[68]	 Falls in 3rd qrd -> Complex number : -19044-32209j
+z[69]	 Falls in 3rd qrd -> Complex number : -19600-31236j
+z[70]	 Falls in 3rd qrd -> Complex number : -20164-30249j
+z[71]	 Falls in 3rd qrd -> Complex number : -20736-29248j
+z[72]	 Falls in 3rd qrd -> Complex number : -21316-28233j
+z[73]	 Falls in 3rd qrd -> Complex number : -21904-27204j
+z[74]	 Falls in 3rd qrd -> Complex number : -22500-26161j
+z[75]	 Falls in 3rd qrd -> Complex number : -23104-25104j
+z[76]	 Falls in 3rd qrd -> Complex number : -23716-24033j
+z[77]	 Falls in 3rd qrd -> Complex number : -24336-22948j
+z[78]	 Falls in 3rd qrd -> Complex number : -24964-21849j
+z[79]	 Falls in 3rd qrd -> Complex number : -25600-20736j
+z[80]	 Falls in 3rd qrd -> Complex number : -26244-19609j
+z[81]	 Falls in 3rd qrd -> Complex number : -26896-18468j
+z[82]	 Falls in 3rd qrd -> Complex number : -27556-17313j
+z[83]	 Falls in 3rd qrd -> Complex number : -28224-16144j
+z[84]	 Falls in 3rd qrd -> Complex number : -28900-14961j
+z[85]	 Falls in 3rd qrd -> Complex number : -29584-13764j
+z[86]	 Falls in 3rd qrd -> Complex number : -30276-12553j
+z[87]	 Falls in 3rd qrd -> Complex number : -30976-11328j
+z[88]	 Falls in 3rd qrd -> Complex number : -31684-10089j
+z[89]	 Falls in 3rd qrd -> Complex number : -32400-8836j
+z[90]	 Falls in 4th qrd  -> Complex number : 32412-7569j
+z[91]	 Falls in 4th qrd  -> Complex number : 31680-6288j
+z[92]	 Falls in 4th qrd  -> Complex number : 30940-4993j
+z[93]	 Falls in 4th qrd  -> Complex number : 30192-3684j
+z[94]	 Falls in 4th qrd  -> Complex number : 29436-2361j
+z[95]	 Falls in 4th qrd  -> Complex number : 28672-1024j
+z[96]	 Falls in 1   qrd  -> Complex number : 27900 + 327j
+z[97]	 Falls in 1   qrd  -> Complex number : 27120 + 1692j
+z[98]	 Falls in 1   qrd  -> Complex number : 26332 + 3071j
+z[99]	 Falls in 1   qrd  -> Complex number : 25536 + 4464j
+z[100]	 Falls in 1   qrd  -> Complex number : 24732 + 5871j
+z[101]	 Falls in 1   qrd  -> Complex number : 23920 + 7292j
+z[102]	 Falls in 1   qrd  -> Complex number : 23100 + 8727j
+z[103]	 Falls in 1   qrd  -> Complex number : 22272 + 10176j
+z[104]	 Falls in 1   qrd  -> Complex number : 21436 + 11639j
+z[105]	 Falls in 1   qrd  -> Complex number : 20592 + 13116j
+z[106]	 Falls in 1   qrd  -> Complex number : 19740 + 14607j
+z[107]	 Falls in 1   qrd  -> Complex number : 18880 + 16112j
+z[108]	 Falls in 1   qrd  -> Complex number : 18012 + 17631j
+z[109]	 Falls in 1   qrd  -> Complex number : 17136 + 19164j
+z[110]	 Falls in 1   qrd  -> Complex number : 16252 + 20711j
+z[111]	 Falls in 1   qrd  -> Complex number : 15360 + 22272j
+z[112]	 Falls in 1   qrd  -> Complex number : 14460 + 23847j
+z[113]	 Falls in 1   qrd  -> Complex number : 13552 + 25436j
+z[114]	 Falls in 1   qrd  -> Complex number : 12636 + 27039j
+z[115]	 Falls in 1   qrd  -> Complex number : 11712 + 28656j
+z[116]	 Falls in 1   qrd  -> Complex number : 10780 + 30287j
+z[117]	 Falls in 1   qrd  -> Complex number : 9840 + 31932j
+z[118]	 Falls in 4th qrd  -> Complex number : 8892-31945j
+z[119]	 Falls in 4th qrd  -> Complex number : 7936-30272j
+z[120]	 Falls in 4th qrd  -> Complex number : 6972-28585j
+z[121]	 Falls in 4th qrd  -> Complex number : 6000-26884j
+z[122]	 Falls in 4th qrd  -> Complex number : 5020-25169j
+z[123]	 Falls in 4th qrd  -> Complex number : 4032-23440j
+z[124]	 Falls in 4th qrd  -> Complex number : 3036-21697j
+z[125]	 Falls in 4th qrd  -> Complex number : 2032-19940j
+z[126]	 Falls in 4th qrd  -> Complex number : 1020-18169j
+z[127]	 Falls in 4th qrd  -> Complex number : 0-16384j
+z[128]	 Falls in 3rd qrd -> Complex number : -1028-14585j
+z[129]	 Falls in 3rd qrd -> Complex number : -2064-12772j
+z[130]	 Falls in 3rd qrd -> Complex number : -3108-10945j
+z[131]	 Falls in 3rd qrd -> Complex number : -4160-9104j
+z[132]	 Falls in 3rd qrd -> Complex number : -5220-7249j
+z[133]	 Falls in 3rd qrd -> Complex number : -6288-5380j
+z[134]	 Falls in 3rd qrd -> Complex number : -7364-3497j
+z[135]	 Falls in 3rd qrd -> Complex number : -8448-1600j
+z[136]	 Falls in 2nd qrd -> Complex number : -9540 + 311j
+z[137]	 Falls in 2nd qrd -> Complex number : -10640 + 2236j
+z[138]	 Falls in 2nd qrd -> Complex number : -11748 + 4175j
+z[139]	 Falls in 2nd qrd -> Complex number : -12864 + 6128j
+z[140]	 Falls in 2nd qrd -> Complex number : -13988 + 8095j
+z[141]	 Falls in 2nd qrd -> Complex number : -15120 + 10076j
+z[142]	 Falls in 2nd qrd -> Complex number : -16260 + 12071j
+z[143]	 Falls in 2nd qrd -> Complex number : -17408 + 14080j
+z[144]	 Falls in 2nd qrd -> Complex number : -18564 + 16103j
+z[145]	 Falls in 2nd qrd -> Complex number : -19728 + 18140j
+z[146]	 Falls in 2nd qrd -> Complex number : -20900 + 20191j
+z[147]	 Falls in 2nd qrd -> Complex number : -22080 + 22256j
+z[148]	 Falls in 2nd qrd -> Complex number : -23268 + 24335j
+z[149]	 Falls in 2nd qrd -> Complex number : -24464 + 26428j
+z[150]	 Falls in 2nd qrd -> Complex number : -25668 + 28535j
+z[151]	 Falls in 2nd qrd -> Complex number : -26880 + 30656j
+z[152]	 Falls in 3rd qrd -> Complex number : -28100-32745j
+z[153]	 Falls in 3rd qrd -> Complex number : -29328-30596j
+z[154]	 Falls in 3rd qrd -> Complex number : -30564-28433j
+z[155]	 Falls in 3rd qrd -> Complex number : -31808-26256j
+z[156]	 Falls in 4th qrd  -> Complex number : 32476-24065j
+z[157]	 Falls in 4th qrd  -> Complex number : 31216-21860j
+z[158]	 Falls in 4th qrd  -> Complex number : 29948-19641j
+z[159]	 Falls in 4th qrd  -> Complex number : 28672-17408j
+z[160]	 Falls in 4th qrd  -> Complex number : 27388-15161j
+z[161]	 Falls in 4th qrd  -> Complex number : 26096-12900j
+z[162]	 Falls in 4th qrd  -> Complex number : 24796-10625j
+z[163]	 Falls in 4th qrd  -> Complex number : 23488-8336j
+z[164]	 Falls in 4th qrd  -> Complex number : 22172-6033j
+z[165]	 Falls in 4th qrd  -> Complex number : 20848-3716j
+z[166]	 Falls in 4th qrd  -> Complex number : 19516-1385j
+z[167]	 Falls in 1   qrd  -> Complex number : 18176 + 960j
+z[168]	 Falls in 1   qrd  -> Complex number : 16828 + 3319j
+z[169]	 Falls in 1   qrd  -> Complex number : 15472 + 5692j
+z[170]	 Falls in 1   qrd  -> Complex number : 14108 + 8079j
+z[171]	 Falls in 1   qrd  -> Complex number : 12736 + 10480j
+z[172]	 Falls in 1   qrd  -> Complex number : 11356 + 12895j
+z[173]	 Falls in 1   qrd  -> Complex number : 9968 + 15324j
+z[174]	 Falls in 1   qrd  -> Complex number : 8572 + 17767j
+z[175]	 Falls in 1   qrd  -> Complex number : 7168 + 20224j
+z[176]	 Falls in 1   qrd  -> Complex number : 5756 + 22695j
+z[177]	 Falls in 1   qrd  -> Complex number : 4336 + 25180j
+z[178]	 Falls in 1   qrd  -> Complex number : 2908 + 27679j
+z[179]	 Falls in 1   qrd  -> Complex number : 1472 + 30192j
+z[180]	 Falls in 1   qrd  -> Complex number : 28 + 32719j
+z[181]	 Falls in 3rd qrd -> Complex number : -1424-30276j
+z[182]	 Falls in 3rd qrd -> Complex number : -2884-27721j
+z[183]	 Falls in 3rd qrd -> Complex number : -4352-25152j
+z[184]	 Falls in 3rd qrd -> Complex number : -5828-22569j
+z[185]	 Falls in 3rd qrd -> Complex number : -7312-19972j
+z[186]	 Falls in 3rd qrd -> Complex number : -8804-17361j
+z[187]	 Falls in 3rd qrd -> Complex number : -10304-14736j
+z[188]	 Falls in 3rd qrd -> Complex number : -11812-12097j
+z[189]	 Falls in 3rd qrd -> Complex number : -13328-9444j
+z[190]	 Falls in 3rd qrd -> Complex number : -14852-6777j
+z[191]	 Falls in 3rd qrd -> Complex number : -16384-4096j
+z[192]	 Falls in 3rd qrd -> Complex number : -17924-1401j
+z[193]	 Falls in 2nd qrd -> Complex number : -19472 + 1308j
+z[194]	 Falls in 2nd qrd -> Complex number : -21028 + 4031j
+z[195]	 Falls in 2nd qrd -> Complex number : -22592 + 6768j
+z[196]	 Falls in 2nd qrd -> Complex number : -24164 + 9519j
+z[197]	 Falls in 2nd qrd -> Complex number : -25744 + 12284j
+z[198]	 Falls in 2nd qrd -> Complex number : -27332 + 15063j
+z[199]	 Falls in 2nd qrd -> Complex number : -28928 + 17856j
+z[200]	 Falls in 2nd qrd -> Complex number : -30532 + 20663j
+z[201]	 Falls in 2nd qrd -> Complex number : -32144 + 23484j
+z[202]	 Falls in 1   qrd  -> Complex number : 31772 + 26319j
+z[203]	 Falls in 1   qrd  -> Complex number : 30144 + 29168j
+z[204]	 Falls in 1   qrd  -> Complex number : 28508 + 32031j
+z[205]	 Falls in 4th qrd  -> Complex number : 26864-30628j
+z[206]	 Falls in 4th qrd  -> Complex number : 25212-27737j
+z[207]	 Falls in 4th qrd  -> Complex number : 23552-24832j
+z[208]	 Falls in 4th qrd  -> Complex number : 21884-21913j
+z[209]	 Falls in 4th qrd  -> Complex number : 20208-18980j
+z[210]	 Falls in 4th qrd  -> Complex number : 18524-16033j
+z[211]	 Falls in 4th qrd  -> Complex number : 16832-13072j
+z[212]	 Falls in 4th qrd  -> Complex number : 15132-10097j
+z[213]	 Falls in 4th qrd  -> Complex number : 13424-7108j
+z[214]	 Falls in 4th qrd  -> Complex number : 11708-4105j
+z[215]	 Falls in 4th qrd  -> Complex number : 9984-1088j
+z[216]	 Falls in 1   qrd  -> Complex number : 8252 + 1943j
+z[217]	 Falls in 1   qrd  -> Complex number : 6512 + 4988j
+z[218]	 Falls in 1   qrd  -> Complex number : 4764 + 8047j
+z[219]	 Falls in 1   qrd  -> Complex number : 3008 + 11120j
+z[220]	 Falls in 1   qrd  -> Complex number : 1244 + 14207j
+z[221]	 Falls in 2nd qrd -> Complex number : -528 + 17308j
+z[222]	 Falls in 2nd qrd -> Complex number : -2308 + 20423j
+z[223]	 Falls in 2nd qrd -> Complex number : -4096 + 23552j
+z[224]	 Falls in 2nd qrd -> Complex number : -5892 + 26695j
+z[225]	 Falls in 2nd qrd -> Complex number : -7696 + 29852j
+z[226]	 Falls in 3rd qrd -> Complex number : -9508-32513j
+z[227]	 Falls in 3rd qrd -> Complex number : -11328-29328j
+z[228]	 Falls in 3rd qrd -> Complex number : -13156-26129j
+z[229]	 Falls in 3rd qrd -> Complex number : -14992-22916j
+z[230]	 Falls in 3rd qrd -> Complex number : -16836-19689j
+z[231]	 Falls in 3rd qrd -> Complex number : -18688-16448j
+z[232]	 Falls in 3rd qrd -> Complex number : -20548-13193j
+z[233]	 Falls in 3rd qrd -> Complex number : -22416-9924j
+z[234]	 Falls in 3rd qrd -> Complex number : -24292-6641j
+z[235]	 Falls in 3rd qrd -> Complex number : -26176-3344j
+z[236]	 Falls in 3rd qrd -> Complex number : -28068-33j
+z[237]	 Falls in 2nd qrd -> Complex number : -29968 + 3292j
+z[238]	 Falls in 2nd qrd -> Complex number : -31876 + 6631j
+z[239]	 Falls in 1   qrd  -> Complex number : 31744 + 9984j
+z[240]	 Falls in 1   qrd  -> Complex number : 29820 + 13351j
+z[241]	 Falls in 1   qrd  -> Complex number : 27888 + 16732j
+z[242]	 Falls in 1   qrd  -> Complex number : 25948 + 20127j
+z[243]	 Falls in 1   qrd  -> Complex number : 24000 + 23536j
+z[244]	 Falls in 1   qrd  -> Complex number : 22044 + 26959j
+z[245]	 Falls in 1   qrd  -> Complex number : 20080 + 30396j
+z[246]	 Falls in 4th qrd  -> Complex number : 18108-31689j
+z[247]	 Falls in 4th qrd  -> Complex number : 16128-28224j
+z[248]	 Falls in 4th qrd  -> Complex number : 14140-24745j
+z[249]	 Falls in 4th qrd  -> Complex number : 12144-21252j
+z[250]	 Falls in 4th qrd  -> Complex number : 10140-17745j
+z[251]	 Falls in 4th qrd  -> Complex number : 8128-14224j
+z[252]	 Falls in 4th qrd  -> Complex number : 6108-10689j
+z[253]	 Falls in 4th qrd  -> Complex number : 4080-7140j
+z[254]	 Falls in 4th qrd  -> Complex number : 2044-3577j
+z[255]	 Falls in 1   qrd  -> Complex number : 0 + 0j
+z[256]	 Falls in 2nd qrd -> Complex number : -2052 + 3591j
+z[257]	 Falls in 2nd qrd -> Complex number : -4112 + 7196j
+z[258]	 Falls in 2nd qrd -> Complex number : -6180 + 10815j
+z[259]	 Falls in 2nd qrd -> Complex number : -8256 + 14448j
+z[260]	 Falls in 2nd qrd -> Complex number : -10340 + 18095j
+z[261]	 Falls in 2nd qrd -> Complex number : -12432 + 21756j
+z[262]	 Falls in 2nd qrd -> Complex number : -14532 + 25431j
+z[263]	 Falls in 2nd qrd -> Complex number : -16640 + 29120j
+z[264]	 Falls in 3rd qrd -> Complex number : -18756-32713j
+z[265]	 Falls in 3rd qrd -> Complex number : -20880-28996j
+z[266]	 Falls in 3rd qrd -> Complex number : -23012-25265j
+z[267]	 Falls in 3rd qrd -> Complex number : -25152-21520j
+z[268]	 Falls in 3rd qrd -> Complex number : -27300-17761j
+z[269]	 Falls in 3rd qrd -> Complex number : -29456-13988j
+z[270]	 Falls in 3rd qrd -> Complex number : -31620-10201j
+z[271]	 Falls in 4th qrd  -> Complex number : 31744-6400j
+z[272]	 Falls in 4th qrd  -> Complex number : 29564-2585j
+z[273]	 Falls in 1   qrd  -> Complex number : 27376 + 1244j
+z[274]	 Falls in 1   qrd  -> Complex number : 25180 + 5087j
+z[275]	 Falls in 1   qrd  -> Complex number : 22976 + 8944j
+z[276]	 Falls in 1   qrd  -> Complex number : 20764 + 12815j
+z[277]	 Falls in 1   qrd  -> Complex number : 18544 + 16700j
+z[278]	 Falls in 1   qrd  -> Complex number : 16316 + 20599j
+z[279]	 Falls in 1   qrd  -> Complex number : 14080 + 24512j
+z[280]	 Falls in 1   qrd  -> Complex number : 11836 + 28439j
+z[281]	 Falls in 1   qrd  -> Complex number : 9584 + 32380j
+z[282]	 Falls in 4th qrd  -> Complex number : 7324-29201j
+z[283]	 Falls in 4th qrd  -> Complex number : 5056-25232j
+z[284]	 Falls in 4th qrd  -> Complex number : 2780-21249j
+z[285]	 Falls in 4th qrd  -> Complex number : 496-17252j
+z[286]	 Falls in 3rd qrd -> Complex number : -1796-13241j
+z[287]	 Falls in 3rd qrd -> Complex number : -4096-9216j
+z[288]	 Falls in 3rd qrd -> Complex number : -6404-5177j
+z[289]	 Falls in 3rd qrd -> Complex number : -8720-1124j
+z[290]	 Falls in 2nd qrd -> Complex number : -11044 + 2943j
+z[291]	 Falls in 2nd qrd -> Complex number : -13376 + 7024j
+z[292]	 Falls in 2nd qrd -> Complex number : -15716 + 11119j
+z[293]	 Falls in 2nd qrd -> Complex number : -18064 + 15228j
+z[294]	 Falls in 2nd qrd -> Complex number : -20420 + 19351j
+z[295]	 Falls in 2nd qrd -> Complex number : -22784 + 23488j
+z[296]	 Falls in 2nd qrd -> Complex number : -25156 + 27639j
+z[297]	 Falls in 2nd qrd -> Complex number : -27536 + 31804j
+z[298]	 Falls in 3rd qrd -> Complex number : -29924-29553j
+z[299]	 Falls in 3rd qrd -> Complex number : -32320-25360j
+z[300]	 Falls in 4th qrd  -> Complex number : 30812-21153j
+z[301]	 Falls in 4th qrd  -> Complex number : 28400-16932j
+z[302]	 Falls in 4th qrd  -> Complex number : 25980-12697j
+z[303]	 Falls in 4th qrd  -> Complex number : 23552-8448j
+z[304]	 Falls in 4th qrd  -> Complex number : 21116-4185j
+z[305]	 Falls in 1   qrd  -> Complex number : 18672 + 92j
+z[306]	 Falls in 1   qrd  -> Complex number : 16220 + 4383j
+z[307]	 Falls in 1   qrd  -> Complex number : 13760 + 8688j
+z[308]	 Falls in 1   qrd  -> Complex number : 11292 + 13007j
+z[309]	 Falls in 1   qrd  -> Complex number : 8816 + 17340j
+z[310]	 Falls in 1   qrd  -> Complex number : 6332 + 21687j
+z[311]	 Falls in 1   qrd  -> Complex number : 3840 + 26048j
+z[312]	 Falls in 1   qrd  -> Complex number : 1340 + 30423j
+z[313]	 Falls in 3rd qrd -> Complex number : -1168-30724j
+z[314]	 Falls in 3rd qrd -> Complex number : -3684-26321j
+z[315]	 Falls in 3rd qrd -> Complex number : -6208-21904j
+z[316]	 Falls in 3rd qrd -> Complex number : -8740-17473j
+z[317]	 Falls in 3rd qrd -> Complex number : -11280-13028j
+z[318]	 Falls in 3rd qrd -> Complex number : -13828-8569j
+z[319]	 Falls in 3rd qrd -> Complex number : -16384-4096j
+z[320]	 Falls in 2nd qrd -> Complex number : -18948 + 391j
+z[321]	 Falls in 2nd qrd -> Complex number : -21520 + 4892j
+z[322]	 Falls in 2nd qrd -> Complex number : -24100 + 9407j
+z[323]	 Falls in 2nd qrd -> Complex number : -26688 + 13936j
+z[324]	 Falls in 2nd qrd -> Complex number : -29284 + 18479j
+z[325]	 Falls in 2nd qrd -> Complex number : -31888 + 23036j
+z[326]	 Falls in 1   qrd  -> Complex number : 31036 + 27607j
+z[327]	 Falls in 1   qrd  -> Complex number : 28416 + 32192j
+z[328]	 Falls in 4th qrd  -> Complex number : 25788-28745j
+z[329]	 Falls in 4th qrd  -> Complex number : 23152-24132j
+z[330]	 Falls in 4th qrd  -> Complex number : 20508-19505j
+z[331]	 Falls in 4th qrd  -> Complex number : 17856-14864j
+z[332]	 Falls in 4th qrd  -> Complex number : 15196-10209j
+z[333]	 Falls in 4th qrd  -> Complex number : 12528-5540j
+z[334]	 Falls in 4th qrd  -> Complex number : 9852-857j
+z[335]	 Falls in 1   qrd  -> Complex number : 7168 + 3840j
+z[336]	 Falls in 1   qrd  -> Complex number : 4476 + 8551j
+z[337]	 Falls in 1   qrd  -> Complex number : 1776 + 13276j
+z[338]	 Falls in 2nd qrd -> Complex number : -932 + 18015j
+z[339]	 Falls in 2nd qrd -> Complex number : -3648 + 22768j
+z[340]	 Falls in 2nd qrd -> Complex number : -6372 + 27535j
+z[341]	 Falls in 2nd qrd -> Complex number : -9104 + 32316j
+z[342]	 Falls in 3rd qrd -> Complex number : -11844-28425j
+z[343]	 Falls in 3rd qrd -> Complex number : -14592-23616j
+z[344]	 Falls in 3rd qrd -> Complex number : -17348-18793j
+z[345]	 Falls in 3rd qrd -> Complex number : -20112-13956j
+z[346]	 Falls in 3rd qrd -> Complex number : -22884-9105j
+z[347]	 Falls in 3rd qrd -> Complex number : -25664-4240j
+z[348]	 Falls in 2nd qrd -> Complex number : -28452 + 639j
+z[349]	 Falls in 2nd qrd -> Complex number : -31248 + 5532j
+z[350]	 Falls in 1   qrd  -> Complex number : 31484 + 10439j
+z[351]	 Falls in 1   qrd  -> Complex number : 28672 + 15360j
+z[352]	 Falls in 1   qrd  -> Complex number : 25852 + 20295j
+z[353]	 Falls in 1   qrd  -> Complex number : 23024 + 25244j
+z[354]	 Falls in 1   qrd  -> Complex number : 20188 + 30207j
+z[355]	 Falls in 4th qrd  -> Complex number : 17344-30352j
+z[356]	 Falls in 4th qrd  -> Complex number : 14492-25361j
+z[357]	 Falls in 4th qrd  -> Complex number : 11632-20356j
+z[358]	 Falls in 4th qrd  -> Complex number : 8764-15337j
+z[359]	 Falls in 4th qrd  -> Complex number : 5888-10304j
+z[360]	 Falls in 4th qrd  -> Complex number : 3004-5257j
+z[361]	 Falls in 4th qrd  -> Complex number : 112-196j
+z[362]	 Falls in 2nd qrd -> Complex number : -2788 + 4879j
+z[363]	 Falls in 2nd qrd -> Complex number : -5696 + 9968j
+z[364]	 Falls in 2nd qrd -> Complex number : -8612 + 15071j
+z[365]	 Falls in 2nd qrd -> Complex number : -11536 + 20188j
+z[366]	 Falls in 2nd qrd -> Complex number : -14468 + 25319j
+z[367]	 Falls in 2nd qrd -> Complex number : -17408 + 30464j
+z[368]	 Falls in 3rd qrd -> Complex number : -20356-29913j
+z[369]	 Falls in 3rd qrd -> Complex number : -23312-24740j
+z[370]	 Falls in 3rd qrd -> Complex number : -26276-19553j
+z[371]	 Falls in 3rd qrd -> Complex number : -29248-14352j
+z[372]	 Falls in 3rd qrd -> Complex number : -32228-9137j
+z[373]	 Falls in 4th qrd  -> Complex number : 30320-3908j
+z[374]	 Falls in 1   qrd  -> Complex number : 27324 + 1335j
+z[375]	 Falls in 1   qrd  -> Complex number : 24320 + 6592j
+z[376]	 Falls in 1   qrd  -> Complex number : 21308 + 11863j
+z[377]	 Falls in 1   qrd  -> Complex number : 18288 + 17148j
+z[378]	 Falls in 1   qrd  -> Complex number : 15260 + 22447j
+z[379]	 Falls in 1   qrd  -> Complex number : 12224 + 27760j
+z[380]	 Falls in 4th qrd  -> Complex number : 9180-32449j
+z[381]	 Falls in 4th qrd  -> Complex number : 6128-27108j
+z[382]	 Falls in 4th qrd  -> Complex number : 3068-21753j
+z[383]	 Falls in 4th qrd  -> Complex number : 0-16384j
+z[384]	 Falls in 3rd qrd -> Complex number : -3076-11001j
+z[385]	 Falls in 3rd qrd -> Complex number : -6160-5604j
+z[386]	 Falls in 3rd qrd -> Complex number : -9252-193j
+z[387]	 Falls in 2nd qrd -> Complex number : -12352 + 5232j
+z[388]	 Falls in 2nd qrd -> Complex number : -15460 + 10671j
+z[389]	 Falls in 2nd qrd -> Complex number : -18576 + 16124j
+z[390]	 Falls in 2nd qrd -> Complex number : -21700 + 21591j
+z[391]	 Falls in 2nd qrd -> Complex number : -24832 + 27072j
+z[392]	 Falls in 2nd qrd -> Complex number : -27972 + 32567j
+z[393]	 Falls in 3rd qrd -> Complex number : -31120-27460j
+z[394]	 Falls in 4th qrd  -> Complex number : 31260-21937j
+z[395]	 Falls in 4th qrd  -> Complex number : 28096-16400j
+z[396]	 Falls in 4th qrd  -> Complex number : 24924-10849j
+z[397]	 Falls in 4th qrd  -> Complex number : 21744-5284j
+z[398]	 Falls in 1   qrd  -> Complex number : 18556 + 295j
+z[399]	 Falls in 1   qrd  -> Complex number : 15360 + 5888j
+z[400]	 Falls in 1   qrd  -> Complex number : 12156 + 11495j
+z[401]	 Falls in 1   qrd  -> Complex number : 8944 + 17116j
+z[402]	 Falls in 1   qrd  -> Complex number : 5724 + 22751j
+z[403]	 Falls in 1   qrd  -> Complex number : 2496 + 28400j
+z[404]	 Falls in 3rd qrd -> Complex number : -740-31473j
+z[405]	 Falls in 3rd qrd -> Complex number : -3984-25796j
+z[406]	 Falls in 3rd qrd -> Complex number : -7236-20105j
+z[407]	 Falls in 3rd qrd -> Complex number : -10496-14400j
+z[408]	 Falls in 3rd qrd -> Complex number : -13764-8681j
+z[409]	 Falls in 3rd qrd -> Complex number : -17040-2948j
+z[410]	 Falls in 2nd qrd -> Complex number : -20324 + 2799j
+z[411]	 Falls in 2nd qrd -> Complex number : -23616 + 8560j
+z[412]	 Falls in 2nd qrd -> Complex number : -26916 + 14335j
+z[413]	 Falls in 2nd qrd -> Complex number : -30224 + 20124j
+z[414]	 Falls in 1   qrd  -> Complex number : 31996 + 25927j
+z[415]	 Falls in 1   qrd  -> Complex number : 28672 + 31744j
+z[416]	 Falls in 4th qrd  -> Complex number : 25340-27961j
+z[417]	 Falls in 4th qrd  -> Complex number : 22000-22116j
+z[418]	 Falls in 4th qrd  -> Complex number : 18652-16257j
+z[419]	 Falls in 4th qrd  -> Complex number : 15296-10384j
+z[420]	 Falls in 4th qrd  -> Complex number : 11932-4497j
+z[421]	 Falls in 1   qrd  -> Complex number : 8560 + 1404j
+z[422]	 Falls in 1   qrd  -> Complex number : 5180 + 7319j
+z[423]	 Falls in 1   qrd  -> Complex number : 1792 + 13248j
+z[424]	 Falls in 2nd qrd -> Complex number : -1604 + 19191j
+z[425]	 Falls in 2nd qrd -> Complex number : -5008 + 25148j
+z[426]	 Falls in 2nd qrd -> Complex number : -8420 + 31119j
+z[427]	 Falls in 3rd qrd -> Complex number : -11840-28432j
+z[428]	 Falls in 3rd qrd -> Complex number : -15268-22433j
+z[429]	 Falls in 3rd qrd -> Complex number : -18704-16420j
+z[430]	 Falls in 3rd qrd -> Complex number : -22148-10393j
+z[431]	 Falls in 3rd qrd -> Complex number : -25600-4352j
+z[432]	 Falls in 2nd qrd -> Complex number : -29060 + 1703j
+z[433]	 Falls in 2nd qrd -> Complex number : -32528 + 7772j
+z[434]	 Falls in 1   qrd  -> Complex number : 29532 + 13855j
+z[435]	 Falls in 1   qrd  -> Complex number : 26048 + 19952j
+z[436]	 Falls in 1   qrd  -> Complex number : 22556 + 26063j
+z[437]	 Falls in 1   qrd  -> Complex number : 19056 + 32188j
+z[438]	 Falls in 4th qrd  -> Complex number : 15548-27209j
+z[439]	 Falls in 4th qrd  -> Complex number : 12032-21056j
+z[440]	 Falls in 4th qrd  -> Complex number : 8508-14889j
+z[441]	 Falls in 4th qrd  -> Complex number : 4976-8708j
+z[442]	 Falls in 4th qrd  -> Complex number : 1436-2513j
+z[443]	 Falls in 2nd qrd -> Complex number : -2112 + 3696j
+z[444]	 Falls in 2nd qrd -> Complex number : -5668 + 9919j
+z[445]	 Falls in 2nd qrd -> Complex number : -9232 + 16156j
+z[446]	 Falls in 2nd qrd -> Complex number : -12804 + 22407j
+z[447]	 Falls in 2nd qrd -> Complex number : -16384 + 28672j
+z[448]	 Falls in 3rd qrd -> Complex number : -19972-30585j
+z[449]	 Falls in 3rd qrd -> Complex number : -23568-24292j
+z[450]	 Falls in 3rd qrd -> Complex number : -27172-17985j
+z[451]	 Falls in 3rd qrd -> Complex number : -30784-11664j
+z[452]	 Falls in 4th qrd  -> Complex number : 31132-5329j
+z[453]	 Falls in 1   qrd  -> Complex number : 27504 + 1020j
+z[454]	 Falls in 1   qrd  -> Complex number : 23868 + 7383j
+z[455]	 Falls in 1   qrd  -> Complex number : 20224 + 13760j
+z[456]	 Falls in 1   qrd  -> Complex number : 16572 + 20151j
+z[457]	 Falls in 1   qrd  -> Complex number : 12912 + 26556j
+z[458]	 Falls in 4th qrd  -> Complex number : 9244-32561j
+z[459]	 Falls in 4th qrd  -> Complex number : 5568-26128j
+z[460]	 Falls in 4th qrd  -> Complex number : 1884-19681j
+z[461]	 Falls in 3rd qrd -> Complex number : -1808-13220j
+z[462]	 Falls in 3rd qrd -> Complex number : -5508-6745j
+z[463]	 Falls in 3rd qrd -> Complex number : -9216-256j
+z[464]	 Falls in 2nd qrd -> Complex number : -12932 + 6247j
+z[465]	 Falls in 2nd qrd -> Complex number : -16656 + 12764j
+z[466]	 Falls in 2nd qrd -> Complex number : -20388 + 19295j
+z[467]	 Falls in 2nd qrd -> Complex number : -24128 + 25840j
+z[468]	 Falls in 2nd qrd -> Complex number : -27876 + 32399j
+z[469]	 Falls in 3rd qrd -> Complex number : -31632-26564j
+z[470]	 Falls in 4th qrd  -> Complex number : 30140-19977j
+z[471]	 Falls in 4th qrd  -> Complex number : 26368-13376j
+z[472]	 Falls in 4th qrd  -> Complex number : 22588-6761j
+z[473]	 Falls in 4th qrd  -> Complex number : 18800-132j
+z[474]	 Falls in 1   qrd  -> Complex number : 15004 + 6511j
+z[475]	 Falls in 1   qrd  -> Complex number : 11200 + 13168j
+z[476]	 Falls in 1   qrd  -> Complex number : 7388 + 19839j
+z[477]	 Falls in 1   qrd  -> Complex number : 3568 + 26524j
+z[478]	 Falls in 3rd qrd -> Complex number : -260-32313j
+z[479]	 Falls in 3rd qrd -> Complex number : -4096-25600j
+z[480]	 Falls in 3rd qrd -> Complex number : -7940-18873j
+z[481]	 Falls in 3rd qrd -> Complex number : -11792-12132j
+z[482]	 Falls in 3rd qrd -> Complex number : -15652-5377j
+z[483]	 Falls in 2nd qrd -> Complex number : -19520 + 1392j
+z[484]	 Falls in 2nd qrd -> Complex number : -23396 + 8175j
+z[485]	 Falls in 2nd qrd -> Complex number : -27280 + 14972j
+z[486]	 Falls in 2nd qrd -> Complex number : -31172 + 21783j
+z[487]	 Falls in 1   qrd  -> Complex number : 30464 + 28608j
+z[488]	 Falls in 4th qrd  -> Complex number : 26556-30089j
+z[489]	 Falls in 4th qrd  -> Complex number : 22640-23236j
+z[490]	 Falls in 4th qrd  -> Complex number : 18716-16369j
+z[491]	 Falls in 4th qrd  -> Complex number : 14784-9488j
+z[492]	 Falls in 4th qrd  -> Complex number : 10844-2593j
+z[493]	 Falls in 1   qrd  -> Complex number : 6896 + 4316j
+z[494]	 Falls in 1   qrd  -> Complex number : 2940 + 11239j
+z[495]	 Falls in 2nd qrd -> Complex number : -1024 + 18176j
+z[496]	 Falls in 2nd qrd -> Complex number : -4996 + 25127j
+z[497]	 Falls in 2nd qrd -> Complex number : -8976 + 32092j
+z[498]	 Falls in 3rd qrd -> Complex number : -12964-26465j
+z[499]	 Falls in 3rd qrd -> Complex number : -16960-19472j
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish
