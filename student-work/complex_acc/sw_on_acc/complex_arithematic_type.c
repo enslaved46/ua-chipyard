@@ -26,10 +26,10 @@
 
 #include <stdio.h>
 
-//#if defined(__riscv)
-//   #include <riscv-pk/encoding.h>
-//   #include "../../metrics.h"
-// #endif
+#if defined(__riscv)
+  #include <riscv-pk/encoding.h>
+  #include "../../benchmark_dependencies/metrics.h"
+#endif
 
 #include <stdint.h>
 #include "complex.h"
@@ -38,21 +38,24 @@
 #define TEST_CADD 1
 #define TEST_CMUL 0
 
+#define PRINT_ADD_RESULT 0
+
 
 int main(void) {
   printf("Welcome to Complex Numer Arithemetic /562\n");
 
   const int16_t MAX_POS = 32767; //int16_t(65535/2 -1);
-  const int16_t MAX_NEG = 32768; //  int16_t(65535/2-1);
+  const int16_t MAX_NEG = -32768; //  int16_t(65535/2-1);
 
   //-32767 is 0x8001
   // extreme test points
-  complex_t z0 = makeComplex(0, 0);
-  complex_t z1 = makeComplex(1,  1); // 4th
-  complex_t z2 = makeComplex(MAX_POS, MAX_POS);   // first quard
-  complex_t z3 = makeComplex(MAX_NEG, MAX_POS);   // 2nd quard
-  complex_t z4 = makeComplex(MAX_NEG, MAX_NEG); // third quard
-  complex_t z5 = makeComplex(MAX_POS, MAX_NEG); // 4th quard
+  const complex_t z0  = makeComplex(0, 0);
+  const complex_t z_1 = makeComplex(-1, -1);
+  const complex_t z1  = makeComplex(1,  1); // 4th
+  const complex_t z2  = makeComplex(MAX_POS, MAX_POS);   // first quard
+  const complex_t z3  = makeComplex(MAX_NEG, MAX_POS);   // 2nd quard
+  const complex_t z4  = makeComplex(MAX_NEG, MAX_NEG); // third quard
+  const complex_t z5  = makeComplex(MAX_POS, MAX_NEG); // 4th quard
 
   // these data set  doesn't test boundry, due to over flow
   complex_t z6  = makeComplex(  50,   50); // first q
@@ -60,7 +63,7 @@ int main(void) {
   complex_t z8  = makeComplex(-100, -500); // thrid
   complex_t z9  = makeComplex(100,  -500); // 4th
 
- 
+
   /* if(TEST_MAKE_COMPLEX == 1){ */
   /*   printf("########################################################################\n"); */
   /*   printf("Running Test for packing and packing complex number into 32'b single REG\n"); */
@@ -81,13 +84,41 @@ int main(void) {
     complex_t z10 = cAdd(z6, z6);
     complex_t z11 = cAdd(z7, z7);
     complex_t z12 = cAdd(z8, z8);
-    complex_t z13 = cAdd(z9, z2);        // real overflows    
-    complex_t zOverFlw = cAdd(z1, z2);  // wraps around
-    printComplexForm(z10);
-    printComplexForm(z11);
-    printComplexForm(z12);
-    printComplexForm(z13);
-    printComplexForm(zOverFlw);
+    complex_t z13 = cAdd(z2, z1);        // wraps around overflow max_val +1
+    complex_t z00 = cAdd(z4, z_1);  // wraps around under - neg_max-1
+    // only  print when needed
+    if(PRINT_ADD_RESULT){
+      printComplexForm(z10);
+      printComplexForm(z11);
+      printComplexForm(z12);
+      printComplexForm(z13);
+      printComplexForm(z00);
+    }
+
+    complex_t tst1_res = makeComplex(100,      100);
+    complex_t tst2_res = makeComplex(-1000,   1000);
+    complex_t tst3_res = makeComplex(-200,   -1000);
+    complex_t tst4_res = makeComplex(-32768, -32768);
+    complex_t tst5_res = makeComplex(32767,  32767);
+
+    // int16_t checkResults(char *testType, complex_t cmplxRes, int16_t expReal, int16_t expImg)
+    //  checkResults(char *testType, complex_t cmplxRes, complex_t expRes){
+    int8_t r1 = checkResults("Accelerator Scalar :           ", z6, "+", z6,  z10, tst1_res);
+    int8_t r2 = checkResults("Accelerator Scalar :           ", z7, "+", z7,  z11, tst2_res);
+    int8_t r3 = checkResults("Accelerator Scalar :           ", z8, "+", z8,  z12, tst3_res);
+    int8_t r4 = checkResults("Accelerator Scalar : Overflow  ", z2, "+", z1,  z13, tst4_res);
+    int8_t r5 = checkResults("Accelerator Scalar : Underflow ", z4, "+", z_1, z00, tst5_res);
+
+    int8_t addFailure = r1+r2+r3+r4+r5;
+    int8_t addTestsRun = 5;
+
+    if (addFailure == 0) {
+      printf("PASS : all %d Scalar Complex Add Tests Passed\n", addTestsRun);
+      int8_t addSucess = 0;
+    } else {
+      printf("FAIL: %d of %d Scalar Complex Add Tests Failed\n", addFailure, addTestsRun);
+      int8_t addSucess = 1;
+    }
   }
 
   /* if (TEST_CMUL == 1){ */
