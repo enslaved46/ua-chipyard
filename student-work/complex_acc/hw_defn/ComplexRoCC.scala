@@ -117,22 +117,24 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
 
   val doResp    = cmd.bits.inst.xd
   val stallResp = doResp && !io.resp.ready
-  val stallLoad = !io.mem.req.ready
-
+  //val stallLoad = !io.mem.req.ready  // mem unused
 
 
   //
   // prepare response to the processor, set IO bus
   //
   // i don't know what it does
-  cmd.ready     := !stallLoad && !stallResp
-
-  io.resp.bits.data := addResult.pad(xLen) // comes from has coreparameter, resolves to 64 bits
-                                           // take destination given from OP code
-                                           // io.resp.bits.rd   := cmd.bits.inst.rd
+  cmd.ready         :=  !stallResp // && !stallLoad  use this if we write to a mem
 
   // only pass the response when processor has insturcted us to and the op code is for us
   io.resp.valid     := cmd.valid && cmd.bits.inst.xd  //same as cmd.fire
+
+  io.resp.bits.rd   := cmd.bits.inst.rd  // take destination given from OP code
+
+  io.resp.bits.data := addResult.pad(xLen) // comes from has coreparameter, resolves to 64 bits
+
+  // io.busy := cmd.valid || busy.reduce(_||_)
+
 }
 
 //  tells Chipyard: “Add my accelerator.”
