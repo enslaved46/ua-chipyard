@@ -101,6 +101,16 @@ cAdd(z1,z2);
 polar(z1);
 polar(z2);
 %}
+function printComplexForm(z)
+    realPart = double(real(z));
+    imagPart = double(imag(z));
+
+    if imagPart < 0
+        fprintf("%d - %di", realPart, -imagPart);
+    else
+        fprintf("%d + %di", realPart, imagPart);
+    end
+end
 
 function z3 = cAdd(z1 , z2)
     a = real(z1); b = imag(z1);
@@ -115,12 +125,18 @@ function z3 = cAdd(z1 , z2)
 
     % recombine but no need , may use it if we retun form MAC
     z3 = realWrapped + wrappedImag*1i;
-    if (wrappedImag >= 0)
-
-        fprintf("z1 + z2 = %d + %di\n", real((z3)), imag((z3)));
-    else
-        fprintf("z1 + z2 = %d  %di\n", real((z3)), imag((z3)));
-    end
+    fprintf("(");  printComplexForm(z1); fprintf(")");
+    fprintf(" + ");
+    fprintf("(");  printComplexForm(z2); fprintf(")");
+    fprintf(" = ");
+    printComplexForm(z3);
+    fprintf("\n");
+    % if (wrappedImag >= 0)
+    %
+    %     fprintf("z1 + z2 = %d + %di\n", real((z3)), imag((z3)));
+    % else
+    %     fprintf("z1 + z2 = %d  %di\n", real((z3)), imag((z3)));
+    % end
 end
 
 function z3 = cMul(z1 , z2)
@@ -136,12 +152,18 @@ function z3 = cMul(z1 , z2)
 
     % recombine but no need , may use it if we retun form MAC
     z3 = realWrapped + wrappedImag*1i;
-    if (wrappedImag >= 0)
-
-        fprintf("z1 * z2 = %d + %di\n", real((z3)), imag((z3)));
-    else
-        fprintf("z1 * z2 = %d  %di\n", real((z3)), imag((z3)));
-    end
+    fprintf("(");  printComplexForm(z1); fprintf(")");
+    fprintf(" * ");
+    fprintf("(");  printComplexForm(z2); fprintf(")");
+    fprintf(" = ");
+    printComplexForm(z3);
+    fprintf("\n");
+    % if (wrappedImag >= 0)
+    %
+    %     fprintf("z1 * z2 = %d + %di\n", real((z3)), imag((z3)));
+    % else
+    %     fprintf("z1 * z2 = %d  %di\n", real((z3)), imag((z3)));
+    % end
 end
 
 function r = polar( z)
