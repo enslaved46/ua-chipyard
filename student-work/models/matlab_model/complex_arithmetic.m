@@ -9,7 +9,7 @@ z4 = z1* z2 =(ac + adi + bci + bdi^2) = (ac -bd) + (ad +bc)i
 Polar form
 z1 = r1e^(j\theta1)
 z2 = r2e^(j\theta2)
-z3 = z1+z2 = r1e^(j\theta1) + r2e^(j\theta2) 
+z3 = z1+z2 = r1e^(j\theta1) + r2e^(j\theta2)
     = r1{(cos(theta1) + i sin(theta1)} + r2{(cos(theta2) + i sin(theta2)}
     = {r1 cos(theta1) + r2 cos(theta2)} + j{sin(theta1) + sin(theta2)}
 z4 = z1 - z2
@@ -17,7 +17,7 @@ z4 = z1 - z2
 z5 = z1 z2
    = r1e^(j\theta1) r2e^(j\theta2)
    = r1r2 e^j(theta1 theta2)
-z6 = z1/z2 
+z6 = z1/z2
   = r1e^(j\theta1) / r2e^(j\theta2)
   = r1/r2 e^j(theta1 - theta2)
   = r3 e^j(theta3) ; r1/r2 = r3; theta1 -theta2 = theta3
@@ -33,7 +33,7 @@ z = r*exp(j*theta); writng in polar form
 % all the data types are double pricission, meaning 64 bits
 % so 64 for real and 64 for imag
 %  Name      Size            Bytes  Class     Attributes
-%  z1        1x1                16  double    complex 
+%  z1        1x1                16  double    complex
 
 clear;
 clc;
@@ -45,17 +45,28 @@ close all;
 
 %z2 = 200 - 15i;
 
-maxPosNum = 32767; %//int16_t(65535/2 -1);                                                                                                
+MAX_POS_NUM = 32767; %//int16_t(65535/2 -1);
+MAX_NEG_NUM = -32768;
 
-%//-32767 is 0x8001                                                                                                                          
+%//-32767 is 0x8001
 %// extreme test points
 
-z1 = (0 + 0*i);
-z2 = (maxPosNum    + (maxPosNum)*1i);   %// first quard                                                                                  
-z3 = (-maxPosNum-1 + (maxPosNum)*1i);   %// 2nd quard                                                                                    
-z4 = (-maxPosNum-1 - (maxPosNum-1)*1i); %// third quard                                                                                  
-z5 = (maxPosNum    - (maxPosNum-1)*1i); %// 4th quard   
+z0 = (0 + 0*i);
+z1 = (1 + 1*i);
+z_1 = (-1 - 1*i);
 
+z2 = (MAX_POS_NUM + (MAX_POS_NUM)*1i);   %// first quard
+z3 = (MAX_NEG_NUM + (MAX_POS_NUM)*1i);   %// 2nd quard
+z4 = (MAX_NEG_NUM - (MAX_POS_NUM)*1i); %// third quard
+z5 = (MAX_POS_NUM - (MAX_POS_NUM)*1i); %// 4th quard
+
+z0  = fi(z0,  1, 16, 0, 'OverflowAction', 'Wrap');
+z1  = fi(z1,  1, 16, 0, 'OverflowAction', 'Wrap');
+z_1 = fi(z_1, 1, 16, 0, 'OverflowAction', 'Wrap');
+z2  = fi(z2,  1, 16, 0, 'OverflowAction', 'Wrap');
+z3  = fi(z3,  1, 16, 0, 'OverflowAction', 'Wrap');
+z4  = fi(z4,  1, 16, 0, 'OverflowAction', 'Wrap');
+z5  = fi(z5,  1, 16, 0, 'OverflowAction', 'Wrap');
 
 z6 = fi(50 + 50i, 1, 16, 0, 'OverflowAction', 'Wrap');
 z7 = fi(-500 + 500i, 1, 16, 0, 'OverflowAction', 'Wrap');
@@ -70,10 +81,12 @@ fprintf("#######################################################################
 cAdd(z6, z6);
 cAdd(z7, z7);
 cAdd(z8, z8);
-cAdd(z9, z9);
+cAdd(z2, z1);        %wraps around overflow max_val +1    , (32767 + 32767i) + (1 + 1i) =     -32768 - 32768i
+cAdd(z4, z_1);%  // wraps around under - neg_max-1  neg underflow, (-32768 - 32768i) + (-1 - 1i) =32767 + 32767i
 
 
-fprintf("########################################################################\n");
+
+fprintf("##############################6##########################################\n");
 fprintf("Running Test for Complex Multiplication                                 \n");
 fprintf("Results are wrapped around for big Number                               \n");
 fprintf("########################################################################\n");
@@ -92,14 +105,14 @@ polar(z2);
 function z3 = cAdd(z1 , z2)
     a = real(z1); b = imag(z1);
     c = real(z2); d = imag(z2);
-    
-    % compute discretely, i coudn't do for individual 16 bits by bitwise op 
+
+    % compute discretely, i coudn't do for individual 16 bits by bitwise op
     realComp = (a + c);
     imagComp = (b + d);
     % forcethe outputs to wrap around into 16 bit signed
     realWrapped = fi(realComp, 1, 16, 0, z1.fimath);
     wrappedImag = fi(imagComp, 1, 16, 0, z1.fimath);
-    
+
     % recombine but no need , may use it if we retun form MAC
     z3 = realWrapped + wrappedImag*1i;
     if (wrappedImag >= 0)
@@ -113,14 +126,14 @@ end
 function z3 = cMul(z1 , z2)
     a = real(z1); b = imag(z1);
     c = real(z2); d = imag(z2);
-    
-    % compute discretely, i coudn't do for individual 16 bits by bitwise op 
+
+    % compute discretely, i coudn't do for individual 16 bits by bitwise op
     realComp = (a * c) - (b * d);
     imagComp = (a * d) + (b * c);
     % forcethe outputs to wrap around into 16 bit signed
     realWrapped = fi(realComp, 1, 16, 0, z1.fimath);
     wrappedImag = fi(imagComp, 1, 16, 0, z1.fimath);
-    
+
     % recombine but no need , may use it if we retun form MAC
     z3 = realWrapped + wrappedImag*1i;
     if (wrappedImag >= 0)

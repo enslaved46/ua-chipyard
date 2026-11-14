@@ -1,0 +1,14 @@
+Welcome to Complex Numer Arithemetic /562
+########################################################################
+Running Test for Complex Addition                                       
+Results are wrapped around for big Number                               
+########################################################################
+Accelerator Scalar :            [PASS] (50 + 50j) + (50 + 50j) = 100 + 100j
+Accelerator Scalar :            [PASS] (-500 + 500j) + (-500 + 500j) = -1000 + 1000j
+Accelerator Scalar :            [PASS] (-100-500j) + (-100-500j) = -200-1000j
+Accelerator Scalar : Overflow   [PASS] (32767 + 32767j) + (1 + 1j) = -32768-32768j
+Accelerator Scalar : Underflow  [PASS] (-32768-32768j) + (-1-1j) = 32767 + 32767j
+PASS : all 5 Scalar Complex Add Tests Passed
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexRoCCConfig/gen-collateral/TestDriver.v:158: Verilog $finish
