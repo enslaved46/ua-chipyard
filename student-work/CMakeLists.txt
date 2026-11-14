@@ -126,6 +126,15 @@ elseif(TEST_SELECT STREQUAL "vector_mul")
     add_dump_target(cmplx_v_mul)
 
 #################################
+# ROCC ACCELERATOR SCALAR ADD TARGET
+#################################
+elseif(TEST_SELECT STREQUAL "rocc_cmplx_acc_add")
+    message(STATUS "Configuring target: rocc_cmplx_scalar_add")
+    add_executable(rocc_cmplx_scalar_add  sw_on_acc/complex_arithematic_type.c)
+    add_dump_target(rocc_cmplx_scalar_add)
+
+
+#################################
 # for FIR and other Test Type add here    
 #################################
 

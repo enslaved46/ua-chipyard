@@ -32,6 +32,10 @@
 - `cmake -S ./ -B ./build/ -DTEST_SELECT=complex_arith`
 - `cmake --build ./build/ --target all`
 
+
+## Accelerator SCALAR CADD
+- `cmake -S ./ -B ./build-rocc/ -DTEST_SELECT=rocc_cmplx_scalar_add`
+
 ## Clean traget
 - `cmake --build ./build/ --target clean`
  
