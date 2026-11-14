@@ -34,11 +34,11 @@
 
 
 ## Accelerator SCALAR CADD
-- `cmake -S ./ -B ./build-rocc/ -DTEST_SELECT=rocc_cmplx_scalar_add`
+- `cmake -S ./ -B ./complex_acc/build-rocc/ -DTEST_SELECT=rocc_cmplx_scalar_add`
 
 ## Clean traget
 - `cmake --build ./build/ --target clean`
- 
+
 ## executable is producedin ./build_riscv dir
 
 ## to run executable, example for add
