@@ -16,6 +16,13 @@ static inline complex_t makeComplex(int16_t realN, int16_t imgN){
   return complexN;
 }
 
+// used using TB, type casting becomes easy
+static inline complex_t cmplxFrmPacked(uint32_t pkdData){
+  complex_t z;
+  z.packedComplex = (int32_t)pkdData;
+  return z;
+}
+
 static inline void unPackComplex(complex_t z){
   int16_t real = (int16_t)((int32_t) z.packedComplex >> 16);
   int16_t img  = (int16_t) (z.packedComplex & 0xFFFF); // losing sign, aksing compiler to treat as signed number
@@ -58,13 +65,13 @@ static inline complex_t cAdd(complex_t z1, complex_t z2){
   return addResult;
 }
 
-/* // perform verctor add */
-/* static inline  void cVectAdd(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di) */
-/*   for (int i = 0; i < size; i++){ */
-/*     result[i] = cAdd(z1[i], z2[i]); */
-/*     // printf(" realResult[%d] : %d  \t  imgResult[%d] : %d\n", i, realResult, i, imgResult); */
-/*   } */
-/* } */
+// perform verctor add using scaar adder
+static inline  void cVectAdd(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di)
+  for (int i = 0; i < size; i++){
+    result[i] = cAdd(z1[i], z2[i]);
+    // printf(" realResult[%d] : %d  \t  imgResult[%d] : %d\n", i, realResult, i, imgResult);
+  }
+}
 
 
 /* /\* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i *\/ */
@@ -109,7 +116,7 @@ static inline  void testComplexForm(complex_t z){
 
 static inline  void printComplexVector(complex_t z[], int size){
     for (int i = 0; i < size; i++){
-      printf("z[%d]", i );
+      printf("z[%d] = ", i );
       printComplexForm(z[i]);
       printf("\n");
     }
