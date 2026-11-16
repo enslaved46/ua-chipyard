@@ -34,7 +34,7 @@
 
 
 ## Accelerator SCALAR CADD
-- `cmake -S ./ -B ./complex_acc/build-rocc/ -DTEST_SELECT=rocc_cmplx_scalar_add`
+- `cmake -S ./ -B ./rocc_complex_acc/build-rocc/ -DTEST_SELECT=rocc_cmplx_scalar_add`
 
 ## Clean traget
 - `cmake --build ./build/ --target clean`

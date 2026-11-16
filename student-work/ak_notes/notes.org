@@ -149,4 +149,32 @@ An important opportunity for your ECE 562 project
       - Page Offset doesn't during addr translation
       - Frame can be group of Block,
       - Page table in Physical RAM, to get translation and data
-      - 
+      -
+
+@ see bashrc.sh for aliases and readme,
+work on the vector hardware
+gather data from software run as well. save results work on lazy day
+oot@5711cfac27d3:/workspace/student-work# scalar_add_make
+make
+oot@5711cfac27d3:/workspace/student-work/complex_acc/build-rocc# /workspace/chipyard/sims/verilator/simulator-chipyard.harness-ComplexRoCCConfig rocc_cmplx_scalar_add.riscv
+
+
+- soft link  hardware
+ln -sfn \
+  /workspace/student-work/rocc_complex_acc/hw_defn/ComplexRoCC.scala \
+  /workspace/chipyard/generators/chipyard/src/main/scala/config/ComplexRoCC.scala
+
+
+- Keep the container
+cd /home/droidbot3/Documents/ua-chipyard
+
+docker compose run \
+    --name ua-chipyard-dev \
+    chipyard
+
+-    Then resume with:
+  cd /home/droidbot3/Documents/ua-chipyard
+
+docker compose run \
+    --name ua-chipyard-dev \
+    chipyard

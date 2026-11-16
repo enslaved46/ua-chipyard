@@ -130,7 +130,7 @@ elseif(TEST_SELECT STREQUAL "vector_mul")
 #################################
 elseif(TEST_SELECT STREQUAL "rocc_cmplx_scalar_add")
     message(STATUS "Configuring target: rocc_cmplx_scalar_add")
-    add_executable(rocc_cmplx_scalar_add  complex_acc/sw_on_acc/complex_arithematic_type.c)
+    add_executable(rocc_cmplx_scalar_add  rocc_complex_acc/sw_on_acc/complex_arithematic_type.c)
     add_dump_target(rocc_cmplx_scalar_add)
 
 

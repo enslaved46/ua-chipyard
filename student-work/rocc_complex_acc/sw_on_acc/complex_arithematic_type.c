@@ -23,17 +23,20 @@
 /* -32768 = 0x8000  */
 /* ----------------------------------------------------------- */
 
-
 #include <stdio.h>
+#include <stdint.h>
+
+#include "../software_includes/complex.h"
+#include "../software_includes/rocc_complex.h"
+#include "../software_includes/complex_add_test_vectors.h"
+#include "../software_includes/complex_test_hlpr.h"
 
 #if defined(__riscv)
   #include <riscv-pk/encoding.h>
-  #include "../../benchmark_dependencies/metrics.h"
+	  
+  #include "../benchmark_dependencies/metrics.h"
 #endif
 
-#include <stdint.h>
-#include "complex.h"
-#include "complex_add_test_vectors.h"
 
 #define TEST_MAKE_COMPLEX 0
 #define TEST_CADD 1
@@ -74,12 +77,12 @@ int main(void) {
     printf("Results are wrapped around for big Number                               \n");
     printf("########################################################################\n");
     BENCH_BEGIN();
-    complex_t z10 = cAdd(z6, z6);
+    complex_t z10 = roccCmplxAdd(z6, z6);
     BENCH_END("scalar_complex_add");
-    complex_t z11 = cAdd(z7, z7);
-    complex_t z12 = cAdd(z8, z8);
-    complex_t z13 = cAdd(z2, z1);        // wraps around overflow max_val +1
-    complex_t z00 = cAdd(z4, z_1);  // wraps around under - neg_max-1
+    complex_t z11 = roccCmplxAdd(z7, z7);
+    complex_t z12 = roccCmplxAdd(z8, z8);
+    complex_t z13 = roccCmplxAdd(z2, z1);        // wraps around overflow max_val +1
+    complex_t z00 = roccCmplxAdd(z4, z_1);  // wraps around under - neg_max-1
 
     // only  print when needed
     if(PRINT_ADD_RESULT){
@@ -136,7 +139,7 @@ int main(void) {
     // CPU performs the array loads and stores
     // software-managed vector loop,
     BENCH_BEGIN();
-    cVectAdd(z1Arr, z2Arr, addResArr, MAX_VECT );
+    roccCmplxVectAdd(z1Arr, z2Arr, addResArr, MAX_VECT );
     BENCH_END("array_based_scalar_vector_add_test");
 
     // printComplexVector(z1Arr, MAX_VECT);
@@ -150,7 +153,7 @@ int main(void) {
     complex_t b[MAX_VECT] = {0};
     complex_t accAddResCalc[MAX_VECT] = {0};
     complex_t accAddResExp[MAX_VECT] = {0};
-    int i=1;
+    int i=0;
 
     printf("########################################################################\n");
     printf("Element Wise Accelerateed Vector Add Test : Scalar Hardware             \n");
@@ -159,18 +162,18 @@ int main(void) {
 
     BENCH_BEGIN();
     
-    for (i; i<=MAX_VECT; i++){
+    for (i; i< MAX_VECT; i++){
       a[i] = cmplxFrmPacked(MATLAB_INPUT_A_POS[i]);
       b[i] = cmplxFrmPacked(MATLAB_INPUT_B_POS[i]);
-      accAddResCalc[i] = cAdd(a[i], b[i]); 
+      accAddResCalc[i] = roccCmplxAdd(a[i], b[i]); 
     }
     BENCH_END("elemet_wise_scalar_acc_vector_add");
 
     int tstFailCntr = 0;
     int pasFailRes;
-    for (int i=1; i<=MAX_VECT; i++){
+    for (int i=0; i< MAX_VECT; i++){
       accAddResExp[i] = cmplxFrmPacked(MATLAB_EXPECTED_POS[i]);
-      pasFailRes = checkResults("Element Wise Vector Add Using Scalar Accelerator Result :    ", a[i], "+", b[i],  accAddResCalc[i],accAddResExp[i] );
+      pasFailRes = checkResults("Element Wise Vector Add Using Scalar Accelerator Result :    ", a[i], "+", b[i],  accAddResCalc[i], accAddResExp[i] );
       tstFailCntr = tstFailCntr + pasFailRes;
     }
 
