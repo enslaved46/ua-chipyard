@@ -45,8 +45,9 @@ int16_t checkResults(char *testType, complex_t op1, char* ope, complex_t op2, co
   int16_t expReal = getReal(expRes);
   int16_t expImg  = getImag(expRes);
 
-  if(calcReal == expReal && calcImg == expImg)
-    { printf("%s [PASS] " , testType);
+  if(calcReal == expReal && calcImg == expImg){
+    if(DEBUG_PRINT){
+      printf("%s [PASS] " , testType);
       printf("(");
       printComplexForm(op1);    //       printf("\t");
 
@@ -56,16 +57,19 @@ int16_t checkResults(char *testType, complex_t op1, char* ope, complex_t op2, co
       printf(") = ");
 
       printComplexForm(cmplxRes);      printf("\n");
-      return 0;}
-  else
-    { printf("%s [Fail] ", testType); printf("\t");
+    }
+    return 0;}
+  else{
+    if(DEBUG_PRINT){
+      printf("%s [Fail] ", testType); printf("\t");
       printf("Calculated : ");
       printComplexForm(cmplxRes);  printf("\t");
       printf("Expected  :");
       printComplexForm(expRes);
       printf("\n");
-      return 1;
     }
+    return 1;
+  }
 }
 
 #endif

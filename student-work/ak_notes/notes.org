@@ -159,11 +159,17 @@ make
 oot@5711cfac27d3:/workspace/student-work/complex_acc/build-rocc# /workspace/chipyard/sims/verilator/simulator-chipyard.harness-ComplexRoCCConfig rocc_cmplx_scalar_add.riscv
 
 
+/workspace/chipyard/sims/verilator
+make CONFIG=CourseRocketConfig
+
+
 - soft link  hardware
 ln -sfn \
   /workspace/student-work/rocc_complex_acc/hw_defn/ComplexRoCC.scala \
   /workspace/chipyard/generators/chipyard/src/main/scala/config/ComplexRoCC.scala
 
+  readlink -f \
+  /workspace/chipyard/generators/chipyard/src/main/scala/config/ComplexRoCC.scala
 
 - Keep the container
 cd /home/droidbot3/Documents/ua-chipyard

@@ -4,6 +4,8 @@
 
 #define COMPLEX_ADD_FUNCT 0
 #define COMPLEX_MUL_FUNCT 1
+#define MAX_VECT   10
+#define DEBUG_PRINT 0
 
 typedef struct{
   int32_t packedComplex;

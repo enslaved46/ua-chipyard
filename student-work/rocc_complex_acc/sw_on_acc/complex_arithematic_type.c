@@ -34,7 +34,7 @@
 #if defined(__riscv)
   #include <riscv-pk/encoding.h>
 	  
-  #include "../benchmark_dependencies/metrics.h"
+  #include "../software_includes/benchmark_dependencies/metrics.h"
 #endif
 
 
@@ -43,7 +43,7 @@
 #define TEST_CMUL 0
 
 #define PRINT_ADD_RESULT 0
-#define MAX_VECT   10
+
 
 #define ARRAY_BASED_SCALAR_ACC_VECTOR_ADD_TEST 1
 #define ELEMET_WISE_SCALAR_ACC_VECTOR_ADD_TEST 1

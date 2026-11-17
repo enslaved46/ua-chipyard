@@ -4,4 +4,8 @@
 *.asv
 model/
 student-work/build/
+student-work/student-work/build/
 student-work/CMakeFiles/
+student-work/rocc_complex_acc/build-rocc/
+student-work/rocc_complex_acc/build-pure-sw/
+student-work/CMakeCache.txt

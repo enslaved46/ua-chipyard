@@ -106,7 +106,8 @@ endfunction()
 #################################
 if(TEST_SELECT STREQUAL "complex_arith")
     message(STATUS "Configuring target: complex_arithmetic for scalar arithemetic use")
-    add_executable(complex_arithmetic models/software_imp/complex_vector_arithematic.c)
+    # add_executable(complex_arithmetic models/software_imp/complex_vector_arithematic.c)
+    add_executable(complex_arithmetic rocc_complex_acc/software_imp/complex_arithematic_type.c)
     add_dump_target(complex_arithmetic)
 
 #################################
