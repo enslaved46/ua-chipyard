@@ -4,19 +4,22 @@
 // we will have probelm with overflow, don't worry about overflow
 // z = z1 + z2 = (a+c) + (b+d)i;
 
-static inline complex_t swCmplxAdd(complex_t z1, complex_t z2){
+static inline complex_add_result_t swCmplxAdd(complex_t z1, complex_t z2){
+  complex_add_result_t addResult;
   int16_t z1Real = getReal(z1);
   int16_t z2Real = getReal(z2);
   int16_t z1Imag = getImag(z1);
   int16_t z2Imag = getImag(z2);
-  int16_t realResult = (z1Real  + z2Real) & 0xFFFF;
-  int16_t imgResult   = (z1Imag + z2Imag) & 0xFFFF;
-  complex_t addResult = makeComplex(realResult, imgResult);
+  addResult.real = (z1Real  + z2Real) & 0x1FFFF;
+  addResult.imag = (z1Imag + z2Imag) & 0x1FFFF;
+  //  int32_t realResult = (z1Real  + z2Real) & 0x1FFFF;
+  // int32_t imgResult   = (z1Imag + z2Imag) & 0x1FFFF;
+  // complex_t addResult = makeComplex(realResult, imgResult);
   return addResult;
 }
 
 // perform verctor add
-static inline void cSwVectAdd(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di)
+static inline void cSwVectAdd(complex_t z1[], complex_t z2[], complex_add_result_t result[], int size){ // (a+bi) (c+di)
   for (int i = 0; i < size; i++){
     result[i] = swCmplxAdd(z1[i], z2[i]);
     // printf(" realResult[%d] : %d  \t  imgResult[%d] : %d\n", i, realResult, i, imgResult);
@@ -25,19 +28,21 @@ static inline void cSwVectAdd(complex_t z1[], complex_t z2[], complex_t result[]
 
 
 /* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i */
-static inline complex_t cSwMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
+static inline complex_mul_result_t cSwMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
+  complex_mul_result_t cSwMulResult;
   int16_t z1Real = getReal(z1);
   int16_t z2Real = getReal(z2);
   int16_t z1Imag = getImag(z1);
   int16_t z2Imag = getImag(z2);
-
-  int16_t realResult = (z1Real*z2Real) - (z1Imag*z2Imag);
-  int16_t imgResult  = (z1Real*z2Imag) + (z1Imag*z2Real);
-  complex_t cSwMulResult = makeComplex(realResult, imgResult);
+  cSwMulResult.real = ((z1Real*z2Real) - (z1Imag*z2Imag)) & 0x1FFFFFFFF;
+  cSwMulResult.imag = ((z1Real*z2Imag) + (z1Imag*z2Real))  & 0x1FFFFFFFF;
+  // int16_t realResult = (z1Real*z2Real) - (z1Imag*z2Imag);
+  // int16_t imgResult  = (z1Real*z2Imag) + (z1Imag*z2Real);
+  // complex_t cSwMulResult = makeComplex(realResult, imgResult);
   return cSwMulResult;
 }
 
-static inline void cVectMul(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di)
+static inline void cVectMul(complex_t z1[], complex_t z2[], complex_mul_result_t result[], int size){ // (a+bi) (c+di)
   for (int i = 0; i < size; i++){
     result[i] = cSwMul(z1[i], z2[i]);
   }
@@ -61,4 +66,3 @@ static inline void cVectMul(complex_t z1[], complex_t z2[], complex_t result[], 
 /*       printComplexForm(z[i]); */
 /*     } */
 /* } */
-

@@ -82,35 +82,41 @@ int main(void) {
       printf("########################################################################\n");
     }
     BENCH_BEGIN();
-    complex_t z10 = swCmplxAdd(z6, z6);
+    complex_add_result_t z10 = swCmplxAdd(z6, z6);
     BENCH_END("scalar_complex_add_software_based");
-    complex_t z11 = swCmplxAdd(z7, z7);
-    complex_t z12 = swCmplxAdd(z8, z8);
-    complex_t z13 = swCmplxAdd(z2, z1);        // wraps around overflow max_val +1
-    complex_t z00 = swCmplxAdd(z4, z_1);  // wraps around under - neg_max-1
+    complex_add_result_t z11 = swCmplxAdd(z7, z7);
+    complex_add_result_t z12 = swCmplxAdd(z8, z8);
+    complex_add_result_t z13 = swCmplxAdd(z2, z1);    // wraps around overflow max_val +1
+    complex_add_result_t z00 = swCmplxAdd(z4, z_1);  // wraps around under - neg_max-1
 
     // only  print when needed
     if(PRINT_ADD_RESULT){
-      printComplexForm(z10);
-      printComplexForm(z11);
-      printComplexForm(z12);
-      printComplexForm(z13);
-      printComplexForm(z00);
+      printComplexAddResult(z10);
+      printComplexAddResult(z11);
+      printComplexAddResult(z12);
+      printComplexAddResult(z13);
+      printComplexAddResult(z00);
     }
 
-    complex_t tst1_res = makeComplex(100,      100);
-    complex_t tst2_res = makeComplex(-1000,   1000);
-    complex_t tst3_res = makeComplex(-200,   -1000);
-    complex_t tst4_res = makeComplex(-32768, -32768);
-    complex_t tst5_res = makeComplex(32767,  32767);
+    /* complex_t tst1_res = makeComplex(100,      100); */
+    /* complex_t tst2_res = makeComplex(-1000,   1000); */
+    /* complex_t tst3_res = makeComplex(-200,   -1000); */
+    /* complex_t tst4_res = makeComplex(-32768, -32768); */
+    /* complex_t tst5_res = makeComplex(32767,  32767); */
 
+
+    complex_add_result_t tst1_res = {.real = 100,   .imag = 100};
+    complex_add_result_t tst2_res = {.real = -1000, .imag = 1000};
+    complex_add_result_t tst3_res = {.real = -200, .imag = -1000};
+    complex_add_result_t tst4_res = {.real = 32768, .imag = 32768};
+    complex_add_result_t tst5_res = {.real = -32769, .imag = -32769};
     // int16_t checkResults(char *testType, complex_t cmplxRes, int16_t expReal, int16_t expImg)
     //  checkResults(char *testType, complex_t cmplxRes, complex_t expRes){
-    int8_t r1 = checkResults("Software Implementation Scalar :           ", z6, "+", z6,  z10, tst1_res);
-    int8_t r2 = checkResults("Software Implementation Scalar :           ", z7, "+", z7,  z11, tst2_res);
-    int8_t r3 = checkResults("Software Implementation Scalar :           ", z8, "+", z8,  z12, tst3_res);
-    int8_t r4 = checkResults("Software Implementation Scalar : Overflow  ", z2, "+", z1,  z13, tst4_res);
-    int8_t r5 = checkResults("Software Implementation Scalar : Underflow ", z4, "+", z_1, z00, tst5_res);
+    int8_t r1 = checkAddResults("Software Implementation Scalar :           ", z6, "+", z6,  z10, tst1_res);
+    int8_t r2 = checkAddResults("Software Implementation Scalar :           ", z7, "+", z7,  z11, tst2_res);
+    int8_t r3 = checkAddResults("Software Implementation Scalar :           ", z8, "+", z8,  z12, tst3_res);
+    int8_t r4 = checkAddResults("Software Implementation Scalar : Overflow  ", z2, "+", z1,  z13, tst4_res);
+    int8_t r5 = checkAddResults("Software Implementation Scalar : Underflow ", z4, "+", z_1, z00, tst5_res);
 
     int8_t scalarAddFailure = r1+r2+r3+r4+r5;
     int8_t totalScalarAddRun = 5;
@@ -129,7 +135,7 @@ int main(void) {
     int i = 0;
     complex_t z1Arr[MAX_VECT] = {0};
     complex_t z2Arr[MAX_VECT] = {0};
-    complex_t addResArr[MAX_VECT] = {0};
+    complex_add_result_t addResArr[MAX_VECT] = {0};
     for (i; i< MAX_VECT; i++){
       printf("%d \t", i);
       z1Arr[i-1] = makeComplex(i,i*2);
@@ -150,15 +156,15 @@ int main(void) {
 
     // printComplexVector(z1Arr, MAX_VECT);
     // printComplexVector(z2Arr, MAX_VECT);
-    printComplexVector(addResArr, MAX_VECT);
+    printComplexAddVector(addResArr, MAX_VECT);
   }
 
   // element wise vector adder using scalar accelerator
   if(ELEMET_WISE_SCALAR_ACC_VECTOR_ADD_TEST)  {
     complex_t a[MAX_VECT] = {0};
     complex_t b[MAX_VECT] = {0};
-    complex_t accAddResCalc[MAX_VECT] = {0};
-    complex_t accAddResExp[MAX_VECT] = {0};
+    complex_add_result_t accAddResCalc[MAX_VECT] = {0};
+    complex_add_result_t accAddResExp[MAX_VECT] = {0};
     int i=0;
 
     if(DEBUG_PRINT){
@@ -180,8 +186,8 @@ int main(void) {
     int tstFailCntr = 0;
     int pasFailRes;
     for (int i=0; i< MAX_VECT; i++){
-      accAddResExp[i] = cmplxFrmPacked(MATLAB_EXPECTED_POS[i]);
-      pasFailRes = checkResults("Software Implementation : Element Wise Vector Add Result :    ", a[i], "+", b[i],  accAddResCalc[i], accAddResExp[i] );
+      accAddResExp[i] = cmplxAddRsltFrmPacked(MATLAB_EXPECTED_POS[i]);
+      pasFailRes = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ", a[i], "+", b[i],  accAddResCalc[i], accAddResExp[i] );
       tstFailCntr = tstFailCntr + pasFailRes;
     }
 

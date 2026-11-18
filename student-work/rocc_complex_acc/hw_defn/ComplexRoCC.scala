@@ -110,11 +110,46 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
   // ADD                              //
   //                                  //
 
-  // add prodce wrap around
-  val addRealRes   = (a+c)   //  +&  prouuces extra bit, carry over, we don't do carry over, we wrap around
-  val addImagRes   = (b+d)
-  val addResult = Cat(addRealRes, addImagRes)
+  private def complexAdd16(a: SInt, b: SInt, c: SInt, d: SInt): UInt = {
+    // add prodce wrap around
+    val addRealRes   = (a +& c)   //  +&  prouuces extra bit, carry over, we don't do carry over, we wrap around
+    val addImagRes   = (b +& d)
+    val scalarAddResult   = Cat(addRealRes(16,0).asUInt, addImagRes(16,0).asUInt) // pack two 17 bit signed  number as unsigned because, we don't want sign extension of real to 64 bits, might cause some shifting opearation errors
+    scalarAddResult // this is same as return scalarAddResult in c
+    // val scalarAddResult  = packAddRes.pad(xLen)
+  }
 
+  val scalarAddResult = complexAdd16(a,b,c,d)
+
+  private def complexMul16(a: SInt, b: SInt, c: SInt, d: SInt): (SInt,SInt) = { // two returns
+    // Qm.n × Qj.q =Q(m+j).(n+q)
+    // Qm.n+Qj.q=Q(max(m,j)+1).max(n,q)
+
+    val mulRealRes   = (a * c) -& (b * d)   //  +&  prouuces extra bit 33 bits
+    val mulImagRes   = (a * d) +& (b * c)  // 33 bits
+    (mulRealRes, mulImagRes) // returned tuples
+    // val packMulRes   = Cat(mulRealRes(32,0), mulImagRes(32,0))
+    // val scalarMulResult  = packMulRes
+  }
+
+  val (mulRealResult, mulImagResult) = complexMul16(a, b, c, d)
+
+  // create registers
+  val savedMulImag  = RegInit(0.S(33.W))
+  val savedMulValid = RegInit(false.B)
+
+  // cmd.valid is high when we recive a vlaid command int the accelerator
+  // cmd.ready is hight when acc is ready to take new commands
+  // cmd.fire is high when both of the cmd.valid and cmd.reayd is high
+  //we have need to wait one more clock, idk i hope the output comes right away just with the comibnational delay
+
+  when(cmd.fire && doScalarMul) {
+    savedMulImag  := mulImagResult
+    savedMulValid := true.B
+  }
+
+  //
+  // setup response
   val doResp    = cmd.bits.inst.xd
   val stallResp = doResp && !io.resp.ready
   //val stallLoad = !io.mem.req.ready  // mem unused
@@ -131,10 +166,26 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
 
   io.resp.bits.rd   := cmd.bits.inst.rd  // take destination given from OP code
 
-  io.resp.bits.data := addResult.pad(xLen) // comes from has coreparameter, resolves to 64 bits
+
+  // 10.U          // UInt value 10, width inferred
+  // 10.U(8.W)     // 8-bit UInt value 10
+  // (-10).S       // Signed value -10
+  // (-10).S(16.W) // 16-bit signed value -10
 
   // io.busy := cmd.valid || busy.reduce(_||_)
+ val acceleratorOut = MuxLookup(
+    funct,                  // selector      with funt out <= addRees when "000" like this in vhdl
+    0.U(xLen.W)             // defualt mux val,  64 bit 0 out if funct is not sensible is given
+  )(Seq(
+    0.U -> scalarAddResult.pad(xLen),         //  0.U -> scalarAddResult.pad(xLen) key value pair , when unsided 0 is given in funct
+    1.U -> mulRealResult.pad(xLen).asUInt,
+    2.U -> savedMulImag.pad(xLen).asUInt
+    // 4.U -> simdAddResult.pad(xLen),
+    // 5.U -> simdMulResult.pad(xLen)
+  ))
 
+  // seelect output based on the funct, opcode
+  io.resp.bits.data :=   acceleratorOut      //addResult.pad(xLen) // comes from has coreparameter, resolves to 64 bits
 }
 
 //  tells Chipyard: “Add my accelerator.”

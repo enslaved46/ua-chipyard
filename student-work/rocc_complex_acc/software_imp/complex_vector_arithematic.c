@@ -32,7 +32,7 @@ int main(void) {
     printf("Running Test for first N Vector of Positive numbers                   \n");
     printf("######################################################################\n");
 
-    cVectAdd(z1, z1, addResult, MAX_VECT );    
+    cVectAdd(z1, z1, addResult, MAX_VECT );
     printComplexVector(addResult, MAX_VECT);
   }
   if(NEG_NUMBER_VECTOR_ADD_TEST){
@@ -63,4 +63,4 @@ int main(void) {
   printComplexVector(addResult, MAX_VECT);
   return 0;
 }
-:q
+:q
