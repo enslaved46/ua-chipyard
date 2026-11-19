@@ -1,0 +1,9 @@
+add (150+250j)+(150+250j)    hw=0x12c01f4 sw=0x12c01f4 OK
+mul (150+250j)*(150+250j)    hw=0x63c024f8 sw=0x63c024f8 OK
+add (-3+5j)+(-3+5j)          hw=0xfffa000a sw=0xfffa000a OK
+mul (1+2j)*(3+4j)            hw=0xfffb000a sw=0xfffb000a OK
+add wrap 20000+20000         hw=0x9c409c40 sw=0x9c409c40 OK
+scalar test: 0 mismatches
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexNumAccConfig/gen-collateral/TestDriver.v:158: Verilog $finish

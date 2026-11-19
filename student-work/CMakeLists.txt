@@ -124,6 +124,18 @@ elseif(TEST_SELECT STREQUAL "vector_mul")
     message(STATUS "Configuring target: cmplx_v_mul")
     add_executable(cmplx_v_mul models/software_imp/complex_vector_mul_test.c)
     add_dump_target(cmplx_v_mul)
+elseif(TEST_SELECT STREQUAL "acc_scalar")
+    message(STATUS "Configuring target: acc_scalar")
+    add_executable(acc_scalar models/software_imp/complex_acc_scalar_test.c)
+    add_dump_target(acc_scalar)
+elseif(TEST_SELECT STREQUAL "vector_add_acc")
+    message(STATUS "Configuring target: cmplx_v_add_acc")
+    add_executable(cmplx_v_add_acc models/software_imp/complex_vector_add_acc_test.c)
+    add_dump_target(cmplx_v_add_acc)
+elseif(TEST_SELECT STREQUAL "vector_mul_acc")
+    message(STATUS "Configuring target: cmplx_v_mul_acc")
+    add_executable(cmplx_v_mul_acc models/software_imp/complex_vector_mul_acc_test.c)
+    add_dump_target(cmplx_v_mul_acc)
 
 #################################
 # COMPLEX VECTOR BENCHMARK (Kody): software vs accelerator, one timed pass

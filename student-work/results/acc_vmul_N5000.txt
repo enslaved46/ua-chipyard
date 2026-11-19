@@ -1,0 +1,9 @@
+########################################################################
+Accelerator: Vector Multiplication of complex numbers (ACMUL)           
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+acc_vector_mul     103998      40014       5000      10000          0       4999          2          0          3        941
+mismatches=0
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexNumAccConfig/gen-collateral/TestDriver.v:158: Verilog $finish
