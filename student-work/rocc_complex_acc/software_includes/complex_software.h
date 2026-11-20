@@ -5,18 +5,6 @@
 // we will have probelm with overflow, don't worry about overflow
 // z = z1 + z2 = (a+c) + (b+d)i;
 
-
-static inline complex_add_result_t makeComplex17(int32_t realN, int32_t imgN){
-  complex_add_result_t z;
-  uint64_t realBits = (uint64_t)(realN & 0x1FFFF);
-  uint64_t imagBits = (uint64_t)(imgN  & 0x1FFFF);
-  z.addResultPkd = (realBits << 17)  | imagBits;
-  
-  // printf("Packed complex is : 0x%8x\n", packedComplex);
-  return z;
-}
-
-
 static inline complex_add_result_t swCmplxAdd(complex_t z1, complex_t z2){
   int16_t z1Real = getReal16(z1);
   int16_t z2Real = getReal16(z2);

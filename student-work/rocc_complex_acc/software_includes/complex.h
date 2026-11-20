@@ -5,7 +5,7 @@
 #define COMPLEX_ADD_FUNCT 0
 #define COMPLEX_MUL_FUNCT 1
 #define MAX_VECT   10
-#define DEBUG_PRINT 1
+#define DEBUG_PRINT 0
 
 typedef struct{
   int32_t packedComplex;
@@ -30,6 +30,17 @@ static inline complex_t makeComplex16(int16_t realN, int16_t imgN){
   // printf("Packed complex is : 0x%8x\n", packedComplex);
   return complexN;
 }
+
+static inline complex_add_result_t makeComplex17(int32_t realN, int32_t imgN){
+  complex_add_result_t z;
+  uint64_t realBits = (uint64_t)(realN & 0x1FFFF);
+  uint64_t imagBits = (uint64_t)(imgN  & 0x1FFFF);
+  z.addResultPkd = (realBits << 17)  | imagBits;
+
+  // printf("Packed complex is : 0x%8x\n", packedComplex);
+  return z;
+}
+
 
 // used using TB, type casting becomes easy
 static inline complex_t cmplxFrmPacked(uint32_t pkdData){

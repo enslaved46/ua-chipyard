@@ -5,9 +5,8 @@
 
 // we will have probelm with overflow, don't worry about overflow
 // z = z1 + z2 = (a+c) + (b+d)i;
-static inline complex_t roccCmplxAdd(complex_t z1, complex_t z2){
+static inline complex_add_result_t roccCmplxAdd(complex_t z1, complex_t z2){
   int64_t raw_result;
-  complex_t addResult;
 
   /* D -> desitnation used : xd  = 1 */
   /* S -> source 1 used    : xs1 = 1 */
@@ -22,12 +21,13 @@ static inline complex_t roccCmplxAdd(complex_t z1, complex_t z2){
 		       COMPLEX_ADD_FUNCT               // funct = 0
 		       );
 
-  addResult.packedComplex = (int32_t)(uint32_t)raw_result;
-  return addResult;
+   return cmplxAddRsltFrmPacked(raw_result);
+    // addResult.packedComplex = (int32_t)(uint32_t)raw_result;
+   // return addResult;
 }
 
 // perform verctor add using scaar adder
-static inline  void roccCmplxVectAdd(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di)
+static inline  void roccCmplxVectAdd(complex_t z1[], complex_t z2[], complex_add_result_t result[], int size){ // (a+bi) (c+di)
   for (int i = 0; i < size; i++){
     result[i] = roccCmplxAdd(z1[i], z2[i]);
     // printf(" realResult[%d] : %d  \t  imgResult[%d] : %d\n", i, realResult, i, imgResult);
