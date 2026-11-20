@@ -60,6 +60,8 @@ cMul (z7,z7);
 cMul (z8,z8);
 cMul (z9,z9);
 
+cMul (32768,32768);
+
 
 %{
 cAdd(z1,z2);

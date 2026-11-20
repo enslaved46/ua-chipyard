@@ -26,8 +26,8 @@ int main(void) {
     int i = 1;
     for (i; i<=MAX_VECT; i++){
       printf("%d \t", i);
-      z1[i-1] = makeComplex(i,i*2);
-      z2[i-1] = makeComplex(i*2,i*3);
+      z1Arr[i-1] = makeComplex(i,i*2);
+      z2Arr[i-1] = makeComplex(i*2,i*3);
     }
      printf("\n");
     printf("########################################################################\n");
@@ -36,28 +36,30 @@ int main(void) {
 
 	#if defined(__riscv)
 	    BENCH_BEGIN();
-    	cVectAdd(z1, z2, addResult, MAX_VECT );
+    	cVectAdd(z1Arr, z2Arr, addResult, MAX_VECT );
 	    BENCH_END("complex_vector_add");
 	#else
-		cVectAdd(z1, z2, addResult, MAX_VECT );
+		cVectAdd(z1Arr, z2Arr, addResult, MAX_VECT );
 	#endif
-    cVectAdd(z1, z2, addResult, MAX_VECT );
-    // printComplexVector(z1, MAX_VECT);
-    // printComplexVector(z2, MAX_VECT);
+    // CPU performs the array loads and stores
+    // software-managed vector loop,
+    cVectAdd(z1Arr, z2Arr, addResult, MAX_VECT );
+    // printComplexVector(z1Arr, MAX_VECT);
+    // printComplexVector(z2Arr, MAX_VECT);
     printComplexVector(addResult, MAX_VECT);
   }
 
   // fill NEG numbers
   if(NEG_NUMBER_VECTOR_ADD_TEST){
     for (int i = 1; i <= MAX_VECT; i++){
-      z1[i-1] = makeComplex(-i*10,-i*20);
-      z2[i-1] = makeComplex(-i*20,-i*30);
+      z1Arr[i-1] = makeComplex(-i*10,-i*20);
+      z2Arr[i-1] = makeComplex(-i*20,-i*30);
     }
     printf("########################################################################\n");
     printf("Running Vector Addition Test for first N Vector of Negative numbers     \n");
     printf("########################################################################\n");
-    cVectAdd(z1, z2, addResult, MAX_VECT );
-    // printComplexVector(z1, MAX_VECT);
+    cVectAdd(z1Arr, z2Arr, addResult, MAX_VECT );
+    // printComplexVector(z1Arr, MAX_VECT);
     printComplexVector(addResult, MAX_VECT);
   }
 
