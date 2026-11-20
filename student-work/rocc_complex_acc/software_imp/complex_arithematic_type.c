@@ -33,9 +33,9 @@
 #include "../software_includes/complex_test_hlpr.h"
 
 #if defined(__riscv)
-  #include <riscv-pk/encoding.h>
+#include <riscv-pk/encoding.h>
 	  
-  #include "../software_includes/benchmark_dependencies/metrics.h"
+#include "../software_includes/benchmark_dependencies/metrics.h"
 #endif
 
 
@@ -57,7 +57,30 @@ int main(void) {
   printf("########################################################################\n");
   const int16_t MAX_POS = 32767; //int16_t(65535/2 -1);
   const int16_t MAX_NEG = -32768; //  int16_t(65535/2-1);
+  int8_t scalarAddFailure, totalScalarAddRun;
+  // one array elemtn at a itmte
+  int elementWiseScalarTstRsltCntr = 0;
+  int elementWisePassFailRes;
+  // passing whole array
+  int32_t swElemVecAddFailCnt = 0;
+  int8_t  swElemVecAddPassFail = 0;
+    
 
+
+  // load form matlab , golden model
+  complex_t matlabImputA[MAX_VECT] = {0};
+  complex_t matlabImputB[MAX_VECT] = {0};
+  complex_add_result_t matlabResultExpected[MAX_VECT] = {0};
+  int i =0;
+    
+  for (; i< MAX_VECT; i++){
+    matlabImputA[i] = cmplxFrmPacked(MATLAB_INPUT_A[i]);
+    matlabImputB[i] = cmplxFrmPacked(MATLAB_INPUT_B[i]);
+    matlabResultExpected[i] = cmplxAddRsltFrmPacked(MATLAB_EXPECTED_OUT[i]);
+
+  }
+
+    
   //-32767 is 0x8001
   // extreme test points
   // const complex_t z0  = makeComplex16(0, 0);
@@ -116,30 +139,16 @@ int main(void) {
     int8_t r4 = checkAddResults("Software Implementation Scalar : Overflow  ", z2, "+", z1,  z13, tst4_res);
     int8_t r5 = checkAddResults("Software Implementation Scalar : Underflow ", z4, "+", z_1, z00, tst5_res);
 
-    int8_t scalarAddFailure = r1+r2+r3+r4+r5;
-    int8_t totalScalarAddRun = 5;
-    printTestSummary("Software Implementation : Scalar Complex Add", scalarAddFailure, totalScalarAddRun); 
+    scalarAddFailure = r1+r2+r3+r4+r5;
+    totalScalarAddRun = 5;
 
-    /* if (scalarAddFailure == 0) { */
-    /*   printf("PASS : all %d Software Implementation : Scalar Complex Add Tests Passed\n", totalScalarAddRun); */
-    /*   // int8_t scalarAddSucess = 0; */
-    /* } else { */
-    /*   printf("FAIL: %d of %d Software Implementation : Scalar Complex Add Tests Failed\n", scalarAddFailure, totalScalarAddRun); */
-    /*   // int8_t scalarAddSucess = 1; */
-    /* } */
   }
 
   // array based  element wise vector add test
   if(ARRAY_BASED_SCALAR_ACC_VECTOR_ADD_TEST){
-    int i = 0;
-    complex_t z1Arr[MAX_VECT] = {0};
-    complex_t z2Arr[MAX_VECT] = {0};
     complex_add_result_t addResArr[MAX_VECT] = {0};
-    for (i; i< MAX_VECT; i++){
-      printf("%d \t", i);
-      z1Arr[i-1] = makeComplex16(i,i*2);
-      z2Arr[i-1] = makeComplex16(i*2,i*3);
-    }
+
+
     printf("\n");
     if(DEBUG_PRINT){
       printf("########################################################################\n");
@@ -150,59 +159,57 @@ int main(void) {
     // CPU performs the array loads and stores
     // software-managed vector loop,
     BENCH_BEGIN();
-    cSwVectAdd(z1Arr, z2Arr, addResArr, MAX_VECT );
+    cSwVectAdd(matlabImputA, matlabImputB,addResArr, MAX_VECT );
     BENCH_END("array_based_scalar_vector_add_software_based");
 
-    // printComplexVector(z1Arr, MAX_VECT);
-    // printComplexVector(z2Arr, MAX_VECT);
-    //  printComplexAddVector(addResArr, MAX_VECT);
-    
+    for (int i=0; i< MAX_VECT; i++){
+      swElemVecAddPassFail  = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ", matlabImputA[i], "+", matlabImputA[i],  addResArr[i], matlabResultExpected[i] );
+      swElemVecAddFailCnt += swElemVecAddPassFail;
+    }
   }
 
   // element wise vector adder using scalar accelerator
-  /* if(ELEMET_WISE_SCALAR_ACC_VECTOR_ADD_TEST)  { */
-  /*   complex_t a[MAX_VECT] = {0}; */
-  /*   complex_t b[MAX_VECT] = {0}; */
-  /*   complex_add_result_t accAddResCalc[MAX_VECT] = {0}; */
-  /*   complex_add_result_t accAddResExp[MAX_VECT] = {0}; */
-  /*   int i=0; */
+  if(ELEMET_WISE_SCALAR_ACC_VECTOR_ADD_TEST)  {
+    complex_add_result_t matlabResultExpected[MAX_VECT] = {0};
 
-  /*   if(DEBUG_PRINT){ */
-  /*     printf("########################################################################\n"); */
-  /*     printf("Software Implementation : Element Wise Accelerateed Vector Add Test     \n"); */
-  /*     printf("Running Vector Test for first %d Vector of Positive numbers             \n",MAX_VECT ); */
-  /*     printf("########################################################################\n"); */
-  /*   } */
+    if(DEBUG_PRINT){
+      printf("########################################################################\n");
+      printf("Software Implementation : Element Wise Accelerateed Vector Add Test     \n");
+      printf("Running Vector Test for first %d Vector of Positive numbers             \n",MAX_VECT );
+      printf("########################################################################\n");
+    }
 
-  /*   BENCH_BEGIN(); */
-    
-  /*   for (i; i< MAX_VECT; i++){ */
-  /*     a[i] = cmplxFrmPacked(MATLAB_INPUT_A_POS[i]); */
-  /*     b[i] = cmplxFrmPacked(MATLAB_INPUT_B_POS[i]); */
-  /*     accAddResCalc[i] = swCmplxAdd(a[i], b[i]);  */
-  /*   } */
-  /*   BENCH_END("elemet_wise_scalar_acc_vector_add_software_based"); */
+    BENCH_BEGIN();
+    complex_add_result_t swElemAddResults[MAX_VECT];
+    for (i=0 ; i< MAX_VECT; i++){     
+      swElemAddResults[i] = swCmplxAdd(matlabImputA[i], matlabImputB[i]);
+    }
+    BENCH_END("elemet_wise_scalar_acc_vector_add_software_based");
 
-  /*   int tstFailCntr = 0; */
-  /*   int pasFailRes; */
-  /*   for (int i=0; i< MAX_VECT; i++){ */
-  /*     accAddResExp[i] = cmplxAddRsltFrmPacked(MATLAB_EXPECTED_POS[i]); */
-  /*     pasFailRes = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ", a[i], "+", b[i],  accAddResCalc[i], accAddResExp[i] ); */
-  /*     tstFailCntr = tstFailCntr + pasFailRes; */
-  /*   } */
-
-  /*   int8_t totalScalarAddRun = MAX_VECT; */
+    for ( i=0; i< MAX_VECT; i++){
+      // matlabResultExpected[i] = cmplxAddRsltFrmPacked(MATLAB_EXPECTED_OUT[i]);
+      elementWisePassFailRes = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ", matlabImputA[i], "+", matlabImputA[i], swElemAddResults[i], matlabResultExpected[i] );
+      elementWiseScalarTstRsltCntr = elementWiseScalarTstRsltCntr + elementWisePassFailRes;
+    }
 
       
-  /*   if (tstFailCntr == 0) { */
-  /*     printf("PASS : all %d Software Implementation : Scalar Complex Add Tests Passed\n", totalScalarAddRun); */
-  /*     int8_t scalarAddSucess = 0; */
-  /*   } else { */
-  /*     printf("FAIL: %d of %d Software Implementation : Scalar Complex Add Tests Failed\n", tstFailCntr, totalScalarAddRun); */
-  /*     int8_t scalarAddSucess = 1; */
-  /*   } */
+    /* if (elementWiseScalarTstRsltCntr == 0) { */
+    /*   printf("PASS : all %d Software Implementation : Scalar Complex Add Tests Passed\n", totalScalarAddRun); */
+    /*   // int8_t scalarAddSucess = 0; */
+    /* } else { */
+    /*   printf("FAIL: %d of %d Software Implementation : Scalar Complex Add Tests Failed\n", elementWiseScalarTstRsltCntr, totalScalarAddRun); */
+    /*   //  int8_t scalarAddSucess = 1; */
+    /* } */
     
-  /* } */
+  }
 
+  printf("======================================================================\n");
+  printf("  TEST SUMMARY REPORT\n");
+  printf("======================================================================\n");
+
+  printTestSummary("Software Implementation : Scalar Complex Add", scalarAddFailure, totalScalarAddRun);
+  printTestSummary("Software Implementation : Element Wise Vector Add Result, Whole Array : ", swElemVecAddFailCnt, MAX_VECT);
+  printTestSummary("Software Implementation : Element Wise Vector Add Result, One Array at a Time : ", elementWiseScalarTstRsltCntr, MAX_VECT);
+  
   return 0;
 }

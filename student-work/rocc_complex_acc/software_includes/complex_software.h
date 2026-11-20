@@ -18,7 +18,6 @@ static inline complex_add_result_t makeComplex17(int32_t realN, int32_t imgN){
 
 
 static inline complex_add_result_t swCmplxAdd(complex_t z1, complex_t z2){
-
   int16_t z1Real = getReal16(z1);
   int16_t z2Real = getReal16(z2);
   int16_t z1Imag = getImag16(z1);

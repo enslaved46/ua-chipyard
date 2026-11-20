@@ -38,12 +38,13 @@ static inline complex_t cmplxFrmPacked(uint32_t pkdData){
   return z;
 }
 
-/* static inline complex_add_result_t cmplxAddRsltFrmPacked(uint64_t pkdData){ */
-/*   complex_add_result_t z; */
-/*   z.real = (int32_t) (pkdData >>17) & 0x1FFFF; */
-/*   z.imag = (int32_t)pkdData & 0x1FFFF; */
-/*   return z; */
-/* } */
+static inline complex_add_result_t cmplxAddRsltFrmPacked(uint64_t pkdData){
+  complex_add_result_t z;
+  z.addResultPkd = pkdData;
+    //z.real = (int32_t) (pkdData >>17) & 0x1FFFF;
+    //z.imag = (int32_t)pkdData & 0x1FFFF;
+  return z;
+}
 
 // input
 static inline void unPackComplex(complex_t z){
