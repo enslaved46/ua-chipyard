@@ -77,7 +77,6 @@ int main(void) {
     matlabImputA[i] = cmplxFrmPacked(MATLAB_INPUT_A[i]);
     matlabImputB[i] = cmplxFrmPacked(MATLAB_INPUT_B[i]);
     matlabResultExpected[i] = cmplxAddRsltFrmPacked(MATLAB_EXPECTED_OUT[i]);
-
   }
 
     
@@ -100,7 +99,7 @@ int main(void) {
   if (TEST_CADD == 1){
     if(DEBUG_PRINT){
       printf("########################################################################\n");
-      printf("Softrware Implementation : Running Scalar Test for Complex Addition      \n");
+      printf("Software Implementation : Running Scalar Test for Complex Addition      \n");
       printf("########################################################################\n");
     }
     BENCH_BEGIN();
@@ -148,7 +147,6 @@ int main(void) {
   if(ARRAY_BASED_SCALAR_ACC_VECTOR_ADD_TEST){
     complex_add_result_t addResArr[MAX_VECT] = {0};
 
-
     printf("\n");
     if(DEBUG_PRINT){
       printf("########################################################################\n");
@@ -162,15 +160,19 @@ int main(void) {
     cSwVectAdd(matlabImputA, matlabImputB,addResArr, MAX_VECT );
     BENCH_END("array_based_scalar_vector_add_software_based");
 
-    for (int i=0; i< MAX_VECT; i++){
-      swElemVecAddPassFail  = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ", matlabImputA[i], "+", matlabImputA[i],  addResArr[i], matlabResultExpected[i] );
+    for (i=0; i< MAX_VECT; i++){
+      swElemVecAddPassFail  = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ",
+					      matlabImputA[i],
+					      "+",
+					      matlabImputA[i],
+					      addResArr[i],
+					      matlabResultExpected[i] );
       swElemVecAddFailCnt += swElemVecAddPassFail;
     }
   }
 
   // element wise vector adder using scalar accelerator
   if(ELEMET_WISE_SCALAR_ACC_VECTOR_ADD_TEST)  {
-    complex_add_result_t matlabResultExpected[MAX_VECT] = {0};
 
     if(DEBUG_PRINT){
       printf("########################################################################\n");
@@ -188,7 +190,13 @@ int main(void) {
 
     for ( i=0; i< MAX_VECT; i++){
       // matlabResultExpected[i] = cmplxAddRsltFrmPacked(MATLAB_EXPECTED_OUT[i]);
-      elementWisePassFailRes = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ", matlabImputA[i], "+", matlabImputA[i], swElemAddResults[i], matlabResultExpected[i] );
+      elementWisePassFailRes = checkAddResults("Software Implementation : Element Wise Vector Add Result :    ",
+					       matlabImputA[i],
+					       "+",
+					       matlabImputB[i],
+					       swElemAddResults[i],
+					       matlabResultExpected[i] );
+
       elementWiseScalarTstRsltCntr = elementWiseScalarTstRsltCntr + elementWisePassFailRes;
     }
 
