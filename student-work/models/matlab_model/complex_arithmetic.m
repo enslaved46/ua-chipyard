@@ -35,6 +35,29 @@ z = r*exp(j*theta); writng in polar form
 %  Name      Size            Bytes  Class     Attributes
 %  z1        1x1                16  double    complex
 
+% -32768 to 32767 16 bit range
+% Minimum: -32768 + -32768 = -65536
+% Maximum:  32767 +  32767 =  65534
+% Signed 32-bit range: -2147483648 to 2147483647
+% A signed 17-bit value can represent:-65536 to 65535
+%
+%
+% for mul
+%     two 16 bit number produce gives : 32 bit out, for signed it is -2^32/2 to 2^32/2-1 complex gives 33 becuase we accumulate as well
+%         so Maximum imaginary result = 2147483648 one greater than signed 32-bit maximum:
+%         (-32768) × (-32768) =  1073741824  // Largest positive product
+%         (-32768) × ( 32767) = -1073709056  // Most negative product
+%
+%         1073741824 + 1073741824        = 2147483648
+% For the most negative imaginary result, both products use the most negative product:
+% -1073709056 + -1073709056
+% = -2147418112
+%
+%   Signed 32-bit range: -2147483648 to 2147483647
+%
+%
+% 33 bit signed -4294967296 to 4294967295
+
 clear;
 clc;
 close all;
@@ -57,8 +80,8 @@ z_1 = (-1 - 1*i);
 
 z2 = (MAX_POS_NUM + (MAX_POS_NUM)*1i);   %// first quard
 z3 = (MAX_NEG_NUM + (MAX_POS_NUM)*1i);   %// 2nd quard
-z4 = (MAX_NEG_NUM - (MAX_POS_NUM)*1i); %// third quard
-z5 = (MAX_POS_NUM - (MAX_POS_NUM)*1i); %// 4th quard
+z4 = (MAX_NEG_NUM + (MAX_NEG_NUM)*1i); %// third quard
+z5 = (MAX_POS_NUM + (MAX_NEG_NUM)*1i); %// 4th quard
 
 z0  = fi(z0,  1, 16, 0, 'OverflowAction', 'Wrap');
 z1  = fi(z1,  1, 16, 0, 'OverflowAction', 'Wrap');
@@ -78,7 +101,7 @@ fprintf("Running Test for Complex Addition                                      
 fprintf("Results are wrapped around for big Number                               \n");
 fprintf("########################################################################\n");
 
-cAdd(z6, z6);
+a= cAdd(z6, z6);
 cAdd(z7, z7);
 cAdd(z8, z8);
 cAdd(z2, z1);        %wraps around overflow max_val +1    , (32767 + 32767i) + (1 + 1i) =     -32768 - 32768i
@@ -120,8 +143,8 @@ function z3 = cAdd(z1 , z2)
     realComp = (a + c);
     imagComp = (b + d);
     % forcethe outputs to wrap around into 16 bit signed
-    realWrapped = fi(realComp, 1, 16, 0, z1.fimath);
-    wrappedImag = fi(imagComp, 1, 16, 0, z1.fimath);
+    realWrapped = fi(realComp, 1, 17, 0, z1.fimath);
+    wrappedImag = fi(imagComp, 1, 17, 0, z1.fimath);
 
     % recombine but no need , may use it if we retun form MAC
     z3 = realWrapped + wrappedImag*1i;
@@ -147,8 +170,8 @@ function z3 = cMul(z1 , z2)
     realComp = (a * c) - (b * d);
     imagComp = (a * d) + (b * c);
     % forcethe outputs to wrap around into 16 bit signed
-    realWrapped = fi(realComp, 1, 16, 0, z1.fimath);
-    wrappedImag = fi(imagComp, 1, 16, 0, z1.fimath);
+    realWrapped = fi(realComp, 1, 33, 0, z1.fimath);
+    wrappedImag = fi(imagComp, 1, 33, 0, z1.fimath);
 
     % recombine but no need , may use it if we retun form MAC
     z3 = realWrapped + wrappedImag*1i;
