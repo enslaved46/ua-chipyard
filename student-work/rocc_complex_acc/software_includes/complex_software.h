@@ -1,20 +1,36 @@
 #ifndef SOFTWARE_COMPLEX_H
+#define SOFTWARE_COMPLEX_H
 #include "complex.h"
 
 // we will have probelm with overflow, don't worry about overflow
 // z = z1 + z2 = (a+c) + (b+d)i;
 
+
+static inline complex_add_result_t makeComplex17(int32_t realN, int32_t imgN){
+  complex_add_result_t z;
+  uint64_t realBits = (uint64_t)(realN & 0x1FFFF);
+  uint64_t imagBits = (uint64_t)(imgN  & 0x1FFFF);
+  z.addResultPkd = (realBits << 17)  | imagBits;
+  
+  // printf("Packed complex is : 0x%8x\n", packedComplex);
+  return z;
+}
+
+
 static inline complex_add_result_t swCmplxAdd(complex_t z1, complex_t z2){
-  complex_add_result_t addResult;
-  int16_t z1Real = getReal(z1);
-  int16_t z2Real = getReal(z2);
-  int16_t z1Imag = getImag(z1);
-  int16_t z2Imag = getImag(z2);
-  addResult.real = (z1Real  + z2Real) & 0x1FFFF;
-  addResult.imag = (z1Imag + z2Imag) & 0x1FFFF;
-  //  int32_t realResult = (z1Real  + z2Real) & 0x1FFFF;
-  // int32_t imgResult   = (z1Imag + z2Imag) & 0x1FFFF;
-  // complex_t addResult = makeComplex(realResult, imgResult);
+
+  int16_t z1Real = getReal16(z1);
+  int16_t z2Real = getReal16(z2);
+  int16_t z1Imag = getImag16(z1);
+  int16_t z2Imag = getImag16(z2);
+
+  // lesson learned, if we mask then we need to presere sign when we make it to 32bit
+  // ((((int_32t)(z1Real  + z2Real)) & 0x1FFFF) << 15)>>15;
+  // addResult.real = (int32_t)(z1Real) + (int32_t)(z2Real);// & 0x1FFFF;
+  // addResult.imag = (int32_t)(z1Imag) + (int32_t)(z2Imag); // & 0x1FFFF;
+  int32_t realResult = (int32_t)(z1Real) + (int32_t)(z2Real);
+  int32_t imgResult  = (int32_t)(z1Imag) + (int32_t)(z2Imag);
+  complex_add_result_t addResult = makeComplex17(realResult, imgResult);
   return addResult;
 }
 
@@ -30,10 +46,10 @@ static inline void cSwVectAdd(complex_t z1[], complex_t z2[], complex_add_result
 /* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i */
 static inline complex_mul_result_t cSwMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
   complex_mul_result_t cSwMulResult;
-  int16_t z1Real = getReal(z1);
-  int16_t z2Real = getReal(z2);
-  int16_t z1Imag = getImag(z1);
-  int16_t z2Imag = getImag(z2);
+  int16_t z1Real = getReal16(z1);
+  int16_t z2Real = getReal16(z2);
+  int16_t z1Imag = getImag16(z1);
+  int16_t z2Imag = getImag16(z2);
   cSwMulResult.real = ((z1Real*z2Real) - (z1Imag*z2Imag)) & 0x1FFFFFFFF;
   cSwMulResult.imag = ((z1Real*z2Imag) + (z1Imag*z2Real))  & 0x1FFFFFFFF;
   // int16_t realResult = (z1Real*z2Real) - (z1Imag*z2Imag);

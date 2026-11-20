@@ -26,8 +26,8 @@ int main(void) {
     int16_t i = 1;
     for (i; i<=MAX_VECT; i++){
      // printf("%d \t", i);
-      z1[i-1] = makeComplex(i,i*2);
-      z2[i-1] = makeComplex(i*2,i*3);
+      z1[i-1] = makeComplex16(i,i*2);
+      z2[i-1] = makeComplex16(i*2,i*3);
     }
     // printf("\n");
     printf("########################################################################\n");
@@ -46,8 +46,8 @@ int main(void) {
   // fill NEG numbers
   if(NEG_NUMBER_VECTOR_ADD_TEST){
     for (int16_t i = 1; i <= MAX_VECT; i++){
-      z1[i-1] = makeComplex(-i*10,-i*20);
-      z2[i-1] = makeComplex(-i*20,-i*30);
+      z1[i-1] = makeComplex16(-i*10,-i*20);
+      z2[i-1] = makeComplex16(-i*20,-i*30);
     }
     printf("########################################################################\n");
     printf("Running Vector Addition Test for first N Vector of Negative numbers     \n");

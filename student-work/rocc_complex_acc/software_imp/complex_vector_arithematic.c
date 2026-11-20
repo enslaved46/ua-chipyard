@@ -20,8 +20,8 @@ int main(void) {
   if(POS_NUMBER_VECTOR_ADD_TEST){
     // fill pos numbers
     for (int i = 0; i<MAX_VECT; i++){
-      z1[i] = makeComplex(i,i);
-      z2[i] = makeComplex(i,i);
+      z1[i] = makeComplex16(i,i);
+      z2[i] = makeComplex16(i,i);
     }
 
     /* for (int i = 0; i<MAX_VECT; i++){ */
@@ -38,8 +38,8 @@ int main(void) {
   if(NEG_NUMBER_VECTOR_ADD_TEST){
     // fill NEG numbers
     for (int i = 0; i<MAX_VECT; i++){
-      z1[i] = makeComplex(-i*10,-i*10);
-      z2[i] = makeComplex(-i*10,-i*10);
+      z1[i] = makeComplex16(-i*10,-i*10);
+      z2[i] = makeComplex16(-i*10,-i*10);
     }
 
     printf("########################################################################\n");
@@ -55,8 +55,8 @@ int main(void) {
   printf("########################################################################\n");
 
     for (int i = 0; i<MAX_VECT; i++){
-      z1[i] = makeComplex(-i*10,-i*10);
-      z2[i] = makeComplex(-i*10,-i*10);
+      z1[i] = makeComplex16(-i*10,-i*10);
+      z2[i] = makeComplex16(-i*10,-i*10);
     }
   cVectMul(z1, z1, addResult, MAX_VECT );
   printComplexVector(z1, MAX_VECT);

@@ -21,8 +21,8 @@ int main(void) {
     int i = 1;
     for (i; i<=MAX_VECT; i++){
       printf("%d \t", i);
-      z1[i-1] = makeComplex(i,i*2);
-      z2[i-1] = makeComplex(i*2,i*3);
+      z1[i-1] = makeComplex16(i,i*2);
+      z2[i-1] = makeComplex16(i*2,i*3);
     }
 	#if defined(__riscv)
 		hpm_setup();

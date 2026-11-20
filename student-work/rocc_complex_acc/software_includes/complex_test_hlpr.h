@@ -17,7 +17,7 @@
 
 // main print
 static inline void printComplexValues(int64_t real, int64_t imag){
-  if (imag < 0){    printf("%" PRId64 " - %" PRId64 "j", real, imag);  }
+  if (imag < 0){    printf("%" PRId64 " %" PRId64 "j", real, imag);  }
   else { printf("%" PRId64 " + %" PRId64 "j", real, imag);  }
 }
 
@@ -27,13 +27,13 @@ static inline void printComplexValues(int64_t real, int64_t imag){
 
 // Packed 16-bit input
 static inline void printComplexInput(complex_t z){
-    printComplexValues((int64_t)getReal(z),  (int64_t)getImag(z));
+    printComplexValues((int64_t)getReal16(z),  (int64_t)getImag16(z));
 }
 
 // Exact 17-bit addition result
 // stored in int32_t fields
-static inline void printComplexAddResult(complex_add_result_t z){
-    printComplexValues((int64_t)z.real, (int64_t)z.imag);
+static inline void printComplexAddResult(complex_add_result_t z){ 
+  printComplexValues((int64_t)getReal17(z), (int64_t)getImag17(z));
 }
 
 // Exact 33-bit multiplication result stored in int64_t fields
@@ -44,8 +44,8 @@ static inline void printComplexMulResult(complex_mul_result_t z){
 // end of print wrappers
 
 static inline  void testComplexForm(complex_t z){
-  int16_t real = getReal(z);
-  int16_t img  = getImag(z);
+  int16_t real = getReal16(z);
+  int16_t img  = getImag16(z);
 
   if (real >= 0 && img >= 0){printf("\t Falls in 1   qrd  -> Complex number : %d + %dj\n", real, img);}   // +ve +ve
   else if (real < 0 && img >= 0) {printf("\t Falls in 2nd qrd -> Complex number : %d + %dj\n", real, img);} //-ve +ve
@@ -68,14 +68,15 @@ static inline  void printComplexAddVector(complex_add_result_t z[], int size){
 //int16_t checkResults(char *testType, complex_t cmplxRes, complex_t expRes){
 int16_t checkAddResults(char *testType, complex_t op1, char* ope, complex_t op2, complex_add_result_t calcResult, complex_add_result_t expResult){
   // extract calulated
-  /* int16_t calcReal = getReal(calcResult); */
-  /* int16_t calcImg  = getImag(calcResult); */
+  int32_t calcReal = getReal17(calcResult);
+  int32_t calcImg  = getImag17(calcResult);
 
-  /* int16_t expReal = getReal(exptdResult); */
-  /* int16_t expImg  = getImag(exptdResult); */
+  int32_t expReal = getReal17(expResult);
+  int32_t expImg  = getImag17(expResult);
 
   
-  if( calcResult.real== expResult.real && calcResult.imag == expResult.imag){
+  /* if( calcResult.real== expResult.real && calcResult.imag == expResult.imag){ */
+  if( calcReal== expReal && calcImg == expImg){
     if(DEBUG_PRINT){
       printf("%s [PASS] " , testType);
       printf("(");
@@ -93,7 +94,15 @@ int16_t checkAddResults(char *testType, complex_t op1, char* ope, complex_t op2,
     if(DEBUG_PRINT){
       printf("%s [Fail] ", testType); printf("\t");
       printf("Calculated : ");
-      printComplexAddResult(calcResult);  printf("\t");
+      printf("(");
+      printComplexInput(op1);    //       printf("\t");
+
+      printf(") %s (", ope);
+
+      printComplexInput(op2);     //      printf("\t");
+      printf(") = ");
+
+      printComplexAddResult(calcResult);  printf("\n");
       printf("Expected  :");
       printComplexAddResult(expResult);
       printf("\n");
@@ -102,4 +111,15 @@ int16_t checkAddResults(char *testType, complex_t op1, char* ope, complex_t op2,
   }
 }
 
+
+
+static inline void printTestSummary(const char *testName, int failCount, int totalCount) {
+    if (failCount == 0) {
+        printf("PASS: all %d %s Tests Passed\n", totalCount, testName);
+	//        return 0;
+    } else {
+        printf("FAIL: %d of %d %s Tests Failed\n", failCount, totalCount, testName);
+        // return 1;
+    }
+}
 #endif

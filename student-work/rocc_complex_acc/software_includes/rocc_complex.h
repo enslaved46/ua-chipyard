@@ -45,7 +45,7 @@ static inline  void roccCmplxVectAdd(complex_t z1[], complex_t z2[], complex_t r
 
 /*   int16_t realResult = (z1Real*z2Real) - (z1Imag*z2Imag); */
 /*   int16_t imgResult  = (z1Real*z2Imag) + (z1Imag*z2Real); */
-/*   complex_t cMulResult = makeComplex(realResult, imgResult); */
+/*   complex_t cMulResult = makeComplex16(realResult, imgResult); */
 /*   return cMulResult; */
 /* } */
 
