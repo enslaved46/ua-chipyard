@@ -68,9 +68,9 @@ int main(void) {
 
 
   // load form matlab , golden model
-  complex_t matlabImputA[MAX_VECT] = {0};
-  complex_t matlabImputB[MAX_VECT] = {0};
-  complex_add_result_t matlabResultExpected[MAX_VECT] = {0};
+  static complex_t matlabImputA[MAX_VECT] = {0};
+  static complex_t matlabImputB[MAX_VECT] = {0};
+  static complex_add_result_t matlabResultExpected[MAX_VECT] = {0};
   int i =0;
     
   for (; i< MAX_VECT; i++){
@@ -103,7 +103,7 @@ int main(void) {
       printf("########################################################################\n");
     }
     BENCH_BEGIN();
-    complex_add_result_t z10 = swCmplxAdd(z6, z6);
+    volatile complex_add_result_t z10 = swCmplxAdd(z6, z6);
     BENCH_END("scalar_complex_add_software_based");
     complex_add_result_t z11 = swCmplxAdd(z7, z7);
     complex_add_result_t z12 = swCmplxAdd(z8, z8);

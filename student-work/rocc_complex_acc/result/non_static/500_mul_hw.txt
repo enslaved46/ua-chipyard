@@ -1,0 +1,10 @@
+[UART] UART0 is here (stdin/stdout).
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+scalar_complex_mul        107         29          0          0          0          0          0          0          0          0
+
+array_based_scalar_acc_vector_mul      17259       5511          0          0          0          0          0          0          0          0
+element_wise_scalar_acc_vector_mul      16156       5510          0          0          0          0          0          0          0          0
+PASS: all 5 Accelerator Hardware : Scalar Complex Mul Tests Passed
+PASS: all 500 Accelerator Hardware : Element Wise Vector Mul Result, Whole Array :  Tests Passed
+PASS: all 500 Accelerator Hardware : Element Wise Vector Mul Result, One Element at a Time :  Tests Passed
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexRoCCConfig/gen-collateral/TestDriver.v:158: Verilog $finish

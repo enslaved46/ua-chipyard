@@ -97,51 +97,62 @@ endfunction()
 
 
 #################################
-# Conditional Build Execution
-# we can use runtime build
+# Conditional Build
 #################################
 
-#################################
-# COMPLEX ARITHMETIC TARGET
-#################################
-if(TEST_SELECT STREQUAL "complex_arith")
-    message(STATUS "Configuring target: complex_arithmetic for scalar arithemetic use")
-    # add_executable(complex_arithmetic models/software_imp/complex_vector_arithematic.c)
-    add_executable(complex_arithmetic rocc_complex_acc/software_imp/complex_arithematic_type.c)
-    add_dump_target(complex_arithmetic)
+# ------------------------------------------------------------------------------
+# 1. Set defaults if not passed via -D flags on the command line
+# ------------------------------------------------------------------------------
+if(NOT DEFINED MAX_VECT)
+    set(MAX_VECT 10)
+endif()
+
+if(NOT DEFINED DEBUG_PRINT)
+    set(DEBUG_PRINT 0)
+endif()
+
+# Print active settings during 'cmake' configuration so you can verify them
+message(STATUS "Benchmark Settings -> MAX_VECT = ${MAX_VECT}, DEBUG_PRINT = ${DEBUG_PRINT}")
+
+# Pass these as compiler preprocessor macros (-DMAX_VECT=... -DDEBUG_PRINT=...)
+add_compile_definitions(
+    MAX_VECT=${MAX_VECT}
+    DEBUG_PRINT=${DEBUG_PRINT}
+)
+
+
+
+###########################################
+# COMPLEX ARITHMETIC TARGET SOFTWARE ADD
+###########################################
+if(TEST_SELECT STREQUAL "sw_cmplx_add")
+    message(STATUS "Configuring target: complex_add software baseline")
+    add_executable(sw_cmplx_add rocc_complex_acc/software_imp/complex_sw_add_test.c)
+    add_dump_target(sw_cmplx_add)
 
 #################################
-# VECTOR ADD TARGET HARDWARE
+# MULTIPLICATION TARGET SOFTWARE MUL
 #################################
-elseif(TEST_SELECT STREQUAL "vector_add")
-    message(STATUS "Configuring target: cmplx_v_add")
-    add_executable(cmplx_v_add models/software_imp/complex_vector_add_test.c)
-    add_dump_target(cmplx_v_add)
+elseif(TEST_SELECT STREQUAL "sw_cmplx_mul")
+    message(STATUS "Configuring target: cmplx_sw_mul baseline")
+    add_executable(cmplx_sw_mul rocc_complex_acc/software_imp/complex_sw_mul_test.c)
+    add_dump_target(cmplx_sw_mul)
 
 #################################
-# MULTIPLICATION TARGET SOFTWARE
+# ROCC ACCELERATOR ADD 
 #################################
-elseif(TEST_SELECT STREQUAL "vector_mul")
-    message(STATUS "Configuring target: cmplx_v_mul")
-    add_executable(cmplx_v_mul models/software_imp/complex_vector_mul_test.c)
-    add_dump_target(cmplx_v_mul)
+elseif(TEST_SELECT STREQUAL "rocc_cmplx_add")
+    message(STATUS "Configuring target: rocc_cmplx_add")
+    add_executable(rocc_cmplx_add  rocc_complex_acc/sw_on_acc/complex_add_test.c)
+    add_dump_target(rocc_cmplx_add)
 
 #################################
-# ROCC ACCELERATOR SCALAR ADD TARGET
+# ROCC ACCELERATOR MUL
 #################################
-elseif(TEST_SELECT STREQUAL "rocc_cmplx_scalar_add")
-    message(STATUS "Configuring target: rocc_cmplx_scalar_add")
-    add_executable(rocc_cmplx_scalar_add  rocc_complex_acc/sw_on_acc/complex_arithematic_type.c)
-    add_dump_target(rocc_cmplx_scalar_add)
-
-#################################
-# ROCC ACCELERATOR SCALAR MUL TARGET
-#################################
-elseif(TEST_SELECT STREQUAL "rocc_cmplx_scalar_mul")
-    message(STATUS "Configuring target: rocc_cmplx_scalar_mul")
-    add_executable(rocc_cmplx_scalar_mul  rocc_complex_acc/sw_on_acc/complex_mul_test.c)
-    add_dump_target(rocc_cmplx_scalar_mul)
-
+elseif(TEST_SELECT STREQUAL "rocc_cmplx_mul")
+    message(STATUS "Configuring target: rocc_cmplx_mul")
+    add_executable(rocc_cmplx_mul  rocc_complex_acc/sw_on_acc/complex_mul_test.c)
+    add_dump_target(rocc_cmplx_mul)
 
 #################################
 # for FIR and other Test Type add here    
@@ -151,7 +162,7 @@ elseif(TEST_SELECT STREQUAL "rocc_cmplx_scalar_mul")
 # ERROR CATCH: 
 #################################
 else()
-    message(FATAL_ERROR "Unknown TEST_SELECT value: '${TEST_SELECT}'. Please use vector_add, complex_arith, or mul.")
+    message(FATAL_ERROR "Unknown TEST_SELECT value: '${TEST_SELECT}'. Please use rocc_cmplx_add, rocc_cmplx_mul, sw_cmplx_mul or sw_cmplx_add")
 endif()
 
 

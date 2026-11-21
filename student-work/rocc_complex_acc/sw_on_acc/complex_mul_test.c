@@ -26,9 +26,9 @@ int main(){
   int32_t elementWiseScalarMulFailCnt = 0;
   int32_t arrayBasedScalarMulFailCnt  = 0;
 
-  complex_t matlabMulInputA[MAX_VECT] = {0};
-  complex_t matlabMulInputB[MAX_VECT] = {0};
-  complex_mul_result_t matlabMulExpected[MAX_VECT] = {0};
+  static complex_t matlabMulInputA[MAX_VECT] = {0};
+  static complex_t matlabMulInputB[MAX_VECT] = {0};
+  static complex_mul_result_t matlabMulExpected[MAX_VECT] = {0};
 
   const int16_t MAX_POS = 32767;
   const int16_t MAX_NEG = -32768;
@@ -59,7 +59,7 @@ int main(){
     }
 
     BENCH_BEGIN();
-    complex_mul_result_t m10 = roccCmplxMul(z6, z6); // (50 + 50j)*(50 + 50j) = 0 + 5000j
+    volatile  complex_mul_result_t m10 = roccCmplxMul(z6, z6); // (50 + 50j)*(50 + 50j) = 0 + 5000j
     BENCH_END("scalar_complex_mul");
 
     complex_mul_result_t m11 = roccCmplxMul(z7, z7); // (-500 + 500j)*(-500 + 500j) = 0 - 500000j

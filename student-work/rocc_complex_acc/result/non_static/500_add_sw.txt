@@ -1,0 +1,16 @@
+[UART] UART0 is here (stdin/stdout).
+########################################################################
+Welcome to Complex Number Scalar Arithemetic Test Using Pure Software   
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+scalar_complex_add_software_based          1          3          0          0          0          0          0          0          0          0
+
+array_based_scalar_vector_add_software_based      15512      10510          0          0          0          0          0          0          0          0
+elemet_wise_scalar_acc_vector_add_software_based      14743      10512          0          0          0          0          0          0          0          0
+======================================================================
+  TEST SUMMARY REPORT
+======================================================================
+PASS: all 5 Software Implementation : Scalar Complex Add Tests Passed
+PASS: all 500 Software Implementation : Element Wise Vector Add Result, Whole Array :  Tests Passed
+PASS: all 500 Software Implementation : Element Wise Vector Add Result, One Array at a Time :  Tests Passed
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish

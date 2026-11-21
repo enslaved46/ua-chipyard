@@ -60,7 +60,7 @@ int main(void) {
     }
 
     BENCH_BEGIN();
-    complex_mul_result_t m10 = cSwMul(z6, z6); // (50 + 50j)*(50 + 50j) = 0 + 5000j
+    volatile complex_mul_result_t m10 = cSwMul(z6, z6); // (50 + 50j)*(50 + 50j) = 0 + 5000j
     BENCH_END("scalar_complex_mul_sw");
 
     complex_mul_result_t m11 = cSwMul(z7, z7); // (-500 + 500j)*(-500 + 500j) = 0 - 500000j

@@ -1,8 +1,13 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
-#define MAX_VECT   10
-#define DEBUG_PRINT 0
+#ifndef MAX_VECT
+  #define MAX_VECT   10
+#endif
+
+#ifndef DEBUG_PRINT
+  #define DEBUG_PRINT 0
+#endif
 
 typedef struct{
   int32_t packedComplex;
