@@ -1,45 +1,37 @@
 # All the necessacys dependency and files are brough to this dir
 
-# Matlab Model source code is included in 
+# Matlab Model source code is included in
  - student-work/models/matlab_model
 
 # RISC Baseline path
  - student-work/models/software_imp
- - types and complex function defined in 
+ - types and complex function defined in
     - complex.h
- - test programs are 
+ - test programs are
     - complex_vector_add_test.c
     - complex_vector_mul_test.c
-    - complex_vector_arithematic.c : scalar add and mul test, dont use this 
-    - complex_arithematic_type.c : scalar add and mul test using type defined in comple.h , use this program 
+    - complex_vector_arithematic.c : scalar add and mul test, dont use this
+    - complex_arithematic_type.c   : scalar add and mul test using type defined in comple.h , use this program
+
+# CMakee Build Commands and istructions
+
+## SW Baseline Add
+- `cmake -S ./ -B ./rocc_complex_acc/build-sw-add/ -DTEST_SELECT=sw_cmplx_add`
+
+## SW Baseline MUL
+- `cmake -S ./ -B ./rocc_complex_acc/build-sw-mul/ -DTEST_SELECT=sw_cmplx_mul`
 
 
+## Accelerator ADD
+- `cmake -S ./ -B ./rocc_complex_acc/build-rocc-add/ -DTEST_SELECT=rocc_cmplx_add`
 
-# CMakee Build Commands and istructions 
-
-## Vector Add
-- `cmake -S ./ -B ./rocc_complex_acc/build-pure-sw/ -DTEST_SELECT=vector_add`
-- `cmake --build ./rocc_complex_acc/build-pure-sw/ --target-all`
-
-
-## Vector MUL
-- `cmake -S ./ -B ./rocc_complex_acc/build-pure-sw/ -DTEST_SELECT=vector_add`
-- `cmake --build ./rocc_complex_acc/build-pure-sw/ --target-all`
-
-
-## Simple complex arithemetic and funciton check
-### this function needs update, i've not used complex type
-- `cmake -S ./ -B ./rocc_complex_acc/build-pure-sw/ -DTEST_SELECT=complex_arith`
-- `cmake --build ./rocc_complex_acc/build-pure-sw/ --target all`
-
-
-## Accelerator SCALAR CADD
-- `cmake -S ./ -B ./rocc_complex_acc/build-rocc-acc/ -DTEST_SELECT=rocc_cmplx_scalar_add`
+## Accelerator MUL
+- `cmake -S ./ -B ./rocc_complex_acc/build-rocc-mul/ -DTEST_SELECT=rocc_cmplx_mul`
 
 ## Clean traget
 - `cmake --build ./rocc_complex_acc/build-pure-sw/ --target clean`
 
-## executable is producedin ./build_riscv dir
+## executable is producedin ./rocc_complex_acc/
 
 ## to run executable, example for add
 - `/workspace/chipyard/sims/verilator/simulator-chipyard.harness-BaselineConfig  /workspace/student-work/rocc_complex_acc/build-pure-sw/cmplx_v_add.riscv`
@@ -51,6 +43,10 @@ make -j$(nproc) CONFIG=ComplexRoCCConfig
 ## use more veliatero thread
 cd /workspace/chipyard/sims/verilator
 make -j32 CONFIG=ComplexRoCCConfig VERILATOR_THREADS=8
+make -j32 CONFIG=BaselineConfig VERILATOR_THREADS=8
+
+# fast sim eample use time stdbuf
+time stdbuf -oL /workspace/chipyard/sims/verilator/simulator-chipyard.harness-ComplexRoCCConfig  rocc_cmplx_mul.riscv | tee ../result/10_mul_tst_hw_no_print.txt
 
 ## increase stack size
 ulimit -s 65536
