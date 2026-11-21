@@ -1,0 +1,51 @@
+[UART] UART0 is here (stdin/stdout).
+########################################################################
+Welcome to Complex Number Scalar Arithmetic Test : Software Baseline    
+########################################################################
+########################################################################
+Software Implementation : Running Scalar Test for Complex Multiplication
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+scalar_complex_mul_sw         19          7          0          0          0          0          0          0          0          0
+Software Scalar Mul :            [PASS] (50 + 50j) * (50 + 50j) = 0 + 5000j
+Software Scalar Mul :            [PASS] (-500 + 500j) * (-500 + 500j) = 0 -500000j
+Software Scalar Mul :            [PASS] (-100 -500j) * (-100 -500j) = -240000 + 100000j
+Software Scalar Mul : 32b Max    [PASS] (32767 + 32767j) * (32767 + 32767j) = 0 + 2147352578j
+Software Scalar Mul : 33b Exact  [PASS] (-32768 -32768j) * (-32768 -32768j) = 0 + 2147483648j
+########################################################################
+Array Based Vector Mul Test : Software Implementation                   
+Running Vector Test for first 10 Vectors                                
+########################################################################
+array_based_vector_mul_sw       2896        267          0          0          0          0          0          0          0          0
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32768 + 32767j) * (32767 -32768j) = 0 + 2147418113j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32755 + 32754j) * (32754 + 32755j) = -2145714540 -65509j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32742 + 32741j) * (32741 + 32742j) = -2144011644 -65483j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32729 + 32728j) * (32728 + 32729j) = -2142309424 -65457j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32716 + 32715j) * (32715 + 32716j) = -2140607880 -65431j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32702 + 32701j) * (32701 + 32702j) = -2138776204 -65403j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32689 + 32688j) * (32688 + 32689j) = -2137076064 -65377j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32676 + 32675j) * (32675 + 32676j) = -2135376600 -65351j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32663 + 32662j) * (32662 + 32663j) = -2133677812 -65325j
+Software Implementation : Array-Based Vector Mul Result :       [PASS] (-32650 + 32649j) * (32649 + 32650j) = -2131979700 -65299j
+########################################################################
+Element Wise Vector Mul Test : Software Implementation                  
+Running Vector Test for first 10 Vectors                                
+########################################################################
+element_wise_vector_mul_sw       2908        265          0          0          0          0          0          0          0          0
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32768 + 32767j) * (32767 -32768j) = 0 + 2147418113j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32755 + 32754j) * (32754 + 32755j) = -2145714540 -65509j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32742 + 32741j) * (32741 + 32742j) = -2144011644 -65483j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32729 + 32728j) * (32728 + 32729j) = -2142309424 -65457j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32716 + 32715j) * (32715 + 32716j) = -2140607880 -65431j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32702 + 32701j) * (32701 + 32702j) = -2138776204 -65403j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32689 + 32688j) * (32688 + 32689j) = -2137076064 -65377j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32676 + 32675j) * (32675 + 32676j) = -2135376600 -65351j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32663 + 32662j) * (32662 + 32663j) = -2133677812 -65325j
+Software Implementation : Element-Wise Vector Mul Result :      [PASS] (-32650 + 32649j) * (32649 + 32650j) = -2131979700 -65299j
+======================================================================
+  TEST SUMMARY REPORT
+======================================================================
+PASS: all 5 Software Implementation : Scalar Complex Mul Tests Passed
+PASS: all 10 Software Implementation : Element Wise Vector Mul Result, Whole Array :  Tests Passed
+PASS: all 10 Software Implementation : Element Wise Vector Mul Result, One Element at a Time :  Tests Passed
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish
