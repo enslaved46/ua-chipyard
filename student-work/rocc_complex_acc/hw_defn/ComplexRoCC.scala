@@ -70,7 +70,7 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
   val doScalarAdd = funct === 0.U
   val doScalarMul = funct === 1.U
 
-  val doLoadVect  = funct === 2.U
+  val doRtnScalarImag  = funct === 2.U
   val doWriteVect = funct === 3.U
 
   val doVectAdd = funct === 4.U

@@ -1,0 +1,17 @@
+########################################################################
+Welcome to Complex Number Scalar Arithemetic Test Using Accelerator     
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+scalar_complex_add         11          8          0          0          0          0          0          0          0          0
+
+array_based_scalar_vector_add_software_based        202         87          0          0          0          0          0          0          0          0
+elemet_wise_scalar_acc_vector_add        174         84          0          0          0          0          0          0          0          0
+======================================================================
+  TEST SUMMARY REPORT
+======================================================================
+PASS: all 5 Software Implementation : Scalar Complex Add Tests Passed
+PASS: all 10 Software Implementation : Element Wise Vector Add Result, Whole Array :  Tests Passed
+PASS: all 10 Software Implementation : Element Wise Vector Add Result, One Array at a Time :  Tests Passed
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexRoCCConfig/gen-collateral/TestDriver.v:158: Verilog $finish

@@ -9,7 +9,7 @@ for i = 1:numel(arrayOfData)
     % 131072 = 2^17; converts signed 17-bit (-65536..65534) to 17-bit two's complement
     realBits = uint64(mod(realPart, 131072));
     imagBits = uint64(mod(imagPart, 131072));
-    fprintf("loop %d : %d\n", i,realBits);
+    % fprintf("loop %d : %d\n", i,realBits);
 
     % Pack real into bits [33:17] and imag into bits [16:0]
     packedValue = bitor(bitshift(realBits, 17), imagBits);

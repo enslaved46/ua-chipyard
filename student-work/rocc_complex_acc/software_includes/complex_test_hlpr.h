@@ -113,6 +113,54 @@ int16_t checkAddResults(char *testType, complex_t op1, char* ope, complex_t op2,
 
 
 
+int16_t checkMulResults(char *testType, complex_t op1, char* ope, complex_t op2, complex_mul_result_t calcResult, complex_mul_result_t expResult){
+  // extract calulated
+  int64_t calcReal = getReal64(calcResult);
+  int64_t calcImg  = getImag64(calcResult);
+
+  int64_t expReal = getReal64(expResult);
+  int64_t expImg  = getImag64(expResult);
+
+  
+  /* if( calcResult.real== expResult.real && calcResult.imag == expResult.imag){ */
+  if( calcReal== expReal && calcImg == expImg){
+    if(DEBUG_PRINT){
+      printf("%s [PASS] " , testType);
+      printf("(");
+      printComplexInput(op1);    //       printf("\t");
+
+      printf(") %s (", ope);
+
+      printComplexInput(op2);     //      printf("\t");
+      printf(") = ");
+
+      printComplexMulResult(calcResult);      printf("\n");
+    }
+    return 0;}
+  else{
+    if(DEBUG_PRINT){
+      printf("%s [Fail] ", testType); printf("\t");
+      printf("Calculated : ");
+      printf("(");
+      printComplexInput(op1);    //       printf("\t");
+
+      printf(") %s (", ope);
+
+      printComplexInput(op2);     //      printf("\t");
+      printf(") = ");
+
+      printComplexMulResult(calcResult);  printf("\n");
+      printf("Expected  :");
+      printComplexMulResult(expResult);
+      printf("\n");
+    }
+    return 1;
+  }
+}
+
+
+
+
 static inline void printTestSummary(const char *testName, int failCount, int totalCount) {
     if (failCount == 0) {
         printf("PASS: all %d %s Tests Passed\n", totalCount, testName);

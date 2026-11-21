@@ -3,6 +3,10 @@
 #include "complex.h"
 #include "/workspace/chipyard/tests/rocc.h"
 
+#define COMPLEX_ADD_FUNCT   0
+#define COMPLEX_MUL_FUNCT   1
+#define COMPLEX_MUL_IMG_RTN 2
+
 // we will have probelm with overflow, don't worry about overflow
 // z = z1 + z2 = (a+c) + (b+d)i;
 static inline complex_add_result_t roccCmplxAdd(complex_t z1, complex_t z2){
@@ -34,25 +38,42 @@ static inline  void roccCmplxVectAdd(complex_t z1[], complex_t z2[], complex_add
   }
 }
 
-
 /* /\* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i *\/ */
-/* static inline complex_t cMul(complex_t z1, complex_t z2){ // (a+bi) (c+di) */
+static inline complex_mul_result_t roccCmplxMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
+  int64_t realResult;
+  int64_t imgResult;
+  complex_mul_result_t mulResult;
 
-/*   int16_t z1Real = getReal(z1); */
-/*   int16_t z2Real = getReal(z2); */
-/*   int16_t z1Imag = getImag(z1); */
-/*   int16_t z2Imag = getImag(z2); */
+  // only rtns real
+  ROCC_INSTRUCTION_DSS(
+		       0,                              // custom0
+		       realResult,                     // destination
+		       (uint32_t)z1.packedComplex,     // rs1
+		       (uint32_t)z2.packedComplex,     // rs2
+		       COMPLEX_MUL_FUNCT               // funct = 1
+		       );
 
-/*   int16_t realResult = (z1Real*z2Real) - (z1Imag*z2Imag); */
-/*   int16_t imgResult  = (z1Real*z2Imag) + (z1Imag*z2Real); */
-/*   complex_t cMulResult = makeComplex16(realResult, imgResult); */
-/*   return cMulResult; */
-/* } */
+  ROCC_INSTRUCTION_DSS(
+		       0,                              // custom0
+		       imgResult,                     // destination
+		       (uint32_t)z1.packedComplex,     // rs1
+		       (uint32_t)z2.packedComplex,     // rs2
+		       COMPLEX_MUL_IMG_RTN             // funct = 1
+		       );
+  
 
-/* static inline  void cVectMul(complex_t z1[], complex_t z2[], complex_t result[], int size){ // (a+bi) (c+di) */
-/*   for (int i = 0; i < size; i++){ */
-/*     result[i] = cMul(z1[i], z2[i]); */
-/*   } */
-/* } */
+  mulResult.real = realResult;
+  mulResult.imag = imgResult;
+  return mulResult;
+}
+
+
+  
+static inline  void roccCmplxVectMul(complex_t z1[], complex_t z2[], complex_mul_result_t result[], int size){ // (a+bi) (c+di)
+  for (int i = 0; i < size; i++){
+    result[i] = roccCmplxMul(z1[i], z2[i]);
+  }
+}
+
 
 #endif

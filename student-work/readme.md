@@ -44,3 +44,13 @@
 ## to run executable, example for add
 - `/workspace/chipyard/sims/verilator/simulator-chipyard.harness-BaselineConfig  /workspace/student-work/rocc_complex_acc/build-pure-sw/cmplx_v_add.riscv`
 
+## Build hardware
+cd /workspace/chipyard/sims/verilator
+make -j$(nproc) CONFIG=ComplexRoCCConfig
+
+## use more veliatero thread
+cd /workspace/chipyard/sims/verilator
+make -j32 CONFIG=ComplexRoCCConfig VERILATOR_THREADS=8
+
+## increase stack size
+ulimit -s 65536

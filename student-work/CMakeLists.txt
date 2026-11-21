@@ -111,7 +111,7 @@ if(TEST_SELECT STREQUAL "complex_arith")
     add_dump_target(complex_arithmetic)
 
 #################################
-# VECTOR ADD TARGET
+# VECTOR ADD TARGET HARDWARE
 #################################
 elseif(TEST_SELECT STREQUAL "vector_add")
     message(STATUS "Configuring target: cmplx_v_add")
@@ -119,7 +119,7 @@ elseif(TEST_SELECT STREQUAL "vector_add")
     add_dump_target(cmplx_v_add)
 
 #################################
-# MULTIPLICATION TARGET
+# MULTIPLICATION TARGET SOFTWARE
 #################################
 elseif(TEST_SELECT STREQUAL "vector_mul")
     message(STATUS "Configuring target: cmplx_v_mul")
@@ -133,6 +133,14 @@ elseif(TEST_SELECT STREQUAL "rocc_cmplx_scalar_add")
     message(STATUS "Configuring target: rocc_cmplx_scalar_add")
     add_executable(rocc_cmplx_scalar_add  rocc_complex_acc/sw_on_acc/complex_arithematic_type.c)
     add_dump_target(rocc_cmplx_scalar_add)
+
+#################################
+# ROCC ACCELERATOR SCALAR MUL TARGET
+#################################
+elseif(TEST_SELECT STREQUAL "rocc_cmplx_scalar_mul")
+    message(STATUS "Configuring target: rocc_cmplx_scalar_mul")
+    add_executable(rocc_cmplx_scalar_mul  rocc_complex_acc/sw_on_acc/complex_mul_test.c)
+    add_dump_target(rocc_cmplx_scalar_mul)
 
 
 #################################

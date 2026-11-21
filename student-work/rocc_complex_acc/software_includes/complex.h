@@ -1,9 +1,6 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
-
-#define COMPLEX_ADD_FUNCT 0
-#define COMPLEX_MUL_FUNCT 1
 #define MAX_VECT   10
 #define DEBUG_PRINT 0
 
@@ -92,6 +89,24 @@ static inline int32_t getReal17(complex_add_result_t z){
 static inline int32_t getImag17(complex_add_result_t z){
   return (int32_t) signExtend17((uint64_t)(z.addResultPkd & 0x1FFFF)); // losing sign, aksing compiler to treat as signed number
 }
+
+static inline int64_t getReal64(complex_mul_result_t z){
+  return  (z.real);
+}
+
+static inline int64_t getImag64(complex_mul_result_t z){
+  return  (z.imag);
+}
+
+
+// make mult type form  TB, output ofmatlab passed
+static inline complex_mul_result_t makeComplex33(int64_t realN, int64_t imgN) {
+    complex_mul_result_t res;
+    res.real = realN;
+    res.imag = imgN;
+    return res;
+}
+
 
 
 // inline complex_t roccCmplxAdd(complex_t z1, complex_t z2);

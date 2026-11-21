@@ -47,8 +47,6 @@ for i = 1:VECTOR_LEN
     %i
 end
 
-zNegRes = cAdd( z3, z4);
-
 fid = fopen("complex_add_test_vectors.h", "w");
 fprintf(fid, "#ifndef COMPLEX_ADD_TEST_VECTORS_H\n");
 fprintf(fid, "#define COMPLEX_ADD_TEST_VECTORS_H\n\n");
