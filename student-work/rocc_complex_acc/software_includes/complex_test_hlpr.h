@@ -160,7 +160,6 @@ int16_t checkMulResults(char *testType, complex_t op1, char* ope, complex_t op2,
 
 
 
-
 static inline void printTestSummary(const char *testName, int failCount, int totalCount) {
     if (failCount == 0) {
         printf("PASS: all %d %s Tests Passed\n", totalCount, testName);

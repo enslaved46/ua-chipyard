@@ -108,6 +108,15 @@ static inline complex_mul_result_t makeComplex33(int64_t realN, int64_t imgN) {
 }
 
 
+static inline int64_t signExtend33(uint64_t num) {
+  num &= 0x1FFFFFFFFu;
+  // if neg sign ext
+  if (num & 0x100000000ULL) { // extrast MSB of addder result and check Sign
+    num  |= 0xFFFFFFFE00000000ULL; // fill 63:33 with sign
+  }
+  return (int64_t)num;
+}
+
 
 // inline complex_t roccCmplxAdd(complex_t z1, complex_t z2);
 // inline  void roccCmplxVectAdd(complex_t z1[], complex_t z2[], complex_t result[], int size); // (a+bi) (c+di)

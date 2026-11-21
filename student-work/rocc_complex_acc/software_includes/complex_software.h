@@ -33,12 +33,13 @@ static inline void cSwVectAdd(complex_t z1[], complex_t z2[], complex_add_result
 /* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i */
 static inline complex_mul_result_t cSwMul(complex_t z1, complex_t z2){ // (a+bi) (c+di)
   complex_mul_result_t cSwMulResult;
-  int16_t z1Real = getReal16(z1);
-  int16_t z2Real = getReal16(z2);
-  int16_t z1Imag = getImag16(z1);
-  int16_t z2Imag = getImag16(z2);
-  cSwMulResult.real = ((z1Real*z2Real) - (z1Imag*z2Imag)) & 0x1FFFFFFFF;
-  cSwMulResult.imag = ((z1Real*z2Imag) + (z1Imag*z2Real))  & 0x1FFFFFFFF;
+  int64_t z1Real = getReal16(z1);  // overflows for 16 bit max number , that resutls -32768
+  int64_t z2Real = getReal16(z2);
+  int64_t z1Imag = getImag16(z1);
+  int64_t z2Imag = getImag16(z2);
+  cSwMulResult.real = signExtend33((uint64_t)((z1Real * z2Real) - (z1Imag * z2Imag)));  //& 0x1FFFFFFFF;
+  cSwMulResult.imag = signExtend33((uint64_t)((z1Real * z2Imag) + (z1Imag * z2Real)));
+  
   // int16_t realResult = (z1Real*z2Real) - (z1Imag*z2Imag);
   // int16_t imgResult  = (z1Real*z2Imag) + (z1Imag*z2Real);
   // complex_t cSwMulResult = makeComplex(realResult, imgResult);
