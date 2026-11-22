@@ -28,6 +28,10 @@
 ## Accelerator MUL
 - `cmake -S ./ -B ./rocc_complex_acc/build-rocc-mul/ -DTEST_SELECT=rocc_cmplx_mul`
 
+## Accelerator MAC
+- `cmake -S ./ -B ./rocc_complex_acc/build-rocc-mac/ -DTEST_SELECT=rocc_cmplx_mac`
+
+
 ## Clean traget
 - `cmake --build ./rocc_complex_acc/build-pure-sw/ --target clean`
 

@@ -138,6 +138,8 @@ elseif(TEST_SELECT STREQUAL "sw_cmplx_mul")
     add_executable(cmplx_sw_mul rocc_complex_acc/software_imp/complex_sw_mul_test.c)
     add_dump_target(cmplx_sw_mul)
 
+
+
 #################################
 # ROCC ACCELERATOR ADD 
 #################################
@@ -155,6 +157,15 @@ elseif(TEST_SELECT STREQUAL "rocc_cmplx_mul")
     add_dump_target(rocc_cmplx_mul)
 
 #################################
+# ROCC ACCELERATOR MAC
+#################################
+elseif(TEST_SELECT STREQUAL "rocc_cmplx_mac")
+    message(STATUS "Configuring target: rocc_cmplx_mac")
+    add_executable(rocc_cmplx_mac  rocc_complex_acc/sw_on_acc/complex_mac_test.c)
+    add_dump_target(rocc_cmplx_mac)
+
+  
+#################################
 # for FIR and other Test Type add here    
 #################################
 
@@ -162,7 +173,7 @@ elseif(TEST_SELECT STREQUAL "rocc_cmplx_mul")
 # ERROR CATCH: 
 #################################
 else()
-    message(FATAL_ERROR "Unknown TEST_SELECT value: '${TEST_SELECT}'. Please use rocc_cmplx_add, rocc_cmplx_mul, sw_cmplx_mul or sw_cmplx_add")
+    message(FATAL_ERROR "Unknown TEST_SELECT value: '${TEST_SELECT}'. Please use rocc_cmplx_add, rocc_cmplx_mul, sw_cmplx_mul, sw_cmplx_add or rocc_cmplx_mac")
 endif()
 
 

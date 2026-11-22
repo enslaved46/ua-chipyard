@@ -1,0 +1,65 @@
+
+  switch(state){
+    is(state.sIdle){
+      when (io.cmdValid){
+        when(doMACclr){
+          state := sClrAccum
+        }.elsewhen(doMAC){
+          when (macOP = false.B){  state := sColdStrt}.elsewhen{ state:= sExec}
+        }.elsewhen(doRdMACImag){
+          state := sIdle
+          macOp := false.B
+        }
+      }
+    }
+
+    is(state.sClrAccum){
+      accImagReg := 0.S
+      accRealReg := 0.S
+      pkdAccum   := 0.S
+      state := sIdle
+      macOp := false.B  // keep sending
+    }
+
+    is(state.sColdStrt){
+      val (mulRealResultMACCldStrt, mulImagResultMACCldStrt) = complexMul16(a, b, c, d)
+      accImagReg := mulImagResultMACCldStrt
+      accRealReg := mulRealResultMACCldStrt
+      macOp := true.B
+      state := sIdle
+    }
+    is(state.sExec){
+      val (mulRealResultMAC, mulImagResultMAC) = complexMul16(a, b, c, d)
+      val pkdAccum  = complexAdd(accRealReg,accImagReg,mulRealResultMAC,mulImagResultMAC,outputWidth=64)
+      accImagReg := pkdAccum(63,0).assInt
+      accRealReg := pkdAccum(127,64).assInt
+      macOp = true.B  // keep sending
+      state = sIdle
+    }
+  }
+
+
+
+
+  when(cmd.fire){
+    when(doMACclr){
+      accImagReg := 0.S
+      accRealReg := 0.S
+      pkdAccum   := 0.S
+      macOp := false.B  // keep sending
+    }.elsewhen (doMAC){
+      val (mulRealResultMACCldStrt, mulImagResultMACCldStrt) = complexMul16(a, b, c, d)
+      when (!macOp) { // cold start
+        accImagReg := mulImagResultMACCldStrt
+        accRealReg := mulRealResultMACCldStrt
+        macOp := true.B
+      }.otherwise{ // we have a running sum
+        val pkdAccum  = complexAdd(accRealReg,accImagReg,mulRealResultMAC,mulImagResultMAC,outputWidth=64)
+        accImagReg := pkdAccum(63,0).assInt
+        accRealReg := pkdAccum(127,64).assInt
+        macOp := true.B  // keep sending
+      }.elsewhen (doRdMACImag){
+        macOp := false.B  // keep sending
+      }
+    }
+  }

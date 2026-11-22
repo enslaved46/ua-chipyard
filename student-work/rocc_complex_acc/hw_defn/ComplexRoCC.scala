@@ -68,13 +68,16 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
 
   // val addr = cmd.bits.rs2(log2Up(outer.n)-1,0)
   val doScalarAdd = funct === 0.U
-  val doScalarMul = funct === 1.U
 
-  val doRtnScalarImag  = funct === 2.U
-  val doWriteVect = funct === 3.U
+  val doScalarMul           = funct === 1.U
+  val doRdScalarMULImagComp = funct === 2.U
 
-  val doVectAdd = funct === 4.U
-  val doVectMul = funct === 5.U
+  val doMAC           = funct === 3.U  // replies with real
+  val doRdMACImag     = funct === 4.U 
+  val doMACclr        = funct === 5.U  //
+  val macReg = 1.U(7.W)
+  // val doRdMACReal     = funct === 5.U
+
 
   // comes from LazyRoccModuleImp
 
@@ -103,6 +106,10 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
   val c = cmd.bits.rs2(31, 16).asSInt
   val d = cmd.bits.rs2(15, 0).asSInt
 
+  // internal register
+  val accRealReg    = RegInit(0.S(64.W))  // 33 for complex mul and log2(4) = 35 bits for accumulator for 4 complex numx
+  val accImagReg    = RegInit(0.S(64.W))
+
   // z1 = a+bi                         //
   // z2 = c+di                        //
   // z3 = z1+ze = (a + bi) + (c + di)  //
@@ -110,29 +117,31 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
   // ADD                              //
   //                                  //
 
-  private def complexAdd16(a: SInt, b: SInt, c: SInt, d: SInt): UInt = {
+  private def complexAdd(a: SInt, b: SInt, c: SInt, d: SInt, outputWidth : Int): UInt = {
     // add prodce wrap around
     val addRealRes   = (a +& c)   //  +&  prouuces extra bit, carry over, we don't do carry over, we wrap around
     val addImagRes   = (b +& d)
-    val scalarAddResult   = Cat(addRealRes(16,0).asUInt, addImagRes(16,0).asUInt) // pack two 17 bit signed  number as unsigned because, we don't want sign extension of real to 64 bits, might cause some shifting opearation errors
-    scalarAddResult // this is same as return scalarAddResult in c
-    // val scalarAddResult  = packAddRes.pad(xLen)
+    // generic witdh
+    val addResult   = Cat(addRealRes(outputWidth-1,0).asUInt, addImagRes(outputWidth-1,0).asUInt) // pack two 17 bit signed  number as unsigned because, we don't want sign extension of real to 64 bits, might cause some shifting opearation errors
+    addResult // this is same as return addResult in c
+                    // val scalarAddResult  = packAddRes.pad(xLen)
   }
 
-  val scalarAddResult = complexAdd16(a,b,c,d)
+  val scalarAddResult = complexAdd(a,b,c,d,17)
 
   private def complexMul16(a: SInt, b: SInt, c: SInt, d: SInt): (SInt,SInt) = { // two returns
-    // Qm.n × Qj.q =Q(m+j).(n+q)
-    // Qm.n+Qj.q=Q(max(m,j)+1).max(n,q)
+                                                                                // Qm.n × Qj.q =Q(m+j).(n+q)
+                                                                                // Qm.n+Qj.q=Q(max(m,j)+1).max(n,q)
 
     val mulRealRes   = (a * c) -& (b * d)   //  +&  prouuces extra bit 33 bits
     val mulImagRes   = (a * d) +& (b * c)  // 33 bits
     (mulRealRes, mulImagRes) // returned tuples
-    // val packMulRes   = Cat(mulRealRes(32,0), mulImagRes(32,0))
-    // val scalarMulResult  = packMulRes
+                             // val packMulRes   = Cat(mulRealRes(32,0), mulImagRes(32,0))
+                             // val scalarMulResult  = packMulRes
   }
 
-  val (mulRealResult, mulImagResult) = complexMul16(a, b, c, d)
+  val (mulRealResult, mulImagResult)       = complexMul16(a, b, c, d)
+
 
   // create registers
   val savedMulImag  = RegInit(0.S(33.W))
@@ -142,15 +151,45 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
   // cmd.ready is hight when acc is ready to take new commands
   // cmd.fire is high when both of the cmd.valid and cmd.reayd is high
   //we have need to wait one more clock, idk i hope the output comes right away just with the comibnational delay
-
+  // in c sim, output came out in one clk
   when(cmd.fire && doScalarMul) {
     savedMulImag  := mulImagResult
     savedMulValid := true.B
   }
 
+  object State extends ChiselEnum {
+    val sIdle, sColdStrt, sExec, sClrAccum = Value
+  }
+
+  val state = RegInit(State.sIdle)  // init state with idle
+  val macOp = RegInit(false.B)
+
+  // sequential
+  val (mulRealMAC, mulImagMAC) = complexMul16(a, b, c, d)
+  val pkdAccum                 = complexAdd(accRealReg, accImagReg, mulRealMAC, mulImagMAC, outputWidth = 64)
+
+  val accReal = Mux(!macOp, mulRealMAC.pad(64), pkdAccum(127, 64).asSInt)
+  val accImag = Mux(!macOp, mulImagMAC.pad(64), pkdAccum(63, 0).asSInt)
+
+  when(cmd.fire){
+    when(doMACclr){
+      accImagReg := 0.S
+      accRealReg := 0.S
+      // pkdAccum   := 0.S
+      macOp      := false.B  // keep sending
+    }.elsewhen (doMAC){
+        accImagReg := accImag
+        accRealReg := accReal
+        macOp := true.B
+      }.elsewhen (doRdMACImag){
+        macOp := false.B  // keep sending
+      }
+    }
+
+
   //
   // setup response
-  val doResp    = cmd.bits.inst.xd
+  val doResp    = cmd.bits.inst.xd // && !doMAC
   val stallResp = doResp && !io.resp.ready
   //val stallLoad = !io.mem.req.ready  // mem unused
 
@@ -160,10 +199,8 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
   //
   // i don't know what it does
   cmd.ready         :=  !stallResp // && !stallLoad  use this if we write to a mem
-
   // only pass the response when processor has insturcted us to and the op code is for us
   io.resp.valid     := cmd.valid && cmd.bits.inst.xd  //same as cmd.fire
-
   io.resp.bits.rd   := cmd.bits.inst.rd  // take destination given from OP code
 
 
@@ -179,9 +216,9 @@ class ComplexRoCCModuleImp(outer: ComplexRoCC)(implicit p: Parameters)    extend
   )(Seq(
     0.U -> scalarAddResult.pad(xLen),         //  0.U -> scalarAddResult.pad(xLen) key value pair , when unsided 0 is given in funct
     1.U -> mulRealResult.pad(xLen).asUInt,
-    2.U -> savedMulImag.pad(xLen).asUInt
-    // 4.U -> simdAddResult.pad(xLen),
-    // 5.U -> simdMulResult.pad(xLen)
+    2.U -> savedMulImag.pad(xLen).asUInt,
+    3.U -> accReal.asUInt,
+    4.U -> accImagReg.asUInt // simdMulResult.pad(xLen)
   ))
 
   // seelect output based on the funct, opcode

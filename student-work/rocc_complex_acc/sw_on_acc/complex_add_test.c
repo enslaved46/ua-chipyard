@@ -93,7 +93,7 @@ int main(void) {
   complex_t z8  = makeComplex16(-100, -500); // thrid
   // complex_t z9  = makeComplex16(100,  -500); // 4th
 
-  if (TEST_CADD == 1){
+  if (TEST_CMAC == 1){
     if(DEBUG_PRINT){
       printf("########################################################################\n");
       printf("Hardware Implementation : Running Scalar Test for Complex Addition      \n");
@@ -142,7 +142,7 @@ int main(void) {
     printf("\n");
     if(DEBUG_PRINT){
       printf("########################################################################\n");
-    printf("Array Based Accelerated  Vector Add Test  : Scalar Hardware             \n");
+      printf("Array Based Accelerated  Vector Add Test  : Scalar Hardware             \n");
       printf("Running Vector Test for first %d Vector of Positive numbers             \n",MAX_VECT );
       printf("########################################################################\n");
     }
