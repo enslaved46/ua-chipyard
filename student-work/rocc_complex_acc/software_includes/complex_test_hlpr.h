@@ -113,7 +113,7 @@ int16_t checkAddResults(char *testType, complex_t op1, char* ope, complex_t op2,
 
 
 
-int16_t checkMulResults(char *testType, complex_t op1, char* ope, complex_t op2, complex_mul_result_t calcResult, complex_mul_result_t expResult){
+static inline int16_t checkMulResults(char *testType, complex_t op1, char* ope, complex_t op2, complex_mul_result_t calcResult, complex_mul_result_t expResult){
   // extract calulated
   int64_t calcReal = getReal64(calcResult);
   int64_t calcImg  = getImag64(calcResult);
@@ -158,6 +158,25 @@ int16_t checkMulResults(char *testType, complex_t op1, char* ope, complex_t op2,
   }
 }
 
+// we need to change the data type of accumulator,
+// the bit width is same as mult_ype
+static inline int16_t checkMacResults(const char *testType, complex_mul_result_t calc, complex_mul_result_t exp) {
+    if (calc.real == exp.real && calc.imag == exp.imag) {
+        if (DEBUG_PRINT) {
+            printf("%s[PASS] Accumulated = ", testType);
+            printComplexValues(calc.real, calc.imag);
+            printf("\n");
+        }
+        return 0;
+    } else {
+        printf("%s[Fail] \tCalculated : ", testType);
+        printComplexValues(calc.real, calc.imag);
+        printf("\nExpected  :");
+        printComplexValues(exp.real, exp.imag);
+        printf("\n");
+        return 1;
+    }
+}
 
 
 static inline void printTestSummary(const char *testName, int failCount, int totalCount) {
