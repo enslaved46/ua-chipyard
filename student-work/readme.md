@@ -21,6 +21,9 @@
 ## SW Baseline MUL
 - `cmake -S ./ -B ./rocc_complex_acc/build-sw-mul/ -DTEST_SELECT=sw_cmplx_mul`
 
+## Accelerator MAC
+- `cmake -S ./ -B ./rocc_complex_acc/build-sw-mac/ -DTEST_SELECT=sw_cmplx_mac`
+
 
 ## Accelerator ADD
 - `cmake -S ./ -B ./rocc_complex_acc/build-rocc-add/ -DTEST_SELECT=rocc_cmplx_add`

@@ -139,6 +139,14 @@ elseif(TEST_SELECT STREQUAL "sw_cmplx_mul")
     add_dump_target(cmplx_sw_mul)
 
 
+#################################
+# SW  MAC
+#################################
+elseif(TEST_SELECT STREQUAL "sw_cmplx_mac")
+    message(STATUS "Configuring target:  sw_cmplx_mac")
+    add_executable(sw_cmplx_mac  rocc_complex_acc/software_imp/complex_sw_mac_test.c)
+    add_dump_target(sw_cmplx_mac)
+ 
 
 #################################
 # ROCC ACCELERATOR ADD 
@@ -162,7 +170,7 @@ elseif(TEST_SELECT STREQUAL "rocc_cmplx_mul")
 elseif(TEST_SELECT STREQUAL "rocc_cmplx_mac")
     message(STATUS "Configuring target: rocc_cmplx_mac")
     add_executable(rocc_cmplx_mac  rocc_complex_acc/sw_on_acc/complex_mac_test.c)
-    add_dump_target(rocc_cmplx_mac)
+    add_dump_target(rocc_cmplx_mac1)
 
   
 #################################

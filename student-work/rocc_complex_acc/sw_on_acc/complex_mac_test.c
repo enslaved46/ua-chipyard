@@ -120,7 +120,7 @@ int main(){
     volatile  complex_mul_result_t seq0Res = roccCmplxMac(&cornerA[0],  &cornerB[0],  1);   
     BENCH_END("rocc_1_elem_complex_mac");
 
-    printComplexMulResult(seq0Res);  // shoul dprint -5+10j
+    // printComplexMulResult(seq0Res);  // shoul dprint -5+10j
     
 
     volatile  complex_mul_result_t seq1Res = roccCmplxMac(&cornerA[0],  &cornerB[0],  4);   
@@ -160,5 +160,9 @@ int main(){
     arrayBasedScalarMacFailCnt += passFail;
   }
 
-  
+    printf("======================================================================\n");
+    printf("  TEST SUMMARY REPORT\n");
+    printf("======================================================================\n");
+    printTestSummary("Complex MAC : 4 Corner Sequences", cornerFailures, 4);
+    printTestSummary("Complex MAC : MATLAB Vector MAC (MAX_VECT)", arrayBasedScalarMacFailCnt, 1);  
 }

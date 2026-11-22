@@ -52,6 +52,15 @@ static inline void cVectMul(complex_t z1[], complex_t z2[], complex_mul_result_t
   }
 }
 
+static inline complex_mul_result_t cSwMac(const complex_t z1[], const complex_t z2[], int len) {
+    complex_mul_result_t acc = {0, 0};
+    for (int i = 0; i < len; i++) {
+        complex_mul_result_t prod = cSwMul(z1[i], z2[i]);
+        acc.real += prod.real;
+        acc.imag += prod.imag;
+    }
+    return acc;
+}
 #endif
 
 /* void printComplexForm(complex_t z){ */
