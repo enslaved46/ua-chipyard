@@ -1,0 +1,17 @@
+mac small: slot 0 (real)                 -18 OK
+mac small: slot 1 (imag)                 68 OK
+mac negative: slot 0 (real)              14 OK
+mac negative: slot 1 (imag)              22 OK
+mac big once: slot 0 (real)              4611686014132420609 OK
+mac big twice: slot 0 (real)             9223372028264841218 OK
+mac big twice: slot 1 (imag)             0 OK
+slot 2 holds 5,000,000,000               5000000000 OK
+slot 2 unchanged by mac                  5000000000 OK
+old ACMUL real (1000+2000j)(3000+4000j)  -5000000 OK
+old ACMUL imag                           10000000 OK
+old AADD real                            150000 OK
+old AADD imag                            270000 OK
+scalarW test: 0 mismatches
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexNumAccWConfig/gen-collateral/TestDriver.v:158: Verilog $finish
