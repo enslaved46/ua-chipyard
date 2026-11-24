@@ -1,0 +1,11 @@
+########################################################################
+Accelerator: dot product of complex numbers (ACMUL + ACACC in slot 0)   
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+acc_dot64       98373      35007       5000      10000          0       4999          2          0          2       1254
+dot re=-67670000 im=118422500
+mismatches=0
+wrapped=0
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexNumAcc64Config/gen-collateral/TestDriver.v:158: Verilog $finish

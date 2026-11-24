@@ -1,0 +1,13 @@
+add wide                               re=150000 im=270000 OK
+mul wide (1000+2000j)*(3000+4000j)     re=-5000000 im=10000000 OK
+mul negative (-3+5j)*(2-4j)            re=14 im=22 OK
+add wrap 2,000,000,000 twice           re=-294967296 im=0 OK
+slot 1 read after write                re=5 im=6 OK
+slot 1 accumulate +(10+20j)            re=15 im=26 OK
+slot 1 unchanged by slot 2             re=15 im=26 OK
+slot 2 holds (1+1j)                    re=1 im=1 OK
+dot product kept in slot 0             re=-18 im=68 OK
+scalar64 test: 0 mismatches
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexNumAcc64Config/gen-collateral/TestDriver.v:158: Verilog $finish

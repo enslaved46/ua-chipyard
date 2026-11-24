@@ -1,0 +1,9 @@
+########################################################################
+Software: dot product of complex numbers (cMul64 + cAdd64)              
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+sw_dot64       142285      11509        500       1000       2000        499          2       1500          3        125
+dot re=-6767000 im=11842250
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish
