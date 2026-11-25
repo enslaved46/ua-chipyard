@@ -1,0 +1,10 @@
+########################################################################
+Accelerator v1: dot product (ACMUL + AADD), 16-bit parts, wraps         
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+acc_dot_v1      11868       5509        500       1000          0        499          2          0          2         28
+packed sum=0xbe68b2ca (wrapped, not the true sum)
+mismatches vs 16-bit software=0
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.ComplexNumAccConfig/gen-collateral/TestDriver.v:158: Verilog $finish

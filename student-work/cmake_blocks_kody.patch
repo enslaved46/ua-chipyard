@@ -1,0 +1,60 @@
+diff --git a/student-work/CMakeLists.txt b/student-work/CMakeLists.txt
+index 11f8338..e4284f4 100644
+--- a/student-work/CMakeLists.txt
++++ b/student-work/CMakeLists.txt
+@@ -136,7 +136,54 @@ elseif(TEST_SELECT STREQUAL "vector_mul_acc")
+     message(STATUS "Configuring target: cmplx_v_mul_acc")
+     add_executable(cmplx_v_mul_acc models/software_imp/complex_vector_mul_acc_test.c)
+     add_dump_target(cmplx_v_mul_acc)
+-
++elseif(TEST_SELECT STREQUAL "acc64_scalar")
++    message(STATUS "Configuring target: acc64_scalar")
++    add_executable(acc64_scalar models/software_imp/complex_acc64_scalar_test.c)
++    add_dump_target(acc64_scalar)
++elseif(TEST_SELECT STREQUAL "dot_sw64")
++    message(STATUS "Configuring target: cmplx_dot_sw64")
++    add_executable(cmplx_dot_sw64 models/software_imp/complex_dot_sw64_test.c)
++    add_dump_target(cmplx_dot_sw64)
++elseif(TEST_SELECT STREQUAL "dot_acc64")
++    message(STATUS "Configuring target: cmplx_dot_acc64")
++    add_executable(cmplx_dot_acc64 models/software_imp/complex_dot_acc64_test.c)
++    add_dump_target(cmplx_dot_acc64)
++
++elseif(TEST_SELECT STREQUAL "dot_sw_v1")
++    message(STATUS "Configuring target: cmplx_dot_sw_v1")
++    add_executable(cmplx_dot_sw_v1 models/software_imp/complex_dot_sw_test.c)
++    add_dump_target(cmplx_dot_sw_v1)
++elseif(TEST_SELECT STREQUAL "dot_acc_v1")
++    message(STATUS "Configuring target: cmplx_dot_acc_v1")
++    add_executable(cmplx_dot_acc_v1 models/software_imp/complex_dot_acc_test.c)
++    add_dump_target(cmplx_dot_acc_v1)
++
++elseif(TEST_SELECT STREQUAL "vec_mul_acc64")
++    message(STATUS "Configuring target: cmplx_vec_mul_acc64")
++    add_executable(cmplx_vec_mul_acc64 models/software_imp/complex_vec_mul_acc64_test.c)
++    add_dump_target(cmplx_vec_mul_acc64)
++elseif(TEST_SELECT STREQUAL "vec_add_acc64")
++    message(STATUS "Configuring target: cmplx_vec_add_acc64")
++    add_executable(cmplx_vec_add_acc64 models/software_imp/complex_vec_add_acc64_test.c)
++    add_dump_target(cmplx_vec_add_acc64)
++
++
++elseif(TEST_SELECT STREQUAL "accw_scalar")
++    message(STATUS "Configuring target: accw_scalar")
++    add_executable(accw_scalar models/software_imp/complex_accw_scalar_test.c)
++    add_dump_target(accw_scalar)
++elseif(TEST_SELECT STREQUAL "dot_swW")
++    message(STATUS "Configuring target: cmplx_dot_swW")
++    add_executable(cmplx_dot_swW models/software_imp/complex_dot_swW_test.c)
++    add_dump_target(cmplx_dot_swW)
++elseif(TEST_SELECT STREQUAL "dot_accW")
++    message(STATUS "Configuring target: cmplx_dot_accW")
++    add_executable(cmplx_dot_accW models/software_imp/complex_dot_accW_test.c)
++    add_dump_target(cmplx_dot_accW)
++elseif(TEST_SELECT STREQUAL "accw_probe")
++    message(STATUS "Configuring target: accw_probe")
++    add_executable(accw_probe models/software_imp/complex_accw_probe_test.c)
++    add_dump_target(accw_probe)
+ #################################
+ # COMPLEX VECTOR BENCHMARK (Kody): software vs accelerator, one timed pass
+ # usage: cmake -S ./ -B ./build/vec_add_sw_N50 -DTEST_SELECT=vec_bench -DVEC_OP=add -DVEC_MODE=sw -DVEC_N=50

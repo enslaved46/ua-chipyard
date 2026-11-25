@@ -1,0 +1,9 @@
+########################################################################
+Software v1: dot product (cAdd + cMul), 16-bit parts, wraps             
+########################################################################
+phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+sw_dot_v1      815066     160009       5000      10000      20000       4999          2      15000          4        627
+packed sum=0x7010fbe4
+%Warning: System has stack size 8192 kb which may be too small; suggest 'ulimit -c 11431' or larger
+[UART] UART0 is here (stdin/stdout).
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish
