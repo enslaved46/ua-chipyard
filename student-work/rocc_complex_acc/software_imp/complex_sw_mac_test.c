@@ -24,7 +24,7 @@ int main(){
   const int16_t MAX_NEG = -32768;
 
 
-
+  int8_t cornerFailures  = 0;
   int8_t scalarMacFailure = 0, totalScalarMacRun = 0;
     int32_t arrayBasedScalarMacFailCnt  = 0;
     int32_t elementWiseScalarMacFailCnt = 0;
@@ -125,7 +125,7 @@ int main(){
     complex_mul_result_t seq2Res = cSwMac(&cornerA[4],  &cornerB[4],  4);
     complex_mul_result_t seq3Res = cSwMac(&cornerA[8],  &cornerB[8],  4);
     complex_mul_result_t seq4Res = cSwMac(&cornerA[12], &cornerB[12], 4);
-    int8_t cornerFailures  = 0;
+
     cornerFailures += checkMacResults("\nCorner Seq 1 (Small Pos)   :", seq1Res, cornerExpected[0]);
     cornerFailures += checkMacResults("Corner Seq 2 (Zero Cancel) :", seq2Res, cornerExpected[1]);
     cornerFailures += checkMacResults("Corner Seq 3 (>33b Pos)    :", seq3Res, cornerExpected[2]);

@@ -28,7 +28,8 @@ int main(){
   int8_t scalarMacFailure = 0, totalScalarMacRun = 0;
     int32_t arrayBasedScalarMacFailCnt  = 0;
     int32_t elementWiseScalarMacFailCnt = 0;
-
+    int8_t cornerFailures  = 0;
+    
     // Static arrays in .bss to prevent bare-metal stack overflow at MAX_VECT = 5000
     static complex_t matlabMacInputA[MAX_VECT];
     static complex_t matlabMacInputB[MAX_VECT];
@@ -129,7 +130,7 @@ int main(){
     complex_mul_result_t seq2Res = roccCmplxMac(&cornerA[4],  &cornerB[4],  4);
     complex_mul_result_t seq3Res = roccCmplxMac(&cornerA[8],  &cornerB[8],  4);
     complex_mul_result_t seq4Res = roccCmplxMac(&cornerA[12], &cornerB[12], 4);
-    int8_t cornerFailures  = 0;
+
     cornerFailures += checkMacResults("\nCorner Seq 1 (Small Pos)   :", seq1Res, cornerExpected[0]);
     cornerFailures += checkMacResults("Corner Seq 2 (Zero Cancel) :", seq2Res, cornerExpected[1]);
     cornerFailures += checkMacResults("Corner Seq 3 (>33b Pos)    :", seq3Res, cornerExpected[2]);

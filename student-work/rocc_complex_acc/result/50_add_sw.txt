@@ -5,8 +5,8 @@ Welcome to Complex Number Scalar Arithemetic Test Using Pure Software
 phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
 scalar_complex_add_software_based         18          6          0          0          0          0          0          0          0          0
 
-array_based_scalar_vector_add_software_based       1297       1059          0          0          0          0          0          0          0          0
-elemet_wise_scalar_acc_vector_add_software_based       1290       1057          0          0          0          0          0          0          0          0
+array_based_scalar_vector_add_software_based       1282       1059          0          0          0          0          0          0          0          0
+elemet_wise_scalar_acc_vector_add_software_based       1291       1057          0          0          0          0          0          0          0          0
 ======================================================================
   TEST SUMMARY REPORT
 ======================================================================

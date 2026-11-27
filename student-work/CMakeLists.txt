@@ -170,7 +170,7 @@ elseif(TEST_SELECT STREQUAL "rocc_cmplx_mul")
 elseif(TEST_SELECT STREQUAL "rocc_cmplx_mac")
     message(STATUS "Configuring target: rocc_cmplx_mac")
     add_executable(rocc_cmplx_mac  rocc_complex_acc/sw_on_acc/complex_mac_test.c)
-    add_dump_target(rocc_cmplx_mac1)
+    add_dump_target(rocc_cmplx_mac)
 
   
 #################################

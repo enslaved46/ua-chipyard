@@ -1,0 +1,10 @@
+[UART] UART0 is here (stdin/stdout).
+Debug Print : 0/nphase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
+rocc_1_elem_complex_mac        362         45          0          0          0          0          0          0          0          0
+array_based_scalar_acc_vector_mac      14419       1269          0          0          0          0          0          0          0          0
+======================================================================
+  TEST SUMMARY REPORT
+======================================================================
+PASS: all 4 Complex MAC : 4 Corner Sequences Tests Passed
+PASS: all 1 Complex MAC : MATLAB Vector MAC (MAX_VECT) Tests Passed
+- /workspace/chipyard/sims/verilator/generated-src/chipyard.harness.TestHarness.BaselineConfig/gen-collateral/TestDriver.v:158: Verilog $finish
