@@ -33,9 +33,8 @@
 #include "../software_includes/complex_test_hlpr.h"
 
 #if defined(__riscv)
-#include <riscv-pk/encoding.h>
-	  
-#include "../software_includes/benchmark_dependencies/metrics.h"
+  #include <riscv-pk/encoding.h>
+  #include "../software_includes/benchmark_dependencies/metrics.h"
 #endif
 
 
@@ -52,6 +51,7 @@
 
 
 int main(void) {
+    hpm_setup();
   printf("########################################################################\n");
   printf("Welcome to Complex Number Scalar Arithemetic Test Using Pure Software   \n");
   printf("########################################################################\n");
@@ -64,7 +64,7 @@ int main(void) {
   // passing whole array
   int32_t swElemVecAddFailCnt = 0;
   int8_t  swElemVecAddPassFail = 0;
-    
+
 
 
   // load form matlab , golden model
@@ -72,14 +72,14 @@ int main(void) {
   static complex_t matlabImputB[MAX_VECT] = {0};
   static complex_add_result_t matlabResultExpected[MAX_VECT] = {0};
   int i =0;
-    
+
   for (; i< MAX_VECT; i++){
     matlabImputA[i] = cmplxFrmPacked(MATLAB_INPUT_A[i]);
     matlabImputB[i] = cmplxFrmPacked(MATLAB_INPUT_B[i]);
     matlabResultExpected[i] = cmplxAddRsltFrmPacked(MATLAB_EXPECTED_OUT[i]);
   }
 
-    
+
   //-32767 is 0x8001
   // extreme test points
   // const complex_t z0  = makeComplex16(0, 0);
@@ -183,7 +183,7 @@ int main(void) {
 
     BENCH_BEGIN();
     complex_add_result_t swElemAddResults[MAX_VECT];
-    for (i=0 ; i< MAX_VECT; i++){     
+    for (i=0 ; i< MAX_VECT; i++){
       swElemAddResults[i] = swCmplxAdd(matlabImputA[i], matlabImputB[i]);
     }
     BENCH_END("elemet_wise_scalar_acc_vector_add_software_based");
@@ -200,7 +200,7 @@ int main(void) {
       elementWiseScalarTstRsltCntr = elementWiseScalarTstRsltCntr + elementWisePassFailRes;
     }
 
-      
+
     /* if (elementWiseScalarTstRsltCntr == 0) { */
     /*   printf("PASS : all %d Software Implementation : Scalar Complex Add Tests Passed\n", totalScalarAddRun); */
     /*   // int8_t scalarAddSucess = 0; */
@@ -208,7 +208,7 @@ int main(void) {
     /*   printf("FAIL: %d of %d Software Implementation : Scalar Complex Add Tests Failed\n", elementWiseScalarTstRsltCntr, totalScalarAddRun); */
     /*   //  int8_t scalarAddSucess = 1; */
     /* } */
-    
+
   }
 
   printf("======================================================================\n");
@@ -218,6 +218,6 @@ int main(void) {
   printTestSummary("Software Implementation : Scalar Complex Add", scalarAddFailure, totalScalarAddRun);
   printTestSummary("Software Implementation : Element Wise Vector Add Result, Whole Array : ", swElemVecAddFailCnt, MAX_VECT);
   printTestSummary("Software Implementation : Element Wise Vector Add Result, One Array at a Time : ", elementWiseScalarTstRsltCntr, MAX_VECT);
-  
+
   return 0;
 }

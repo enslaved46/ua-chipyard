@@ -3,10 +3,10 @@
 Welcome to Complex Number Scalar Arithemetic Test Using Accelerator     
 ########################################################################
 phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
-scalar_complex_add         14         14          0          0          0          0          0          0          0          0
+scalar_complex_add         39         14          0          0          0          0          3          0          1          2
 
-array_based_scalar_vector_add_software_based     120261      40011          0          0          0          0          0          0          0          0
-elemet_wise_scalar_acc_vector_add     119310      40010          0          0          0          0          0          0          0          0
+array_based_scalar_vector_add_software_based     120124      40011       5000      10001          0       4999          4          0          2       1517
+elemet_wise_scalar_acc_vector_add     119173      40010       5000      10000          0       4999          2          0          2       1516
 ======================================================================
   TEST SUMMARY REPORT
 ======================================================================

@@ -3,9 +3,9 @@
 Welcome to Complex Number Scalar Arithmetic Test : Software Baseline    
 ########################################################################
 phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
-scalar_complex_mul_sw         32          9          0          0          0          0          0          0          0          0
-array_based_vector_mul_sw     147421      13009          0          0          0          0          0          0          0          0
-element_wise_vector_mul_sw     147412      13007          0          0          0          0          0          0          0          0
+scalar_complex_mul_sw          7          9          0          0          0          0          2          0          1          1
+array_based_vector_mul_sw     147504      13009       1500       1000       2000        501          2       1500          4        226
+element_wise_vector_mul_sw     147449      13007       1500       1000       2000        501          2       3000          4        227
 ======================================================================
   TEST SUMMARY REPORT
 ======================================================================

@@ -8,9 +8,8 @@
 #include "../software_includes/complex_test_hlpr.h"
 
 #if defined(__riscv)
-#include <riscv-pk/encoding.h>
-
-#include "../software_includes/benchmark_dependencies/metrics.h"
+ #include <riscv-pk/encoding.h>
+ #include "../software_includes/benchmark_dependencies/metrics.h"
 #endif
 
 #define TEST_CMAC 1
@@ -20,6 +19,7 @@
 #define ELEMENT_WISE_SCALAR_ACC_VECTOR_MAC_TEST 1
 
 int main(){
+  hpm_setup();
   const int16_t MAX_POS = 32767;
   const int16_t MAX_NEG = -32768;
 
@@ -41,7 +41,7 @@ int main(){
         matlabMacCumExpected[i] = MATLAB_MAC_CUMSUM_OUT[i];
     }
 
-    
+
   // check corner cases
   complex_t cornerA[16] = {
     // Seq 1: small positive -> Expected: -7 + 24j
@@ -113,13 +113,13 @@ int main(){
     printf("Debug Print : %d/n", DEBUG_PRINT);
 
     BENCH_BEGIN();
-    volatile  complex_mul_result_t seq0Res = cSwMac(&cornerA[0],  &cornerB[0],  1);   
+    volatile  complex_mul_result_t seq0Res = cSwMac(&cornerA[0],  &cornerB[0],  1);
     BENCH_END("rocc_1_elem_complex_mac");
 
     // printComplexMulResult(seq0Res);  // shoul dprint -5+10j
-    
 
-    complex_mul_result_t seq1Res = cSwMac(&cornerA[0],  &cornerB[0],  4);   
+
+    complex_mul_result_t seq1Res = cSwMac(&cornerA[0],  &cornerB[0],  4);
 
 
     complex_mul_result_t seq2Res = cSwMac(&cornerA[4],  &cornerB[4],  4);
@@ -160,5 +160,5 @@ int main(){
     printf("======================================================================\n");
     printTestSummary("Complex MAC : 4 Corner Sequences", cornerFailures, 4);
     printTestSummary("Complex MAC : MATLAB Vector MAC (MAX_VECT)", arrayBasedScalarMacFailCnt, 1);
-  
+
 }

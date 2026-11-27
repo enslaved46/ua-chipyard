@@ -1,9 +1,9 @@
 [UART] UART0 is here (stdin/stdout).
 phase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
-scalar_complex_mul        125         29          0          0          0          0          0          0          0          0
+scalar_complex_mul        125         29          0          0          0          0          4          0          2          2
 
-array_based_scalar_acc_vector_mul     169930      55014          0          0          0          0          0          0          0          0
-element_wise_scalar_acc_vector_mul     168822      55010          0          0          0          0          0          0          0          0
+array_based_scalar_acc_vector_mul     169990      55014       5000      10000          0       4999          4          0          2       2137
+element_wise_scalar_acc_vector_mul     168874      55010       5000      10000          0       4999          2          0          2       2137
 PASS: all 5 Accelerator Hardware : Scalar Complex Mul Tests Passed
 PASS: all 5000 Accelerator Hardware : Element Wise Vector Mul Result, Whole Array :  Tests Passed
 PASS: all 5000 Accelerator Hardware : Element Wise Vector Mul Result, One Element at a Time :  Tests Passed

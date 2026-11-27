@@ -8,7 +8,6 @@
 
 #if defined(__riscv)
   #include <riscv-pk/encoding.h>
-
   #include "../software_includes/benchmark_dependencies/metrics.h"
 #endif
 
@@ -21,6 +20,7 @@
 #define ELEMENT_WISE_SCALAR_ACC_VECTOR_MUL_TEST 1
 
 int main(){
+  hpm_setup();
   // --- Complex Multiplication Variables & Golden Vector Loading ---
   int8_t scalarMulFailure = 0, totalScalarMulRun = 0;
   int32_t elementWiseScalarMulFailCnt = 0;

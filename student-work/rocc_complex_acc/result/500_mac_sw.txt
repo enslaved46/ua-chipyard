@@ -1,7 +1,7 @@
 [UART] UART0 is here (stdin/stdout).
 Debug Print : 0/nphase          cycles    instret     branch       load        mul  bp_dir_ms  bp_tgt_ms   md_stall    ic_miss    dc_miss
-rocc_1_elem_complex_mac        471         45          0          0          0          0          0          0          0          0
-array_based_scalar_acc_vector_mac     142926      12519          0          0          0          0          0          0          0          0
+rocc_1_elem_complex_mac        478         45          3          2          4          1          4          6          3          4
+array_based_scalar_acc_vector_mac     142904      12519       1500       1000       2000        501          4       3000          1         65
 ======================================================================
   TEST SUMMARY REPORT
 ======================================================================

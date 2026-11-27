@@ -9,7 +9,6 @@
 
 #if defined(__riscv)
 #include <riscv-pk/encoding.h>
-
 #include "../software_includes/benchmark_dependencies/metrics.h"
 #endif
 
@@ -20,33 +19,32 @@
 #define ELEMENT_WISE_SCALAR_ACC_VECTOR_MAC_TEST 1
 
 int main(){
+  hpm_setup();
   const int16_t MAX_POS = 32767;
   const int16_t MAX_NEG = -32768;
 
-
-
   int8_t scalarMacFailure = 0, totalScalarMacRun = 0;
-    int32_t arrayBasedScalarMacFailCnt  = 0;
-    int32_t elementWiseScalarMacFailCnt = 0;
-    int8_t cornerFailures  = 0;
-    
-    // Static arrays in .bss to prevent bare-metal stack overflow at MAX_VECT = 5000
-    static complex_t matlabMacInputA[MAX_VECT];
-    static complex_t matlabMacInputB[MAX_VECT];
-    static complex_mul_result_t matlabMacCumExpected[MAX_VECT];
+  int32_t arrayBasedScalarMacFailCnt  = 0;
+  int32_t elementWiseScalarMacFailCnt = 0;
+  int8_t cornerFailures  = 0;
 
-    int i = 0;
-    for (i = 0; i < MAX_VECT; i++) {
-        matlabMacInputA[i]      = cmplxFrmPacked(MATLAB_MUL_INPUT_A[i]);
-        matlabMacInputB[i]      = cmplxFrmPacked(MATLAB_MUL_INPUT_B[i]);
-        matlabMacCumExpected[i] = MATLAB_MAC_CUMSUM_OUT[i];
-    }
+  // Static arrays in .bss to prevent bare-metal stack overflow at MAX_VECT = 5000
+  static complex_t matlabMacInputA[MAX_VECT];
+  static complex_t matlabMacInputB[MAX_VECT];
+  static complex_mul_result_t matlabMacCumExpected[MAX_VECT];
 
-
+  int i = 0;
+  for (i = 0; i < MAX_VECT; i++) {
+    matlabMacInputA[i]      = cmplxFrmPacked(MATLAB_MUL_INPUT_A[i]);
+    matlabMacInputB[i]      = cmplxFrmPacked(MATLAB_MUL_INPUT_B[i]);
+    matlabMacCumExpected[i] = MATLAB_MAC_CUMSUM_OUT[i];
+  }
 
 
 
-    
+
+
+
   // check corner cases
   complex_t cornerA[16] = {
     // Seq 1: small positive -> Expected: -7 + 24j
@@ -118,13 +116,13 @@ int main(){
     printf("Debug Print : %d/n", DEBUG_PRINT);
 
     BENCH_BEGIN();
-    volatile  complex_mul_result_t seq0Res = roccCmplxMac(&cornerA[0],  &cornerB[0],  1);   
+    volatile  complex_mul_result_t seq0Res = roccCmplxMac(&cornerA[0],  &cornerB[0],  1);
     BENCH_END("rocc_1_elem_complex_mac");
 
     // printComplexMulResult(seq0Res);  // shoul dprint -5+10j
-    
 
-    volatile  complex_mul_result_t seq1Res = roccCmplxMac(&cornerA[0],  &cornerB[0],  4);   
+
+    volatile  complex_mul_result_t seq1Res = roccCmplxMac(&cornerA[0],  &cornerB[0],  4);
 
 
     complex_mul_result_t seq2Res = roccCmplxMac(&cornerA[4],  &cornerB[4],  4);
@@ -161,9 +159,9 @@ int main(){
     arrayBasedScalarMacFailCnt += passFail;
   }
 
-    printf("======================================================================\n");
-    printf("  TEST SUMMARY REPORT\n");
-    printf("======================================================================\n");
-    printTestSummary("Complex MAC : 4 Corner Sequences", cornerFailures, 4);
-    printTestSummary("Complex MAC : MATLAB Vector MAC (MAX_VECT)", arrayBasedScalarMacFailCnt, 1);  
+  printf("======================================================================\n");
+  printf("  TEST SUMMARY REPORT\n");
+  printf("======================================================================\n");
+  printTestSummary("Complex MAC : 4 Corner Sequences", cornerFailures, 4);
+  printTestSummary("Complex MAC : MATLAB Vector MAC (MAX_VECT)", arrayBasedScalarMacFailCnt, 1);
 }

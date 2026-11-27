@@ -1,0 +1,115 @@
+* How my design works ?
+The design performs ADD, MUL and MAC on Qm.n number where M=16 and n=0. This The design outputs full precision meaning that it assures arithmetic correctness.
+
+The system only wraps if it 
+
+
+* Input :
+This design is implemented for signed numbers. Each complex number is packed into 16-bit integer of Real and Imaginary components.
+
+ - Input,  z = a + bi, then in Hardware the bit fields looks like
+
+ Bit Field mapping
+
+ 31                    16 15                     0
+ +-----------------------+------------------------+
+ | signed real: a        | signed imaginary: b    |
+ +-----------------------+------------------------+
+ 
+63                    32 31                    16 15                     0
+ +-----------------------+-----------------------+------------------------+
+ | untouched             | signed real: a        | signed imaginary: b    |
+ +-----------------------+-----------------------+------------------------+
+
+The design uses general suppose register so it uses 64-bit register, leaving 63-32 un-touched for input.
+
+
+* Output :
+ ** ADD :   /* z = z1 + z2 = (a+c) + (b+d)i; */
+ - Add yields Qm.n + Qm.n = Q(m+1).n = Q17.0
+
+ Bit Field" Results 
+
+ 63                         34 33              17 16               0
++----------------------------+------------------+------------------+
+| zeros                      | 17-bit real      | 17-bit imaginary |
++----------------------------+------------------+------------------+
+ 
+ *x* Multiplication : /* // z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i */
+
+ Multiplication yields 33 bits output. It is due to 32 from 16 bit integer mult and 1 from subtraction and addition
+ // Real Number MUL : Qm.n × Qj.q =Q(m+j).(n+q)
+// Complex MUL : Qm.n × Qj.q =Q(m+j+1).(n+q)
+
+Bit Fields
+
+
+ 32                                0
++-----------------------------------+
+| mulRealResult: signed 33 bits     |
++-----------------------------------+
+
+ 32                                0
++-----------------------------------+
+| mulImagResult: signed 33 bits     |
++-----------------------------------+
+
+
+* Accelerator Result Response :
+- Add :   z = z1 + z2 = (a+c) + (b+d)i
+    - 17-bit real + 17-bit imag = 34 bits → one RV64 response
+    - Add yeilds Qm.n + Qm.n = Q(m+1).n = Q17.0
+    - Result Bit Field
+
+ 63                         34 33              17 16               0
++----------------------------+------------------+------------------+
+| zeros                      | 17-bit real      | 17-bit imaginary |
++----------------------------+------------------+------------------+
+
+
+- Mul:  z = z1* z2 =(ac + adi + bci + bdi^2) = (ac - bd) + (ad +bc)i
+  - 33-bit real + 33-bit imag = 66 bits → two RV64 responses
+  - Mul yeilds : Qm.n × Qj.q =Q(m+j+1).(n+q), 1 for over flow
+  - Bit Field Multiplication result
+  - Sign-extended [63:33] into the 64-bit RoCC response
+  - funct = 1: return real, save imaginary
+  - funct = 2: return imag
+
+32                                0
++-----------------------------------+
+| mulRealResult: signed 33 bits     |
++-----------------------------------+
+
+ 32                                0
++-----------------------------------+
+| mulImagResult: signed 33 bits     |
++-----------------------------------+
+  
+
+
+- MAC: (\(z_{\text{acc}} = z_{\text{acc}} + z_1 \cdot z_2\)),
+  - 64-bit real + 64-bit imag = 128 bits → two RV64 responses
+  - funct = 3: MAC step and return real accumulator, with every instruction the Accelerator returns REAL portion of the MAC operation.
+  - funct = 4: return imaginary accumulator
+  - funct = 5: clear MAC state
+
+ 63                                                               0
++------------------------------------------------------------------+
+| updated signed real accumulator: 64 bits                          |
++------------------------------------------------------------------+
+
+funct = 4: return imaginary accumulator
+
+ 63                                                               0
++------------------------------------------------------------------+
+| final signed imaginary accumulator: 64 bits                       |
++------------------------------------------------------------------+
+
+
+complex_mul_result_t
+63                                                                 0 
++------------------------------------------------------------------+
+| real: final 64-bit signed real accumulator                        |
++------------------------------------------------------------------+
+| imag: final 64-bit signed imaginary accumulator                   |
++------------------------------------------------------------------+

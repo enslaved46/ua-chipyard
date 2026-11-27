@@ -18,6 +18,7 @@
 #define ELEMENT_WISE_SCALAR_SW_VECTOR_MUL_TEST 1
 
 int main(void) {
+    hpm_setup();
   printf("########################################################################\n");
   printf("Welcome to Complex Number Scalar Arithmetic Test : Software Baseline    \n");
   printf("########################################################################\n");

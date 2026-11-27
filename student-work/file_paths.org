@@ -1,0 +1,79 @@
+* Design Path : Root
+ - ua-chipyard/student-work/rocc_complex_acc/
+
+** Hardware Design :
+  - ua-chipyard/student-work/rocc_complex_acc/hw_defn/
+
+** Software Baseline
+   - ua-chipyard/student-work/rocc_complex_acc/software_imp
+
+** RoCC-Accelerator Software
+   - ua-chipyard/student-work/rocc_complex_acc/sw_on_acc
+
+** Shared Headers and Test Vectors
+   - ua-chipyard/student-work/rocc_complex_acc/software_includes/
+
+   Data types and packing : Shared between Accelerator and Software
+   ~/Documents/ua-chipyard/student-work/rocc_complex_acc/software_includes/complex.h
+
+   Software arithmetic:
+   - ua-chipyard/student-work/rocc_complex_acc/software_includes/complex_software.h
+
+   RoCC instruction wrappers: Call to the Accelerator
+   - ua-chipyard/student-work/rocc_complex_acc/software_includes/rocc_complex.h
+
+   Test and print helpers:
+   - ua-chipyard/student-work/rocc_complex_acc/software_includes/complex_test_hlpr.h
+
+** Performance-Counter Support
+   - ua-chipyard/student-work/rocc_complex_acc/software_includes/benchmark_dependencies/
+
+   HPM event definitions:
+   - ua-chipyard/student-work/rocc_complex_acc/software_includes/benchmark_dependencies/hpm.h
+
+   Benchmark measurement macros:
+   - ua-chipyard/student-work/rocc_complex_acc/software_includes/benchmark_dependencies/metrics.h
+
+** MATLAB Golden Model
+   - ua-chipyard/student-work/models/matlab_model/
+
+   Complex functions:
+   - ua-chipyard/student-work/models/matlab_model/complex_functions/
+
+** Benchmarked Output Results
+   - ua-chipyard/student-work/rocc_complex_acc/result/
+
+** Build Directories
+   - ua-chipyard/student-work/rocc_complex_acc/build-sw-add/
+   Software Add:
+
+   Software Multiply:
+   - ua-chipyard/student-work/rocc_complex_acc/build-sw-mul/
+
+   Software MAC:
+   - ua-chipyard/student-work/rocc_complex_acc/build-sw-mac/
+
+   RoCC Add:
+   - ua-chipyard/student-work/rocc_complex_acc/build-rocc-add/
+
+   RoCC Multiply:
+   - ua-chipyard/student-work/rocc_complex_acc/build-rocc-mul/
+
+   RoCC MAC:
+   - ua-chipyard/student-work/rocc_complex_acc/build-rocc-mac/
+
+** Build and Benchmark Control
+   CMake configuration: Individual Builds for unit tests
+   - ua-chipyard/student-work/CMakeLists.txt
+
+   Complete benchmark script in one go:
+   - ua-chipyard/student-work/run_all_benchmarks.sh
+
+** Processor Baseline Configuration
+   - ua-chipyard/course/configs/CourseRocketConfig.scala
+
+   Baseline configuration:
+   BaselineConfig
+
+   Accelerator configuration:
+   ComplexRoCCConfig

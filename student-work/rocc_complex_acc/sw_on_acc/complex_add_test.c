@@ -33,7 +33,6 @@
 
 #if defined(__riscv)
   #include <riscv-pk/encoding.h>
-
   #include "../software_includes/benchmark_dependencies/metrics.h"
 #endif
 
@@ -49,6 +48,7 @@
 #define ELEMET_WISE_SCALAR_ACC_VECTOR_ADD_TEST 1
 
 int main(void) {
+  hpm_setup();
   printf("########################################################################\n");
   printf("Welcome to Complex Number Scalar Arithemetic Test Using Accelerator     \n");
   printf("########################################################################\n");
